@@ -1289,6 +1289,58 @@ $(function () {
     $(this).attr('title', '탭 선택됨').closest('li').siblings().find('button').attr('title', '탭');
   });
 
+  $('.news_tab_menu li').on('click', function(){
+    if( $(this).find('a').length ) return;
+    var idx = $(this).index();
+    $(this).addClass('active').siblings().removeClass('active');
+    $('.news_tab_content .tab_panel').eq(idx).addClass('active').siblings().removeClass('active');
+    setupPagination();
+  });
+
+  function setupPagination() {
+    $('.tab_panel').each(function() {
+      var $panel = $(this);
+      var $items = $panel.find('ul li');
+      var numItems = $items.length;
+      var perPage = 6;
+      var $controls = $panel.closest('.news_tab_content').find('.controls');
+      
+      if (numItems <= perPage) {
+        $controls.hide();
+        return;
+      }
+      
+      $controls.show();
+      var numPages = Math.ceil(numItems / perPage);
+      var currentPage = 1;
+
+      $items.hide();
+      $items.slice(0, perPage).show();
+
+      $controls.find('.prev').off('click').on('click', function(e) {
+        e.preventDefault();
+        if (currentPage > 1) {
+          currentPage--;
+          var start = (currentPage - 1) * perPage;
+          var end = start + perPage;
+          $items.hide().slice(start, end).show();
+        }
+      });
+
+      $controls.find('.next').off('click').on('click', function(e) {
+        e.preventDefault();
+        if (currentPage < numPages) {
+          currentPage++;
+          var start = (currentPage - 1) * perPage;
+          var end = start + perPage;
+          $items.hide().slice(start, end).show();
+        }
+      });
+    });
+  }
+
+  setupPagination();
+
   //게시판 상세 글자크기 조절
   $('.fs_up').on('click', function () {
     $('.fs_btn strong').text('글자확대').addClass('active');
