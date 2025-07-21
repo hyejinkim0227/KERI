@@ -1554,3 +1554,140 @@ function slick_on_pc(slider, settings) {
     }
   });
 };
+
+// 도메인 연구분야 슬라이더
+function initDomainSlider() {
+  if ($('.domain .slider-for').length && $('.domain .slider-nav').length) {
+    
+    // 네비게이션 슬라이더 초기화 (먼저 초기화)
+    $('.domain .slider-nav').not('.slick-initialized').slick({
+      slidesToShow: 10,
+      slidesToScroll: 1,
+      asNavFor: '.domain .slider-for',
+      dots: false,
+      arrows: false,
+      centerMode: false,
+      focusOnSelect: true,
+      vertical: true,
+      verticalSwiping: true,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      pauseOnHover: true,
+      adaptiveHeight: false,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            vertical: false,
+            verticalSwiping: false,
+            slidesToShow: 5,
+            variableWidth: true,
+            adaptiveHeight: true
+          }
+        },
+        {
+          breakpoint: 720,
+          settings: {
+            vertical: false,
+            verticalSwiping: false,
+            slidesToShow: 3,
+            variableWidth: true,
+            adaptiveHeight: true
+          }
+        }
+      ]
+    });
+
+    // 메인 콘텐츠 슬라이더 초기화 (나중에 초기화)
+    $('.domain .slider-for').not('.slick-initialized').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false,
+      dots: false,
+      fade: true,
+      asNavFor: '.domain .slider-nav',
+      autoplay: true,
+      autoplaySpeed: 5000,
+      pauseOnHover: true,
+      speed: 800,
+      cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
+      adaptiveHeight: true
+    });
+
+    // 슬라이더 이벤트 바인딩
+    $('.domain .slider-nav').on('afterChange', function(event, slick, currentSlide) {
+      updateActiveState(currentSlide);
+    });
+
+    $('.domain .slider-for').on('afterChange', function(event, slick, currentSlide) {
+      updateActiveState(currentSlide);
+    });
+
+    // 초기 active 상태 설정
+    setTimeout(function() {
+      updateActiveState(0);
+    }, 100);
+  }
+}
+
+// 활성 상태 업데이트
+function updateActiveState(currentSlide) {
+  $('.domain .slider-nav .slick-slide').removeClass('slick-current');
+  $('.domain .slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]').addClass('slick-current');
+  
+  // 페이지네이션 업데이트
+  $('.domain-controls .pagination .current').text(currentSlide + 1);
+}
+
+// 도메인 슬라이더 제어 버튼
+function initDomainControls() {
+  // 이전/다음 버튼 클릭 이벤트
+  $(document).on('click', '.domain-controls .prev', function() {
+    $('.domain .slider-for').slick('slickPrev');
+  });
+  
+  $(document).on('click', '.domain-controls .next', function() {
+    $('.domain .slider-for').slick('slickNext');
+  });
+
+  // 일시정지/재생 버튼
+  $(document).on('click', '.domain-controls .pause', function() {
+    $('.domain .slider-for').slick('slickPause');
+    $('.domain .slider-nav').slick('slickPause');
+    $(this).removeClass('pause').addClass('play');
+  });
+
+  $(document).on('click', '.domain-controls .play', function() {
+    $('.domain .slider-for').slick('slickPlay');
+    $('.domain .slider-nav').slick('slickPlay');
+    $(this).removeClass('play').addClass('pause');
+  });
+}
+
+// 도메인 슬라이더 반응형 처리
+function resizeDomainSlider() {
+  if ($('.domain .slider-for').hasClass('slick-initialized')) {
+    $('.domain .slider-for').slick('resize');
+  }
+  if ($('.domain .slider-nav').hasClass('slick-initialized')) {
+    $('.domain .slider-nav').slick('resize');
+  }
+}
+
+// DOM 로드 완료 후 초기화
+$(document).ready(function() {
+  // 기존 초기화 코드들...
+  
+  // 도메인 슬라이더 초기화
+  initDomainSlider();
+  initDomainControls();
+});
+
+// 윈도우 리사이즈 이벤트
+$(window).on('resize', function() {
+  // 기존 리사이즈 코드들...
+  
+  // 도메인 슬라이더 리사이즈
+  resizeDomainSlider();
+});
