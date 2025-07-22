@@ -454,13 +454,45 @@ $(function () {
   lnbInit(); //lnb 초기화
   snsToggle(); // sns박스 열고 닫힘
   introScroll();
+  // indicator 스크롤 업데이트 제어 변수
+  var isIndicatorScrolling = false;
+  
   // indicator
   $('#indicator li a').on('click', function () {
-    if (!$(this).parent().hasClass('active') && pcChk(1920)) {
-      var mainNavi = $(this).attr('data-mainnavi');
-      var mainRowTop = $('[data-mainrow=' + mainNavi + ']').offset().top;
-      $('html,body').stop().animate({ scrollTop: mainRowTop }, 700);
+    var $parent = $(this).parent();
+    var mainNavi = $parent.attr('data-mainnavi');
+    
+    // 스크롤 애니메이션 중임을 표시
+    isIndicatorScrolling = true;
+    
+    // 모든 indicator에서 active 클래스 제거
+    $('#indicator li').removeClass('active');
+    // 클릭한 항목에 active 클래스 추가
+    $parent.addClass('active');
+    
+    // 해당 섹션 찾기
+    var $targetSection = $('[data-mainnavi="' + mainNavi + '"]').not('#indicator li');
+    
+    // news는 data-mainnavi 속성이 없으므로 별도 처리
+    if (mainNavi === 'news') {
+      $targetSection = $('.news');
     }
+    
+    if ($targetSection.length > 0) {
+      var targetTop = $targetSection.offset().top;
+      // 헤더 높이만큼 빼기 (헤더가 고정되어 있는 경우)
+      var headerHeight = $('.header').outerHeight() || 0;
+      
+      $('html,body').stop().animate({ 
+        scrollTop: targetTop - headerHeight 
+      }, 700, function() {
+        // 애니메이션 완료 후 스크롤 업데이트 재활성화
+        setTimeout(function() {
+          isIndicatorScrolling = false;
+        }, 100);
+      });
+    }
+    
     return false;
   });
   slideScroll();
@@ -477,7 +509,55 @@ $(function () {
     } else {
       $('.btn_quick .scroll_top').fadeOut();
     }
+    
+    // indicator 활성화 처리
+    updateIndicatorOnScroll();
   });
+  
+  // 스크롤에 따른 indicator 활성화 함수
+  function updateIndicatorOnScroll() {
+    // 스크롤 애니메이션 중이면 업데이트 하지 않음
+    if (isIndicatorScrolling) {
+      return;
+    }
+    
+    var scrollTop = $(window).scrollTop();
+    var headerHeight = $('.header').outerHeight() || 0;
+    var currentSection = '';
+    
+    // 각 섹션의 위치 확인
+    var sections = [
+      { name: 'search', element: $('.main_banner[data-mainnavi="search"]') },
+      { name: 'domain', element: $('.domain[data-mainnavi="domain"]') },
+      { name: 'news', element: $('.news') },
+      { name: 'certification', element: $('.certification[data-mainnavi="certification"]') },
+      { name: 'promo', element: $('.promo[data-mainnavi="promo"]') }
+    ];
+    
+    for (var i = 0; i < sections.length; i++) {
+      var section = sections[i];
+      if (section.element.length > 0) {
+        var sectionTop = section.element.offset().top - headerHeight - 50; // 50px 여유
+        var sectionBottom = sectionTop + section.element.outerHeight();
+        
+        if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+          currentSection = section.name;
+          break;
+        }
+      }
+    }
+    
+    // 첫 번째 섹션이 기본값
+    if (!currentSection && scrollTop < 200) {
+      currentSection = 'search';
+    }
+    
+    // indicator 활성화
+    if (currentSection) {
+      $('#indicator li').removeClass('active');
+      $('#indicator li[data-mainnavi="' + currentSection + '"]').addClass('active');
+    }
+  }
   $('.btn_quick .scroll_top').on('click', function () {
     $('html,body').stop().animate({ scrollTop: 0 }, 600);
   });

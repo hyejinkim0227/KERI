@@ -52,17 +52,18 @@ $sidebar-width: 117px;
     .head {display:flex;justify-content:space-between;align-items:center;text-align:center;}   
     .logo {  position: relative; padding-left: 116px; border-radius: 0 0 40px 0;
             &::after{
-            content: '';
-            display: block;
-            position: absolute;
-            bottom: -47.7px;
-            left: -25px;
-            width: 100px;
-            height: 52.7px;
-            clip-path: polygon(0 0, 99% 0, 100% 0, 61% 5%, 49% 11%, 39% 20%, 31% 31%, 27% 44%, 25% 57%, 25% 69%, 25% 80%, 25% 90%, 25% 100%, 0 100%);
-            background-color: #fff;
-        }
-        > a {display:inline-block;width:307px;height:87px;background: #fff url(../images/common/logo.png) no-repeat center;vertical-align:middle;
+                content: '';
+                display: block;
+                position: absolute;
+                bottom: -47.7px;
+                left: -25px;
+                width: 100px;
+                height: 52.7px;
+                clip-path: polygon(0 0, 99% 0, 100% 0, 61% 5%, 49% 11%, 39% 20%, 31% 31%, 27% 44%, 25% 57%, 25% 69%, 25% 80%, 25% 90%, 25% 100%, 0 100%);
+                background-color: #fff;
+            }
+        > a {display:inline-block;width:307px;height:87px;
+            background: #fff url(../images/common/logo_header.png) no-repeat center;vertical-align:middle;
             border-radius: 0 0 40px 0;
         }
     }
