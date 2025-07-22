@@ -451,6 +451,15 @@ $(function () {
   //   }
   // )
   // wow.init();
+  
+  // AOS 초기화
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+  
   lnbInit(); //lnb 초기화
   snsToggle(); // sns박스 열고 닫힘
   introScroll();
@@ -458,7 +467,12 @@ $(function () {
   var isIndicatorScrolling = false;
   
   // indicator
-  $('#indicator li a').on('click', function () {
+  $('#indicator li a').on('click.indicator', function () {
+    // 풀페이지 스크롤이 활성화된 경우 기본 이벤트 무시
+    if ($('.main.fullpage-scroll').length) {
+      return false;
+    }
+    
     var $parent = $(this).parent();
     var mainNavi = $parent.attr('data-mainnavi');
     
@@ -508,6 +522,11 @@ $(function () {
       $('.btn_quick .scroll_top').fadeIn();
     } else {
       $('.btn_quick .scroll_top').fadeOut();
+    }
+    
+    // 풀페이지 스크롤이 활성화된 경우 indicator 업데이트 무시
+    if ($('.main.fullpage-scroll').length) {
+      return;
     }
     
     // indicator 활성화 처리
@@ -1770,4 +1789,118 @@ $(window).on('resize', function() {
   
   // 도메인 슬라이더 리사이즈
   resizeDomainSlider();
+});
+
+// 섹션별 풀페이지 스크롤 기능
+function initFullPageScroll() {
+  const $html = $('html, body');
+  let page = 1;
+  const lastPage = 5; // 총 섹션 수
+  
+  // 기존 indicator 이벤트 제거
+  $('#indicator li a').off('click.indicator');
+  
+  // 초기 페이지 설정
+  updateFullPageIndicator(page);
+  
+  // 마우스 휠 이벤트
+  $(window).on("wheel", function(e){
+    if($html.is(":animated")) return;
+    
+    if(e.originalEvent.deltaY > 0){
+      if(page == lastPage) return;
+      page++;
+    } else if(e.originalEvent.deltaY < 0){
+      if(page == 1) return;
+      page--;
+    }
+    
+    var posTop = (page-1) * $(window).height();
+    $html.animate({scrollTop : posTop}, 800);
+    
+    updateFullPageIndicator(page);
+  });
+  
+  // 인디케이터 클릭 이벤트 (새로 바인딩)
+  $('#indicator li a').on('click.fullpage', function(e) {
+    e.preventDefault();
+    if($html.is(":animated")) return;
+    
+    const index = $(this).parent().index() + 1;
+    page = index;
+    
+    var posTop = (page-1) * $(window).height();
+    $html.animate({scrollTop : posTop}, 800);
+    
+    updateFullPageIndicator(page);
+    return false;
+  });
+  
+  // 인디케이터 업데이트
+  function updateFullPageIndicator(currentPage) {
+    $('#indicator li').removeClass('active');
+    $('#indicator li').eq(currentPage - 1).addClass('active');
+  }
+  
+  // 키보드 네비게이션
+  $(document).on('keydown', function(e) {
+    if($html.is(":animated")) return;
+    
+    if (e.keyCode === 40 || e.keyCode === 34) { // 아래 화살표 또는 Page Down
+      e.preventDefault();
+      if(page == lastPage) return;
+      page++;
+      var posTop = (page-1) * $(window).height();
+      $html.animate({scrollTop : posTop}, 800);
+      updateFullPageIndicator(page);
+    } else if (e.keyCode === 38 || e.keyCode === 33) { // 위 화살표 또는 Page Up
+      e.preventDefault();
+      if(page == 1) return;
+      page--;
+      var posTop = (page-1) * $(window).height();
+      $html.animate({scrollTop : posTop}, 800);
+      updateFullPageIndicator(page);
+    }
+  });
+  
+  // 터치 이벤트 (모바일 지원)
+  let touchStartY = 0;
+  let touchEndY = 0;
+  
+  $(document).on('touchstart', function(e) {
+    touchStartY = e.originalEvent.touches[0].clientY;
+  });
+  
+  $(document).on('touchend', function(e) {
+    if($html.is(":animated")) return;
+    
+    touchEndY = e.originalEvent.changedTouches[0].clientY;
+    const touchDiff = touchStartY - touchEndY;
+    
+    // 최소 터치 거리 (50px)
+    if (Math.abs(touchDiff) > 50) {
+      if (touchDiff > 0) {
+        if(page == lastPage) return;
+        page++;
+      } else {
+        if(page == 1) return;
+        page--;
+      }
+      
+      var posTop = (page-1) * $(window).height();
+      $html.animate({scrollTop : posTop}, 800);
+      updateFullPageIndicator(page);
+    }
+  });
+}
+
+// 페이지 로드 시 풀페이지 스크롤 초기화
+$(document).ready(function() {
+  // 메인 페이지인 경우에만 풀페이지 스크롤 활성화
+  if ($('.main').length && $('#indicator').length) {
+    // 풀페이지 스크롤 클래스가 있는 경우에만 실행
+    if ($('.main.fullpage-scroll').length) {
+      initFullPageScroll();
+    }
+  }
 });

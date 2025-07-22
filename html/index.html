@@ -10,11 +10,16 @@
   <link rel="stylesheet" href="../common/css/default.css" />
   <link rel="stylesheet" href="../common/css/slick.css" />
   <link rel="stylesheet" href="../common/css/animate.css" />
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
   <!-- 공통 js -->
   <script src="../common/js/jquery-1.12.4.min.js"></script>
   <script src="../common/js/wow.js"></script>
   <!-- <script src="../common/js/prefixfree.min.js"></script> -->
   <script src="../common/js/slick.js"></script>
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="../common/js/common.js"></script>
   <!-- //공통 js -->
   <!--[if lt IE 10]>
@@ -23,7 +28,7 @@
 </head>
 
 <body>
-  <div id="wrapper" class="main">
+  <div id="wrapper" class="main fullpage-scroll">
     <!-- 스킵내비게이션 -->
     <div class="skip_navi">
       <strong class="hide">바로가기 메뉴</strong>
@@ -550,7 +555,7 @@
               </li>
             </ul>
           </div>
-          <div class="main_banner_right">
+          <div class="main_banner_right" data-aos="fade-left" data-aos-delay="400" data-aos-duration="700">
             <div>
               <h2>최신성과</h2>
               <ul>
@@ -989,7 +994,7 @@
               </div>
           </div>
          
-          <div class="certification">
+          <div class="certifin">
             <h2>시험인증검사</h2>
             <div class="certification_con">
                 <!-- 서비스  -->
@@ -1060,8 +1065,8 @@
     <!-- //컨텐츠 -->
     <!-- 푸터 -->
     <div class="footer">
-      <div class="container">
-        <nav class="fnb">
+      <div class="">
+        <nav class="fnb container ">
           <ol class="acodian2">
             <li>
               <button type="button">관련사이트 바로가기 <span class="hide">열기</span></button>
@@ -1139,73 +1144,76 @@
             </li>
           </ol>
         </nav>
-        <div class="footer_con">
-          <div class="footer_left">
-            <img src="../common/images/common/ft_logo.png" alt="한국전기연구원"/>
-            <ul>
-              <li>
-                <b>창원본원</b>
-                <span>(51543) 경상남도 창원시 성산구 전기의길 12 (성주동)</span>
-                <span>TEL 055-280-1114</span>
-                <span>FAX 055-280-121</span>
-              </li>
-              <li>
-                <b>안산분원</b>
-                <span>(15588) 경기도 안산시 상록구 항가울로 111 (사동)</span>
-                <span>TEL 031-8040-4114</span>
-                <span>FAX 031-8040-402</span>
-              </li>
-              <li>
-                <b>의왕분원</b>
-                <span>(16029)경기도 의왕시 내손순환로 138 (내손동)</span>
-                <span>TEL 031-420-6114 </span>
-                <span>FAX 031-420-600</span>
-              </li>
-              <li>
-                <b>광주스마트그리드본부</b>
-                <span>(61751) 광주광역시 남구 도시첨단산업로 27(압촌동)</span>
-                <span>TEL 062-606-7214</span>
-                <span>FAX 062-606-7226</span>
-              </li>
-              <li>
-                <b>홈페이지 담당자</b>
-                <span>TEL 055-280-1074</span>
-                <span>MAIL : jihyun@keri.re.k</span>
-              </li>
-            </ul>
+        <div class="footer_con container">
+          <div class="footer_info">
+            <div class="footer_left">
+              <img src="../common/images/common/ft_logo.png" alt="한국전기연구원"/>
+              <ul>
+                <li>
+                  <b>창원본원</b>
+                  <span>(51543) 경상남도 창원시 성산구 전기의길 12 (성주동)</span>
+                  <span>TEL 055-280-1114</span>
+                  <span>FAX 055-280-121</span>
+                </li>
+                <li>
+                  <b>안산분원</b>
+                  <span>(15588) 경기도 안산시 상록구 항가울로 111 (사동)</span>
+                  <span>TEL 031-8040-4114</span>
+                  <span>FAX 031-8040-402</span>
+                </li>
+                <li>
+                  <b>의왕분원</b>
+                  <span>(16029)경기도 의왕시 내손순환로 138 (내손동)</span>
+                  <span>TEL 031-420-6114 </span>
+                  <span>FAX 031-420-600</span>
+                </li>
+                <li>
+                  <b>광주스마트그리드본부</b>
+                  <span>(61751) 광주광역시 남구 도시첨단산업로 27(압촌동)</span>
+                  <span>TEL 062-606-7214</span>
+                  <span>FAX 062-606-7226</span>
+                </li>
+                <li>
+                  <b>홈페이지 담당자</b>
+                  <span>TEL 055-280-1074</span>
+                  <span>MAIL : jihyun@keri.re.k</span>
+                </li>
+              </ul>
+            </div>
+            <div class="footer_right"> 
+              <a href="#">직원찾기</a>
+              <a href="#">Contact Us</a>
+              <ul>
+                <a href="심사기관에서 제시한 경로 넣어주세요." target="_blank" title="새창열기">
+                  <img
+                    src="../common/images/common/logo_mark_wa.png" alt="심사기관에서 제시한 alt값 넣어주세요."/>
+                </a>
+                <a href="심사기관에서 제시한 경로 넣어주세요." target="_blank" title="새창열기">
+                  <img
+                    src="../common/images/common/logo_mark_HRD.png" alt="심사기관에서 제시한 alt값 넣어주세요."/>
+                </a>
+                <a href="심사기관에서 제시한 경로 넣어주세요." target="_blank" title="새창열기">
+                  <img
+                    src="../common/images/common/logo_mark_HRD02.png" alt="심사기관에서 제시한 alt값 넣어주세요."/>
+                </a>
+                <a href="심사기관에서 제시한 경로 넣어주세요." target="_blank" title="새창열기">
+                  <img
+                    src="../common/images/common/logo_.png" alt="심사기관에서 제시한 alt값 넣어주세요."/>
+                </a>
+              </ul>
+            </div>
           </div>
-          <div class="footer_right"> 
-            <a href="#">직원찾기</a>
-            <a href="#">Contact Us</a>
-            <ul>
-              <a href="심사기관에서 제시한 경로 넣어주세요." target="_blank" title="새창열기">
-                <img
-                  src="../common/images/common/logo_mark_wa.png" alt="심사기관에서 제시한 alt값 넣어주세요."/>
-              </a>
-              <a href="심사기관에서 제시한 경로 넣어주세요." target="_blank" title="새창열기">
-                <img
-                  src="../common/images/common/logo_mark_HRD.png" alt="심사기관에서 제시한 alt값 넣어주세요."/>
-              </a>
-              <a href="심사기관에서 제시한 경로 넣어주세요." target="_blank" title="새창열기">
-                <img
-                  src="../common/images/common/logo_mark_HRD02.png" alt="심사기관에서 제시한 alt값 넣어주세요."/>
-              </a>
-              <a href="심사기관에서 제시한 경로 넣어주세요." target="_blank" title="새창열기">
-                <img
-                  src="../common/images/common/logo_.png" alt="심사기관에서 제시한 alt값 넣어주세요."/>
-              </a>
-            </ul>
+          <div class="footer_menu">
+            <a href="#">개인정보처리방침</a>
+            <a href="#">저작권보호정책</a>
+            <a href="#">입찰공고</a>
+            <a href="#">채용공고</a>
+            <div class="copyright">
+              CopyrightⓒKorea Electrotechnology Research Institute
+            </div>
           </div>
         </div>
-        <div class="footer_menu">
-          <a href="#">개인정보처리방침</a>
-          <a href="#">저작권보호정책</a>
-          <a href="#">입찰공고</a>
-          <a href="#">채용공고</a>
-          <div class="copyright">
-            CopyrightⓒKorea Electrotechnology Research Institute
-          </div>
-        </div>
+       
        
       </div>
     </div>

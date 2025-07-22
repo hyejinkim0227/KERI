@@ -2,7 +2,7 @@ $sidebar-width: 117px;
 
 #wrapper {width:100%;overflow:hidden;
   &.main {
-    padding-left: $sidebar-width;
+    
   }
   &.fixed {min-width:1200px;}
   @include maxWidth($tb1080){
@@ -17,13 +17,13 @@ $sidebar-width: 117px;
 		&:hover, &:focus{top:0;}
 	}
 }
-.container {max-width:$container;margin-right:auto;margin-left:auto;
+.container {max-width:1300px;margin-right:auto;margin-left:auto;
     @include maxWidth($m720){
         padding-right:15px;padding-left:15px;
     }
 }
 .main {
-    .container {padding-left: 0; max-width:$container;
+    .container {padding-left: 0; max-width:1300px;
         @include maxWidth(1415px){          
         }
         @include maxWidth($m720){
@@ -86,7 +86,7 @@ $sidebar-width: 117px;
                         padding-right:0;background:url(../images/common/icon_gnb_link.png) no-repeat right center/12px auto;content:'';
                     }
             }
-            > div { background: #f2f4f6 url(../images/common/bg_gnb.png) no-repeat left bottom/100% 599px; display: flex; flex-direction: column; gap:23px;
+            > div { background: #f2f4f6 url(../images/common/lnb_bg.png) no-repeat left bottom/100% 599px; display: flex; flex-direction: column; gap:23px;
                 width:534px;height: auto;min-height: 599px; padding: 43px 0 0 118px; border-radius: 0 0 100px 0; font-family: $ff-sbaggro;
                 strong {font-size:$fs-40;font-weight:500;color:#000; line-height: 0.6;display:block;letter-spacing: -1px; 
                    background-position:0 0;position:relative;background-repeat:no-repeat; line-height: 0.9;
@@ -387,8 +387,9 @@ $sidebar-width: 117px;
 /*사이트맵 푸른색 배경 끝*/
 
 #contents{width:100%;
-    
-    
+    &.main {
+        padding-left: $sidebar-width;
+    }
 }
 .btn_quick {
       position:fixed;right:0;top:40%;z-index:10;
@@ -444,18 +445,18 @@ $sidebar-width: 117px;
     }
 }
 /*푸터*/
-.footer {border-top:1px solid #f5f5f5;padding:40px 0;font-family:$ff-noto;
+.footer {border-top:1px solid #f5f5f5;font-family:$ff-noto;
     .container {position:relative;}
     .mk_wa {position:absolute;right:0;bottom:20px;}
-    .fnb {display:flex;justify-content:space-between;align-items:center;padding-left:170px;background:url(../images/common/f_logo.png) no-repeat left center;margin-bottom:40px;
-        > ul {display:flex;line-height:44px;
-            li {margin-right:30px;}
-        }
+    .fnb {display:flex;justify-content:space-between;align-items:center;padding-left:170px;
+        background:url(../images/common/f_logo.png) no-repeat left center;margin-bottom:50px;
+        border-bottom: 1px solid #e3e2e7;
+
         > ol {display:flex;
-            > li {position:relative;margin-left:30px;
-                &:first-of-type{margin-left:0;}
-                button {width:202px;color:#000;height:44px;line-height:44px;text-align:left;background:url(../images/common/icon_fb_select.png) no-repeat right center;border-bottom:1px solid #646464;}
-                ul {@include scrollBar;display:none;position:absolute;left:0;overflow-x:hidden;overflow-y:auto;max-height:200px;left:0;bottom:100%;background:#000;width:100%;z-index:100;background: #fff; padding: 10px 15px; border: 1px solid #000;
+            > li {position:relative;margin-left:30px; border-left: 1px solid #e3e2e7;border-right: 1px solid #e3e2e7;
+                &:first-of-type{margin-left:0; border-right: unset;}
+                button {width:202px;color:#000;height:44px;line-height:44px;text-align:left;background:url(../images/common/icon_fb_select.png) no-repeat right center;}
+                ul {@include scrollBar;display:none;position:absolute;left:0;overflow-x:hidden;overflow-y:auto;max-height:200px;left:0;bottom:100%;background:#000;width:100%;z-index:100;background: #fff; padding: 10px 15px;
                     > li {font-size: 15px; color: #000;position: relative; margin:4px 0;
                        
                         @include minWidth(1000px){
@@ -469,26 +470,26 @@ $sidebar-width: 117px;
                 }
             }
         }
-        
     }
-    .addr {max-width:none;font-weight: 300;
-       li {margin:0.2em 0;
-            span {color:#a3a3a3;}
+    .footer_info{
+        display: flex; 
+        .footer_left{ display: flex; flex-direction: column; gap:30px;
+            img{
+                display: block; width: 220px;
+            }
         }
-       > span {display:block;margin-top:0.2em;color:#a7a7a7;}
-    }   
+        .footer_right{
+            display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: flex-end;
+        }
+    }
+   
+
+
    @include maxWidth($tb1080){   
-     .mk_wa {display:none;}
-    .fnb {position:relative;padding-top:70px;background-position:left top 70px;
-        margin-bottom:30px;      
-        > ol {position:absolute;left:0;top:0;display:flex;width:100%;}
-    }
-    .addr {
-       li {margin:0.3em 0;
-            span {color:#000;}
-        }
-       > span {margin-top:1em;}
-    }   
+  
 
    }
    @include maxWidth($m720){padding:20px 0 30px; 
@@ -512,7 +513,7 @@ $sidebar-width: 117px;
             }
         }
     }
-    .addr {font-size:12px;}   
+
    }
 }
 
