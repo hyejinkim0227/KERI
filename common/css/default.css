@@ -5485,6 +5485,26 @@ table.tableB tbody tr.notice {
 }
 
 /*메인 공통*/
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 .main {
   /*메인배너*/
   /*KERI 소식*/
@@ -6284,6 +6304,40 @@ table.tableB tbody tr.notice {
     text-indent: 40px;
   }
 }
+.main .news {
+  position: relative;
+  z-index: 1;
+}
+.main .news::before {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  z-index: -2;
+  width: 1311px;
+  height: 496px;
+  border-radius: 0 0 0 60px;
+  background: #0d1d5b url(../images/main/news_bg.png) no-repeat right center/cover;
+  transform: translateX(100%);
+  animation: slideInFromRight 1.2s ease-out 0.5s forwards;
+  opacity: 0;
+}
+.main .news::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 150px;
+  z-index: -1;
+  width: 1495px;
+  height: 482px;
+  border-radius: 100px 100px 0 0;
+  background: #f7f9ff;
+  transform: translateX(-100%);
+  animation: slideInFromLeft 1.2s ease-out 0.5s forwards;
+  opacity: 0;
+}
 .main .news h2 {
   text-align: center;
 }
@@ -6291,10 +6345,12 @@ table.tableB tbody tr.notice {
   display: flex;
   gap: 78px;
   align-items: flex-start;
+  padding-top: 59px;
 }
 .main .news .news_tab .news_tab_menu {
   width: 200px;
   flex-shrink: 0;
+  margin-top: 50px;
 }
 .main .news .news_tab .news_tab_menu li {
   border-bottom: 1px dashed #e5e5e5;
@@ -6434,14 +6490,15 @@ table.tableB tbody tr.notice {
   justify-content: flex-end;
   align-items: center;
   gap: 39px;
+  position: relative;
 }
 .main .news .news_bottom a {
   width: 270px;
   height: 92.6px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 25px 20px;
+  justify-content: space-between;
+  padding: 20px 30px;
   background: rgba(46, 60, 113, 0.7);
   color: #fff;
   border-radius: 30px 10px 30px 10px;
@@ -6450,23 +6507,30 @@ table.tableB tbody tr.notice {
   box-shadow: 0.3px 17px 21px 0 rgba(0, 0, 0, 0.14);
   transition: all 0.3s ease;
 }
+.main .news .news_bottom a::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: url(../images/main/news_link.png) no-repeat center/30px;
+}
 .main .news .news_bottom a:hover {
   transform: translateY(-2px);
 }
 .main .news .news_bottom a span {
-  padding-left: 35px;
-  background-size: 24px;
-  background-repeat: no-repeat;
-  background-position: left center;
+  padding-left: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 .main .news .news_bottom a:nth-child(1) span {
-  background-image: url(../images/main/news_icon_01.png);
+  background: url(../images/main/news_icon_01.png) no-repeat center left/39px 35px;
 }
 .main .news .news_bottom a:nth-child(2) span {
-  background-image: url(../images/main/news_icon_02.png);
+  background: url(../images/main/news_icon_02.png) no-repeat center left/40px 38px;
 }
 .main .news .news_bottom a:nth-child(3) span {
-  background-image: url(../images/main/news_icon_03.png);
+  background: url(../images/main/news_icon_03.png) no-repeat center left/37px 33px;
 }
 @media screen and (max-width: 1080px) {
   .main .news {
