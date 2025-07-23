@@ -179,6 +179,17 @@
        url('../fonts/SBAggroB.otf') format('opentype'); /* Fallback */
 }
 
+/* SCDream4 폰트 */
+@font-face {
+  font-family: 'SCDream4';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/SCDream4.woff2') format('woff2'), /* Modern Browsers */
+       url('../fonts/SCDream4.woff') format('woff'), /* IE9+, Legacy Modern Browsers */
+       url('../fonts/SCDream4.eot') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/SCDream4.otf') format('opentype'); /* Fallback */
+}
+
 	
 /********* reset.css **********/
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ul, ol, li, form, fieldset, legend, label, input, button, select, textarea, header, main, footer, section, article, aside, menu, nav, table, caption, tbody, tfoot, thead, tr, th, td, summary, figure, figcaption, hgroup { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; -webkit-box-sizing: border-box; box-sizing: border-box;}
@@ -222,9 +233,8 @@ $border2 : 1px solid #dfdfdf;
 $ff-suit:'SUIT','sans-serif';
 $ff-pretendard:'PretendardGOV','sans-serif';
 $ff-sbaggro:'SBAggro','sans-serif';
-$ff-noto:'PretendardGOV','sans-serif';
-$ff-gm:'SUIT','sans-serif';
-$ff-os:'SUIT','sans-serif';
+$ff-scdream:'SCDream4','sans-serif';
+
 
 //font-size
 $fs-10:0.625rem;// 10px
@@ -245,7 +255,9 @@ $fs-26:1.625rem;// 26px
 $fs-28:1.75rem;// 28px
 $fs-30:1.875rem;// 30px
 $fs-32:2rem;// 32px
+$fs-34:2.125rem;// 34px
 $fs-40:2.5rem;// 40px
+$fs-60:3.75rem;// 60px
 
 
 //style

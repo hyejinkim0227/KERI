@@ -41,7 +41,7 @@
       <div class="top_menu container">
         
       </div>
-      <div class="head container">
+      <div class="head">
         <h1 class="logo">
           <a href="#"><span class="hide">한국전기연구원</span></a>
         </h1>
@@ -462,7 +462,7 @@
     </div>
     <!-- //헤더 -->
     <!-- 컨텐츠 -->
-    <div id="contents" class="main">
+    <div id="contents" class="main" style="position: relative;">
       <ul id="indicator">
         <li class="active" data-mainnavi="search">
           <a href="#">
@@ -499,10 +499,10 @@
               <form name="#" method="POST" action="#">
                 <fieldset>
                   <legend>검색 입력 폼</legend>
-                  <div class="search">
+                  <div class="search_input">
                     <input type="text" name="#" value="" placeholder="어떤 정보를 찾으시나요?" title="어떤 정보를 찾으시나요?"
                       autocomplete="off" />
-                    <button type="button"><span class="hide">SEARCH</span></button>
+                    <button type="button">SEARCH</button>
                   </div>
                 </fieldset>
               </form>
@@ -515,42 +515,43 @@
                   <li><a href="#">#묻고답하기</a></li>
                 </ul>
               </div>
-              
             </div>
             <ul>
               <li>
                 <a href="#">
-                  <img src="../common/images/main/search_icon_03.png" alt="시험·인증·검사"/>
-                  <span>시험·인증·검사</span>
+                  <span><img src="../common/images/main/search_icon_03.png" alt="시험·인증·검사"/></span>
+                  <b>시험·인증·검사</b>
                 </a>
               </li>
               <li>
                 <a href="https://keri.recruitment.kr/bbs/appsite/qna/write" target="_blank">
-                  <img src="../common/images/main/search_icon_04.png" alt="채용문의"/>
-                  <span>채용문의</span>
+                  <span><img src="../common/images/main/search_icon_04.png" alt="채용문의"/></span>
+                  <b>채용문의</b>
                 </a>
               </li>
               <li>
                 <a href="https://www.keri.re.kr/bid/" target="_blank">
-                  <img src="../common/images/main/search_icon_05.png" alt="입찰문의"/>
-                  <span>입찰문의</span>
+                  <span>
+                    <img src="../common/images/main/search_icon_05.png" alt="입찰문의"/>
+                  </span>
+                  <b>입찰문의</b>
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="../common/images/main/search_icon_06.png" alt="기술이전"/> 
-                  <span>기술이전</span>
+                  <span><img src="../common/images/main/search_icon_06.png" alt="기술이전"/> </span>
+                  <b>기술이전</b>
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="../common/images/main/search_icon_07.png" alt="제증명서 신청"/>
-                  <span>제증명서 신청</span>
+                  <span> <img src="../common/images/main/search_icon_07.png" alt="제증명서 신청"/></span>
+                  <b>제증명서 신청</b>
                 </a>
               </li>
               <li><a href="https://visit.keri.re.kr/" target="_blank">
-                <img src="../common/images/main/search_icon_08.png" alt="방문신청"/>
-                <span>방문신청</span>
+                <span><img src="../common/images/main/search_icon_08.png" alt="방문신청"/></span>
+                <b>방문신청</b>
               </a>
               </li>
             </ul>
@@ -728,7 +729,6 @@
         </div>
       </section>
       <!-- //분야 -->
-      
       <!-- 배너 -->
        <div class="side_banner">
         <div class="container">
@@ -1059,14 +1059,14 @@
         </div>
        </section>
        <!-- //홍보 -->
-      </div>
+    </div>
 
      
     <!-- //컨텐츠 -->
     <!-- 푸터 -->
     <div class="footer">
       <div class="">
-        <nav class="fnb container ">
+        <nav class="fnb container">
           <ol class="acodian2">
             <li>
               <button type="button">관련사이트 바로가기 <span class="hide">열기</span></button>
@@ -1144,10 +1144,10 @@
             </li>
           </ol>
         </nav>
-        <div class="footer_con container">
-          <div class="footer_info">
+        <div class="footer_con ">
+          <div class="footer_info container">
             <div class="footer_left">
-              <img src="../common/images/common/ft_logo.png" alt="한국전기연구원"/>
+              <img src="../common/images/common/logo.png" alt="한국전기연구원"/>
               <ul>
                 <li>
                   <b>창원본원</b>
@@ -1180,9 +1180,11 @@
                 </li>
               </ul>
             </div>
-            <div class="footer_right"> 
-              <a href="#">직원찾기</a>
-              <a href="#">Contact Us</a>
+            <div class="footer_right">
+              <div>
+                <a href="#">직원찾기</a>
+                <a href="#">Contact Us</a>
+              </div>
               <ul>
                 <a href="심사기관에서 제시한 경로 넣어주세요." target="_blank" title="새창열기">
                   <img
@@ -1203,7 +1205,7 @@
               </ul>
             </div>
           </div>
-          <div class="footer_menu">
+          <div class="footer_menu container">
             <a href="#">개인정보처리방침</a>
             <a href="#">저작권보호정책</a>
             <a href="#">입찰공고</a>
@@ -1213,8 +1215,6 @@
             </div>
           </div>
         </div>
-       
-       
       </div>
     </div>
     <!-- //푸터 -->

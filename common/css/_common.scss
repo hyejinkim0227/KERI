@@ -12,7 +12,7 @@ $sidebar-width: 117px;
       font-size:14px;
   }
 }
-.skip_navi {position:absolute; z-index:9999; width:100%; left:0; top:0; text-align:center;
+.skip_navi {position:absolute; z-index:9999; width:100%; left:0; top:0;text-align:center;
 	a{display:block; position:absolute; left:0; top:-9999px; z-index:1; width:100%; height:40px; line-height:40px; background-color:#333; color:#fff; font-size:20px; font-weight:700;
 		&:hover, &:focus{top:0;}
 	}
@@ -41,7 +41,7 @@ $sidebar-width: 117px;
 /*헤더*/
 
 .header {height:$header-height;position:absolute; left:0;right:0;overflow:visible;z-index:100;
-    .top_menu {display:flex;justify-content:space-between;align-items:center;font-size:12px;line-height:30px;font-family:$ff-noto;
+    .top_menu {display:flex;justify-content:space-between;align-items:center;font-size:12px;line-height:30px;
         > ol {display:flex;
             > li {margin-right:15px;}
         }
@@ -50,20 +50,10 @@ $sidebar-width: 117px;
         }
     } 
     .head {display:flex;justify-content:space-between;align-items:center;text-align:center;}   
-    .logo {  position: relative; padding-left: 116px; border-radius: 0 0 40px 0;
-            &::after{
-                content: '';
-                display: block;
-                position: absolute;
-                bottom: -47.7px;
-                left: -25px;
-                width: 100px;
-                height: 52.7px;
-                clip-path: polygon(0 0, 99% 0, 100% 0, 61% 5%, 49% 11%, 39% 20%, 31% 31%, 27% 44%, 25% 57%, 25% 69%, 25% 80%, 25% 90%, 25% 100%, 0 100%);
-                background-color: #fff;
-            }
+    .logo {  position: relative;border-radius: 0 0 40px 0;
+           
         > a {display:inline-block;width:307px;height:87px;
-            background: #fff url(../images/common/logo_header.png) no-repeat center;vertical-align:middle;
+            background: #fff url(../images/common/logo.png) no-repeat center;vertical-align:middle;
             border-radius: 0 0 40px 0;
         }
     }
@@ -249,7 +239,7 @@ $sidebar-width: 117px;
                 }
                 > .sns {margin-left:0;margin-top:130px;padding-left:20px;width:32%;display:block;text-align:left;
                     li {margin-left:0;
-                        a {text-indent:0;font-family:$ff-gm;font-size:10px;line-height:25px;width:auto;height:auto;text-align:left;font-weight:bold;
+                        a {text-indent:0;font-size:10px;line-height:25px;width:auto;height:auto;text-align:left;font-weight:bold;
                             &.facebook {background-image:none;color:#005cb3;}
                             &.insta {background-image:none;color:#ff377e;}
                             &.twitter {background-image:none;color:#4896fd;}
@@ -445,17 +435,13 @@ $sidebar-width: 117px;
     }
 }
 /*푸터*/
-.footer {border-top:1px solid #f5f5f5;font-family:$ff-noto;
-    .container {position:relative;}
-    .mk_wa {position:absolute;right:0;bottom:20px;}
-    .fnb {display:flex;justify-content:space-between;align-items:center;padding-left:170px;
-        background:url(../images/common/f_logo.png) no-repeat left center;margin-bottom:50px;
-        border-bottom: 1px solid #e3e2e7;
-
+.footer { border-top:1px solid #e3e2e7;
+    .fnb {display:flex;justify-content:space-between;align-items:center; 
         > ol {display:flex;
-            > li {position:relative;margin-left:30px; border-left: 1px solid #e3e2e7;border-right: 1px solid #e3e2e7;
-                &:first-of-type{margin-left:0; border-right: unset;}
-                button {width:202px;color:#000;height:44px;line-height:44px;text-align:left;background:url(../images/common/icon_fb_select.png) no-repeat right center;}
+            > li {position:relative; border-left: 1px solid #e3e2e7;border-right: 1px solid #e3e2e7;
+                &:first-of-type{border-right: unset;}
+                button {width:202px; color:#000 ;height:44px; line-height:44px; text-align:left; background:url(../images/common/icon_ft_select_off.png) no-repeat right 10px center; font-family: $ff-suit; padding: 0 20px; }
+                
                 ul {@include scrollBar;display:none;position:absolute;left:0;overflow-x:hidden;overflow-y:auto;max-height:200px;left:0;bottom:100%;background:#000;width:100%;z-index:100;background: #fff; padding: 10px 15px;
                     > li {font-size: 15px; color: #000;position: relative; margin:4px 0;
                        
@@ -466,26 +452,53 @@ $sidebar-width: 117px;
                     }
                 }
                 &.active {
-                    button {background-image:url(../images/common/icon_fb_select_on.png);}
+                    button {background-image:url(../images/common/icon_ft_select_on.png);}
                 }
             }
         }
     }
-    .footer_info{
-        display: flex; 
-        .footer_left{ display: flex; flex-direction: column; gap:30px;
-            img{
-                display: block; width: 220px;
+    .footer_con{background: #f5f5f5;border-top: 1px solid #e3e2e7;
+        .footer_info{ padding: 50px 0 30px; width: 100%; display: flex;justify-content: space-between; border-bottom: 1px solid #e3e2e7;
+            .footer_left{ display: flex; flex-direction: column; gap:30px;
+                img{display: block; width: 220px;}
+                > ul{ display: flex; flex-direction: column; gap: 6px; 
+                    li{ font-size: $fs-15; font-family: $ff-suit; display: flex;
+                        b{ font-weight: 600; margin-right: 10px;}
+                        span{
+                            &::after{
+                                content: '';
+                                display: inline-block;
+                                width: 1px;
+                                height: 13px;
+                                background: #000;
+                                margin: 0 10px;
+                            }
+                            &:last-child{
+                                &::after{display: none;}
+                            }
+                        }
+                    }
+                }
+            }
+            .footer_right{  display: flex;  flex-direction: column; justify-content: flex-end; align-items: flex-end; gap: 32px;
+                > div { display: flex; gap: 10px; flex-direction: column;
+                    a{
+                        display: block; font-size: $fs-15; font-family: $ff-suit; font-weight: 600; background: url(../images/common/icon_ft_arrow.png) no-repeat center right/7px 11px; padding-right: 50px;
+                    }
+                  
+                }
+                > ul{
+                    display: flex; gap: 20px;
+                }
             }
         }
-        .footer_right{
-            display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                align-items: flex-end;
+        .footer_menu{
+            display: flex; gap: 16px; padding: 30px 0; font-family: $ff-suit; font-weight: 600;
+            .copyright{
+                margin-left: auto; font-size: $fs-15; font-weight: 300;
+            }
         }
     }
-   
 
 
    @include maxWidth($tb1080){   
@@ -533,7 +546,7 @@ $sidebar-width: 117px;
             .img {width:405px;height:405px;
               img {width:100%;height:100%;}
             }
-            .control {margin-top:40px;font-size:0;color:#fff;line-height:20px;font-family:$ff-gm;font-weight:500;text-align:center;
+            .control {margin-top:40px;font-size:0;color:#fff;line-height:20px;font-weight:500;text-align:center;
                 > :nth-child(n) {display:inline-block;font-size:17px;margin:0 5px;vertical-align:top;height:16px;}
                 .pagination_num {font-weight:300;margin-right:10px;
                   .current {color:#cc9c5b;font-weight:400;}
@@ -593,7 +606,7 @@ $sidebar-width: 117px;
 /*서브페이지 타이틀*/
 
 .page_spot {display:table;width:100%;margin-bottom:40px;height:195px;text-align:center;background-repeat:no-repeat;background-position:center;background-size:cover;background-image:url(../images/common/bg_lnb.jpg);
-    h2 {font-size:38px;font-weight:500;color:#fff;font-family:$ff-noto;display:table-cell;vertical-align:middle;}    
+    h2 {font-size:38px;font-weight:500;color:#fff;display:table-cell;vertical-align:middle;}    
     @include maxWidth($m720){margin-bottom:0;padding:0;height:121.5px;line-height:1.4;background-image:url(../images/common/bg_lnb_m.jpg);
         h2 {font-size:23px;}
     }
@@ -601,7 +614,7 @@ $sidebar-width: 117px;
 .sub {
     &.container {position:relative;padding-bottom:100px;padding-left:340px;}
     .lnb_wrap {
-        > strong {position:absolute;left:0;top:0;width:280px;display:table;font-size:34px;color:#000;padding-top:5px;font-family:$ff-noto;font-weight: 500;text-align:left;height:86px;background:url(../images/common/bg_lnb_tit.png) no-repeat left bottom/100% auto;}
+        > strong {position:absolute;left:0;top:0;width:280px;display:table;font-size:34px;color:#000;padding-top:5px;font-weight: 500;text-align:left;height:86px;background:url(../images/common/bg_lnb_tit.png) no-repeat left bottom/100% auto;}
         .lnb{width:280px;position:absolute;left:0;top:86px;
             > li {border-bottom:$border2;
                 > a{display:block;padding:17.6px 50px 17.6px 25px;position:relative;font-weight:400;transition:all 0.3s;

@@ -1,4 +1,3 @@
-
 var elFocus, headH; //포커스요소 저장하는 전역변수
 var page = 0;
 
@@ -1903,4 +1902,55 @@ $(document).ready(function() {
       initFullPageScroll();
     }
   }
+});
+
+// indicator 제어
+$(document).ready(function() {
+  const $indicator = $('#indicator');
+  const $contents = $('#contents');
+  const $sections = $('[data-mainnavi]');
+  const $footer = $('footer');
+  
+  // 스크롤 이벤트 핸들러
+  $(window).on('scroll', function() {
+    const scrollTop = $(window).scrollTop();
+    const contentsTop = $contents.offset().top;
+    const footerTop = $footer.offset().top;
+    const windowHeight = $(window).height();
+    
+    // contents 영역과 footer 영역 사이에서만 indicator 표시
+    if (scrollTop >= contentsTop && scrollTop + windowHeight <= footerTop) {
+      $indicator.css('opacity', '1');
+      
+      // 현재 보이는 섹션에 따라 active 클래스 변경
+      $sections.each(function() {
+        const $section = $(this);
+        const sectionTop = $section.offset().top;
+        const sectionBottom = sectionTop + $section.height();
+        
+        if (scrollTop >= sectionTop - 100 && scrollTop < sectionBottom) {
+          const navType = $section.data('mainnavi');
+          $indicator.find('li').removeClass('active');
+          $indicator.find(`li[data-mainnavi="${navType}"]`).addClass('active');
+        }
+      });
+    } else {
+      $indicator.css('opacity', '0');
+    }
+  });
+  
+  // indicator 클릭 이벤트
+  $indicator.find('li').on('click', function() {
+    const navType = $(this).data('mainnavi');
+    const $targetSection = $(`[data-mainnavi="${navType}"]`).first();
+    
+    if ($targetSection.length) {
+      $('html, body').animate({
+        scrollTop: $targetSection.offset().top
+      }, 500);
+    }
+  });
+  
+  // 초기 실행
+  $(window).trigger('scroll');
 });
