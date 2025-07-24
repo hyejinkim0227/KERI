@@ -324,6 +324,22 @@ function resetSearch() {
   });
 }
 
+function openSearchEn() {
+  $('.header_en .util > .search_box,.btn_sch').addClass('active');
+  $('.btn_sch').attr('title', 'Close Search');
+  var schBoxH = $('.search_box').outerHeight();
+  $('.header_en').addClass('active').stop().animate({ height: headH + schBoxH + 'px' }, 200);
+  return false;
+}
+
+function resetSearchEn() {
+  $('.header_en').stop().animate({ height: headH + 'px' }, 200, function () {
+    $('.header_en').removeClass('active');
+    $('.util > .search_box,.btn_sch').removeClass('active');
+    $('.btn_sch').attr('title', 'Open Search');
+  });
+}
+
 
 function openPopup() {
   saveFocus(); //이벤트 발생한 요소 기억
@@ -1387,57 +1403,83 @@ $(function () {
     $(this).attr('title', '탭 선택됨').closest('li').siblings().find('button').attr('title', '탭');
   });
 
+  // 뉴스 탭 메뉴 클릭 이벤트
   $('.news_tab_menu li').on('click', function(){
     if( $(this).find('a').length ) return;
     var idx = $(this).index();
     $(this).addClass('active').siblings().removeClass('active');
     $('.news_tab_content .tab_panel').eq(idx).addClass('active').siblings().removeClass('active');
-    setupPagination();
+    initNewsSlider();
   });
 
-  function setupPagination() {
-    $('.tab_panel').each(function() {
-      var $panel = $(this);
-      var $items = $panel.find('ul li');
+  // 뉴스 슬라이더 초기화 함수
+  function initNewsSlider() {
+    $('.tab_panel.active .news_slider').each(function() {
+      var $slider = $(this);
+      var $items = $slider.find('li');
       var numItems = $items.length;
-      var perPage = 6;
-      var $controls = $panel.closest('.news_tab_content').find('.controls');
+      var itemsPerPage = 6;
+      var $controls = $('.news_controls');
       
-      if (numItems <= perPage) {
-        $controls.hide();
+      // 기존 슬라이더 제거
+      if ($slider.hasClass('slick-initialized')) {
+        $slider.slick('unslick');
+      }
+      
+      // 버튼은 항상 보여주기
+      $controls.find('.news_prev, .news_next').show();
+      
+      // 6개 이하면 슬라이더 비활성화하고 버튼만 비활성화
+      if (numItems <= itemsPerPage) {
+        $controls.find('.news_prev, .news_next').addClass('disabled');
+        $slider.removeClass('news-slider-active');
         return;
       }
       
-      $controls.show();
-      var numPages = Math.ceil(numItems / perPage);
-      var currentPage = 1;
-
-      $items.hide();
-      $items.slice(0, perPage).show();
-
-      $controls.find('.prev').off('click').on('click', function(e) {
+      // 6개 이상이면 슬라이더 활성화
+      $slider.addClass('news-slider-active');
+      
+      // 간단한 페이징 방식으로 변경
+      var currentPage = 0;
+      var totalPages = Math.ceil(numItems / itemsPerPage);
+      
+      function showPage(pageIndex) {
+        $items.hide();
+        var start = pageIndex * itemsPerPage;
+        var end = start + itemsPerPage;
+        $items.slice(start, end).show();
+        
+        // 버튼 상태 업데이트
+        $('.news_controls .news_prev').toggleClass('disabled', pageIndex === 0);
+        $('.news_controls .news_next').toggleClass('disabled', pageIndex >= totalPages - 1);
+      }
+      
+      // 초기 페이지 표시
+      showPage(0);
+      
+      // 이전/다음 버튼 이벤트 (기존 이벤트 제거 후 새로 바인딩)
+      $('.news_controls .news_prev').off('click.newsSlider').on('click.newsSlider', function(e) {
         e.preventDefault();
-        if (currentPage > 1) {
+        if (currentPage > 0) {
           currentPage--;
-          var start = (currentPage - 1) * perPage;
-          var end = start + perPage;
-          $items.hide().slice(start, end).show();
+          showPage(currentPage);
         }
       });
-
-      $controls.find('.next').off('click').on('click', function(e) {
+      
+      $('.news_controls .news_next').off('click.newsSlider').on('click.newsSlider', function(e) {
         e.preventDefault();
-        if (currentPage < numPages) {
+        if (currentPage < totalPages - 1) {
           currentPage++;
-          var start = (currentPage - 1) * perPage;
-          var end = start + perPage;
-          $items.hide().slice(start, end).show();
+          showPage(currentPage);
         }
       });
     });
   }
 
-  setupPagination();
+
+
+  // 초기 슬라이더 설정
+  initNewsSlider();
 
   //게시판 상세 글자크기 조절
   $('.fs_up').on('click', function () {
@@ -1909,10 +1951,15 @@ $(document).ready(function() {
   const $indicator = $('#indicator');
   const $contents = $('#contents');
   const $sections = $('[data-mainnavi]');
-  const $footer = $('footer');
+  const $footer = $('.footer'); // 클래스 선택자로 수정
   
   // 스크롤 이벤트 핸들러
   $(window).on('scroll', function() {
+    // 요소 존재 체크
+    if ($contents.length === 0 || $footer.length === 0) {
+      return;
+    }
+    
     const scrollTop = $(window).scrollTop();
     const contentsTop = $contents.offset().top;
     const footerTop = $footer.offset().top;
@@ -1925,6 +1972,8 @@ $(document).ready(function() {
       // 현재 보이는 섹션에 따라 active 클래스 변경
       $sections.each(function() {
         const $section = $(this);
+        if ($section.length === 0) return;
+        
         const sectionTop = $section.offset().top;
         const sectionBottom = sectionTop + $section.height();
         
