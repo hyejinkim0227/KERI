@@ -475,6 +475,16 @@ $(function () {
     mirror: false
   });
   
+  var support_list_Slider = $('.support_list');
+    if (support_list_Slider.length > 0) {
+        support_list_Slider.slick({
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            prevArrow: $('.support_btn_prev'),
+            nextArrow: $('.support_btn_next'),
+        });
+    }
+
   lnbInit(); //lnb 초기화
   snsToggle(); // sns박스 열고 닫힘
   introScroll();
