@@ -115,13 +115,14 @@ $sidebar-width: 117px;
             
         }
     }
-    .util {display: flex; align-items: center; gap: 26px; margin-right: 38px;
-        .lang{color: #fff;}
-        .popup_zone{
+    .util {display: flex; align-items: center; width: 379px; justify-content: space-between;
+        .lang{margin-left: 38px; height: 40px; padding: 10px 17px 10px 30px; font-family: $ff-sbaggro; font-weight: 300; font-size: $fs-13; color: #fff; 
+            background: url(../images/common/icon_globel.png) no-repeat left center / 20px 21px;}
+        .popup_zone{padding: 10px 13px 10px 27px;
             background: url(../images/common/icon_popup_zone.png) no-repeat left center/20px;
-            padding-left: 27px; color: #fff; font-family: $ff-sbaggro; font-weight: 300;  letter-spacing: -0.33px;
+           color: #fff; font-family: $ff-sbaggro; font-weight: 300;letter-spacing: -0.33px;
         }
-        .search_box {display:none;
+        .search_box {display:none; 
             position:absolute;left:0;top:114px;width:100%;border-top:1px solid #ddd;background-color:#fff;z-index:2;padding:60px 30px;text-align:center;
             &.active {display:block;}
             .tit {color:rgba(0,0,0,0.3);font-size:36px;font-weight:600;margin-right:45px;vertical-align:top;display:inline-block;line-height:30px;}
@@ -146,11 +147,11 @@ $sidebar-width: 117px;
             }
         }
         
-        .search_open {width:21px;height:21px;background:url(../images/common/icon_head_search.png) no-repeat right center;vertical-align:middle;
+        .search_open {padding: 10px 16px 10px 13px; height: 40px; background:url(../images/common/icon_head_search.png) no-repeat center;vertical-align:middle;
             &.active {background-image: url(../images/common/btn_search_close.png);}
         }
        
-        .sitemap_open {width:32px;height:32px;background:url(../images/common/icon_sitemap_open.png) no-repeat center;vertical-align:middle;
+        .sitemap_open { width:54px; height:40px;background:url(../images/common/icon_sitemap_open.png) no-repeat center;vertical-align:middle;
         }
     }         
     &.active {
