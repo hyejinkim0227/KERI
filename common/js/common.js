@@ -482,6 +482,9 @@ $(function () {
             slidesToScroll: 2,
             prevArrow: $('.support_btn_prev'),
             nextArrow: $('.support_btn_next'),
+            autoplay: true,
+            autoplaySpeed: 4000,
+            pauseOnHover: true
         });
     }
 
@@ -543,6 +546,13 @@ $(function () {
   tabBoxSizing(); //탭컨텐츠 높이 조절
   tabContent(); //선택탭 컨텐츠 노출
   $(window).on('scroll', function () {
+    // 헤더 scrolled 클래스 처리 (GNB active와 구분)
+    if ($(window).scrollTop() > 0) {
+      $('.header').addClass('scrolled');
+    } else {
+      $('.header').removeClass('scrolled');
+    }
+    
     if ($(window).scrollTop() > 100) {
       $('.btn_quick .scroll_top').fadeIn();
     } else {
@@ -1661,7 +1671,7 @@ $(function () {
   // $('body').css('height', window.innerHeight);
 });
 $(window).on('resize', function () {
-  $('.header_en,.header,.search_open').removeAttr('style').removeClass('active');
+  $('.header_en,.header,.search_open').removeAttr('style').removeClass('active scrolled');
   headH = $('.header').outerHeight(); //기본 헤더 높이 전역변수
   if (pcChk(1080)) {
     gnbFloatClear();
@@ -1673,7 +1683,7 @@ $(window).on('resize', function () {
   if (!pcChk(720)) {
     tableChange();
   }
-  $('.header').removeClass('active').removeAttr('style');
+  $('.header').removeClass('active scrolled').removeAttr('style');
   imgResize(); //.img 이미지 사이즈 조절
   tabBoxSizing(); //탭컨텐츠 높이 조절
   tabResizing1(); //탭버튼 높이 조절
@@ -1761,6 +1771,13 @@ function initDomainSlider() {
     $('.domain-nav.slider-nav').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
       // 페이지네이션 업데이트
       $('.domain-controls .pagination .current').text(nextSlide + 1);
+      
+      // 짝수번째 슬라이드(data-index가 1,3,5,7,9)일 때 클래스 추가
+      if (nextSlide === 1 || nextSlide === 3 || nextSlide === 5 || nextSlide === 7 || nextSlide === 9) {
+        $('.domain').addClass('even-slide');
+      } else {
+        $('.domain').removeClass('even-slide');
+      }
     });
     
     // 컨트롤 버튼 연결
@@ -1782,6 +1799,9 @@ function initDomainSlider() {
         $(this).addClass('paused').text('▶');
       }
     });
+    
+    // 초기 상태 설정 (첫 번째 슬라이드는 index 0이므로 홀수번째)
+    $('.domain').removeClass('even-slide');
   }
 }
 
@@ -1911,6 +1931,7 @@ $(document).ready(function() {
 
 // indicator 제어
 $(document).ready(function() {
+  if ($('.main.fullpage-scroll').length) return;
   const $indicator = $('#indicator');
   const $contents = $('#contents');
   const $sections = $('[data-mainnavi]');
@@ -1965,4 +1986,25 @@ $(document).ready(function() {
   
   // 초기 실행
   $(window).trigger('scroll');
+});
+
+// TOP 버튼 기능
+$(document).ready(function() {
+  const $topBtn = $('#topBtn');
+  
+  // 스크롤 이벤트 - top 버튼 show/hide
+  $(window).on('scroll', function() {
+    if ($(window).scrollTop() > 300) {
+      $topBtn.addClass('show');
+    } else {
+      $topBtn.removeClass('show');
+    }
+  });
+  
+  // top 버튼 클릭 이벤트 - 페이지 상단으로 부드럽게 이동
+  $topBtn.on('click', function() {
+    $('html, body').animate({
+      scrollTop: 0
+    }, 600, 'swing');
+  });
 });

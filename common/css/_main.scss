@@ -677,13 +677,14 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
+    margin-top: 140px;
     
     &::after {
       content: '';
       display: block;
       position: absolute;
       left: 0;
-      bottom: 200px;
+      bottom: 100px;
       z-index: -1;
       width: calc(100% - 100px);
       height: 225px;
@@ -696,6 +697,7 @@
 
     h2{
       text-align: center;
+      margin-bottom: 59px;
     }
 
     .news_tab {
@@ -766,7 +768,7 @@
         .news_controls {
           position: absolute;
           top: 95px;
-          right: -95px;
+          left: calc(100% + 115px);
           display: flex;
           gap: 8px;
           z-index: 4;
@@ -867,52 +869,6 @@
                   word-break: keep-all;
               }
 
-              .research-visual {
-                position: absolute;
-                top: 50%;
-                right: 30px;
-                transform: translateY(-50%);
-                margin: 0;
-                
-                img {
-                  border-radius: 15px;
-                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-                  max-width: 100%;
-                  height: auto;
-                  
-                  // 고대비 모드 지원
-                  @media (prefers-contrast: high) {
-                    border: 2px solid #fff;
-                  }
-                  
-                  // 애니메이션 감소 설정 사용자 고려
-                  @media (prefers-reduced-motion: reduce) {
-                    transition: none;
-                  }
-                  
-                  // 기본 hover 효과
-                  @media (prefers-reduced-motion: no-preference) {
-                    transition: transform 0.3s ease;
-                    
-                    &:hover {
-                      transform: scale(1.05);
-                    }
-                  }
-                }
-              }
-
-              // 스크린 리더 전용 텍스트
-              .sr-only {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                white-space: nowrap;
-                border: 0;
-              }
             }
           }
 
@@ -1173,134 +1129,6 @@
     }
   }
 
-  /* 기존 외교부 소식 스타일 (주석 처리됨) */
-  /* .news {position:relative;
-    &:before {content:'';position:absolute;right:calc(50% + 430px);width:calc(50% - 430px);height:270px;bottom:0;background-color:#f5f5f5;display:block;z-index:-1;}  
-    .tab_box {$tabH:48px;position:relative;text-align:right;margin-top:-90px;
-      > li {display:inline-block;margin-left:10px;
-        &:first-of-type{margin-left:0;}
-          > button {height:$tabH;color:#000;font-size:16px;width:152px;border:1px solid #000;background-color:#fff;
-            &:hover {color:#fff;box-shadow:5px 12px 22px rgba(0,0,0,0.15);background-color:#000;text-align:center;}
-          }
-          > div {display:none;position:absolute;left:0;top:$tabH;width:100%;padding-top:35px;
-            > .more {position:absolute;font-size:16px;color:#000;font-weight:500;padding-right:45px;background:url(../images/main/arrow_more1.png) no-repeat right 12px;line-height:33px;display:block;right:0;top:30px;
-              &:before {content:'';position:absolute;left:-16px;top:0;width:33px;height:33px;display:block;background-color:#f5f5f5;border-radius:33px;z-index:-1;}
-            }
-          }
-          &.active {
-              > button {color:#fff;box-shadow:5px 12px 22px rgba(0,0,0,0.15);background-color:#000;text-align:center;font-weight: 500;}
-              > div {display:block;}
-          }
-         
-      }
-      ol {@include ftItem(3,80);text-align:left;position:relative;   
-        > li {height:300px;         
-          > a,> div {display:block;padding:40px 0 90px;
-            a {display:block;}
-            span {display:none;font-size:14px;font-weight: 600;position:relative;padding-bottom:10px;margin-left:2px;
-              &:before {content:'';width:40px;height:2px;background-color:#000;position:absolute;left:0;bottom:0;}
-            }
-            b {display:block;color:#917c62;font-size:38px;font-weight: 500;padding-top:7px;margin-bottom:6px;position:relative;
-              &:after {content:'';width:24px;height:24px;background:#b89e7d url(../images/main/icon_news_off.png) no-repeat center;box-sizing:border-box;display:inline-block;vertical-align:4px;float:right;position:absolute;right:0;top:50%;margin-top:-12px;}
-              @include minWidth($m720){
-                &:after {transition:0.3s;}
-                &:hover {
-                  &:after {border:1px solid #917c62;background:#fff url(../images/main/icon_news_on.png) no-repeat center;}
-                }
-              }
-            }
-            strong {@include ell1;display:block;font-size:22px;font-weight: 500;margin-top:26px;margin-bottom:15px;color:#000;
-              &:first-child{margin-top:0;}
-            }
-            p {@include ell2;font-size:16px;line-height:1.5em;height:3em;word-break:keep-all;overflow:hidden;margin:0;}
-            em {font-size:14px;color:#777;display:block;margin-top:11px;}
-          }          
-          }
-      }
-    }
-    @include maxWidth(1300px){position:relative;margin-top:30px;padding-top:50px;
-      &:before {content:'';bottom:initial;bottom:auto;top:0;right:calc(50% + 65px);width:calc(50% - 65px);}  
-      .tab_box {text-align:center;margin-top:50px;
-        > li {margin-left:5px;
-            > div {padding-top:60px;
-               > .more {position:relative;display:inline-block;top:0;margin-top:20px;padding-right:42px;padding-left:16px;
-                &:before {left:0;}
-              }
-            }
-        }
-        ol {@include ftItem(3,40);
-         > li {height:auto;
-           > a,> div {padding:0;}
-         }
-        }
-      }
-    
-    }
-    @include maxWidth(900px){
-      .tab_box {
-        ol {@include ftItem(1,0);
-          &.total {
-            > li {
-              > div {padding-left:100px;position:relative;
-               
-              }
-            }
-          }
-          > li {height:auto;padding:20px 0;border-bottom:1px solid #f3f3f3;
-            &:first-of-type{padding-top:0;}
-            &:last-of-type{border-bottom:0;padding-bottom:0;}
-            > a,>div {
-              span {display:none;}   
-               b {font-size:16px;width:80px;height:50px;line-height:50px;padding:0;background-color:#f4f2ef;text-align:center;position:absolute;left:0;top:0;
-                &:after {position:absolute;right:-8px;top:-8px;margin-top:0;width:18px;height:18px;background-size:8px auto;}
-              }
-              strong {margin-top:0;
-                + p {display:none;}
-              }          
-              p {font-size:16px;}
-              em {font-size:15px;margin-top:3px;}
-            }
-          }
-        }
-      }
-    
-    }
-    @include maxWidth($m720){padding-top:25px;
-      &:before {content:'';height:115px;right:calc(50% + 32px);width:calc(50% - 32px);}
-      .tab_box {$tabH:37px;margin-top:25px;width:100%;
-        > li {float:left;width:25%;margin-left:0;        
-            > button {height:$tabH;font-size:14px;width:100%;border-left:0;}
-            &:first-of-type{
-              button {border-left:1px solid #000;}
-            }
-            &.active {
-              > button {box-shadow:5px 12px 22px rgba(0,0,0,0.15);}
-            }
-            > div {top:$tabH;padding-top:30px;
-              > .more {font-size:14px;background-size:29px auto;background-position:right 10px;line-height:30px;
-                &:before {width:30px;height:30px;left:0;}
-              }
-            }
-        }
-        ol {
-          &.total {
-            > li {
-              > div {padding-left:60px;}
-            }
-          }
-          > li {
-            > a,>div {
-               b {font-size:14px;width:45px;height:35px;line-height:35px;}
-               strong {font-size:14px;margin-bottom:2px;}
-               p {font-size:14px;}
-              em {font-size:13px;}
-            }
-            }
-        }
-      }
-    }
-  }
-
    
   /*배너*/
   .side_banner {
@@ -1431,13 +1259,14 @@
     .container {
       position: relative;
       z-index: 2;
-      max-width: 1200px;
+      max-width: 1400px; // 1200px에서 1400px로 증가
       margin: 0 auto;
-      height: 900px;
+      height: 870px;
       width: 100%;
       display: flex;
       align-items: stretch;
       margin-left: 0;
+      overflow: visible; // visual 이미지가 보이도록
     }
 
     // 좌측 네비게이션 (slick.js)
@@ -1524,7 +1353,7 @@
       height: 100%;
       width: 100%;
 
-      padding: 90px 300px 0 140px;
+      padding: 90px 140px 0 140px; // 우측 패딩을 300px에서 140px로 변경
       
       .slick-list {
         height: 100%;
@@ -1536,10 +1365,11 @@
       }
       
       .content-slide {
+        flex: 1;
         height: 100% !important;
         width: 100% !important;
         position: relative;
-        overflow: hidden;
+        overflow: visible; // hidden에서 visible로 변경하여 absolute 요소가 보이도록
        
       
 
@@ -1585,53 +1415,42 @@
            
           }
 
-          .research-visual {
-            position: absolute;
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            margin: 0;
-            
-            img {
-              border-radius: 15px;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-              max-width: 100%;
-              height: auto;
-              
-              // 고대비 모드 지원
-              @media (prefers-contrast: high) {
-                border: 2px solid #fff;
-              }
-              
-              // 애니메이션 감소 설정 사용자 고려
-              @media (prefers-reduced-motion: reduce) {
-                transition: none;
-              }
-              
-              // 기본 hover 효과
-              @media (prefers-reduced-motion: no-preference) {
-                transition: transform 0.3s ease;
-                
-                &:hover {
-                  transform: scale(1.05);
-                }
-              }
-            }
-          }
         }
 
-     
-        .visual{ margin-top: 62px;
-          display: flex
-          ;
-              justify-content: flex-end;
+        .visual{ 
+          background-color: #ededed;
+          border-radius: 38px;
+          position: absolute;
+          right: 150px; // padding을 넘어서 container의 실제 오른쪽 끝으로 이동
+          bottom: 77px;
+          margin: 0;
+          z-index: 1; // content-slide-inner 뒤로 배치
+          
           img{
             display: block;
-            width: 500px;
-            height: 300px;
             border-radius: 30px;
+            max-width: 500px;
           }
          
+        }
+
+        // 짝수번째 슬라이드 (data-index가 1,3,5,7,9인 경우) 레이아웃 반전
+        &[data-index="1"],
+        &[data-index="3"], 
+        &[data-index="5"],
+        &[data-index="7"],
+        &[data-index="9"] {
+          .content-slide-inner {
+            position: absolute;
+            right: 120px; // 패딩만큼 오른쪽 여백
+            bottom: 77px; // 패딩만큼 하단 여백
+          }
+          
+          .visual {
+            top: 0;
+            bottom: unset;
+            right: auto;//
+          }
         }
       }
       
@@ -1646,12 +1465,13 @@
       width: 162px;
       position: absolute;
       bottom: 39%;
-      left: 36%;
+      right: calc(100% - 700px);
       transform: translateX(-50%);
       display: flex;
       align-items: center;
       gap: 10px;
       z-index: 10;
+      transition: all 0.3s ease; // 부드러운 전환 효과
 
       .pagination {
         color: #fff;
@@ -1679,6 +1499,14 @@
             background: url(../images/main/domain_play.png) no-repeat center center;
           }
          }
+    }
+
+    // 짝수번째 슬라이드일 때 컨트롤 버튼 위치 변경
+    &.even-slide .domain-controls {
+      left: calc(100% - 400px);
+      top: 43%;
+      right: auto;
+      bottom: auto;
     }
 
     // 애니메이션
@@ -1914,62 +1742,73 @@
   }
 }
 
-.east_area {color:#fff;
-  > li {margin-bottom:40px;height:260px;padding:43px 50px 0;position:relative;
-    background-repeat:no-repeat;background-size:cover;background-position:center;
-    h2 {font-size:34px;margin-bottom:13px;}
-    p {font-size:16px;}
-    > ul {position:absolute;left:50px;bottom:50px;width:calc(100% - 100px);
-      li {width:calc(50% - 5px);margin-right:10px;float:left;
-        .bt {display:block;border:1px solid #fff;background-color:rgba(0,0,0,0.4);text-align:center;font-size:15px;line-height:45px;}
-        &:last-of-type{margin-right:0;}
-      }
-    }
-    &:last-of-type{margin-bottom:0;}
-    &.dokdo {background-image:url(../images/main/bg_east_dokdo.png);}
-    &.sea {background-image:url(../images/main/bg_east_sea.png);}
-  }
-  @include maxWidth($m720){
-     > li {margin-bottom:15px;height:184px;padding:31px 35px 0;
-    h2 {font-size:20px;margin-bottom:8px;}
-    p {font-size:12px;}
-    > ul {left:35px;bottom:35px;width:calc(100% - 70px);
-      li {width:calc(50% - 3px);margin-right:6px;
-        .bt {font-size:14px;line-height:37px;}      
-      }
-    }  
-  }
-  }
+// .east_area {color:#fff;
+//   > li {margin-bottom:40px;height:260px;padding:43px 50px 0;position:relative;
+//     background-repeat:no-repeat;background-size:cover;background-position:center;
+//     h2 {font-size:34px;margin-bottom:13px;}
+//     p {font-size:16px;}
+//     > ul {position:absolute;left:50px;bottom:50px;width:calc(100% - 100px);
+//       li {width:calc(50% - 5px);margin-right:10px;float:left;
+//         .bt {display:block;border:1px solid #fff;background-color:rgba(0,0,0,0.4);text-align:center;font-size:15px;line-height:45px;}
+//         &:last-of-type{margin-right:0;}
+//       }
+//     }
+//     &:last-of-type{margin-bottom:0;}
+//     &.dokdo {background-image:url(../images/main/bg_east_dokdo.png);}
+//     &.sea {background-image:url(../images/main/bg_east_sea.png);}
+//   }
+//   @include maxWidth($m720){
+//      > li {margin-bottom:15px;height:184px;padding:31px 35px 0;
+//     h2 {font-size:20px;margin-bottom:8px;}
+//     p {font-size:12px;}
+//     > ul {left:35px;bottom:35px;width:calc(100% - 70px);
+//       li {width:calc(50% - 3px);margin-right:6px;
+//         .bt {font-size:14px;line-height:37px;}      
+//       }
+//     }  
+//   }
+//   }
 
-  .video-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 비율 */
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
+//   .video-container {
+//     position: relative;
+//     width: 100%;
+//     padding-bottom: 56.25%; /* 16:9 비율 */
+//     height: 0;
+//     overflow: hidden;
+//     max-width: 100%;
     
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+//     iframe {
+//       position: absolute;
+//       top: 0;
+//       left: 0;
+//       width: 100%;
+//       height: 100%;
+//     }
+//   }
+// }
+
+// 물 흐르는 효과 애니메이션 정의
+@keyframes flowingText {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 
 /* 인증 섹션 */
 .certification {
-  padding: 80px 0;
+  padding-top:137px;
   position: relative;
+  overflow: hidden; // 흐르는 텍스트가 영역을 벗어나지 않도록
 
   &:before{
     content: '';
     display: block;
     position: absolute;
     z-index: -2;
-    bottom: 50px;
+    bottom: 18px;
     right: 0;
     width: 49%;
     height: 603px;
@@ -1977,17 +1816,33 @@
     border-radius: 100px 0 0 0;
     background-image: linear-gradient(to top, #d8e1f1, #d5e3e4);
   }
+  
   &:after{
     content: '';
     display: block;
     position: absolute;
     z-index: -1;
-    bottom: 32px;
+    bottom: 0;
     right: 5%;
     width: 284px;
     height: 77px;
     background:url(../images/main/certification_bg_logo.png) no-repeat right bottom/284px auto;
   }
+  
+  // 물 흐르는 텍스트 효과를 위한 별도 클래스
+  .flowing-text-bg {
+    position: absolute;
+    top: 186px;
+    left: 0;
+    width: 1350px;
+    height: 83px;
+    background: url(../images/main/certification_bg_text.png) repeat-x center/1350px 83px;
+    z-index: -1; // 일시적으로 위에 보이도록
+    animation: flowingText 20s linear infinite;
+    transform: translateY(-50%);
+    pointer-events: none; // 클릭 이벤트 방지
+  }
+
   .container{
     display: flex; 
     justify-content: space-between;
@@ -1998,14 +1853,16 @@
     width: calc(50% - 26px);
 
     .support_banner{ 
+      background: #fff;
       margin-bottom: 34px; 
       padding: 30px 0;
-      background-color: #fff;
       border: solid 1px #d6d6d6;
       border-radius: 30px;
       box-shadow: 0 0 21px 0 rgba(0, 0, 0, 0.05);
+      box-sizing: border-box;
       
       >div{
+
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -2060,12 +1917,14 @@
             display: block;
           }
           > div{
+            height: 40px;
             @include ell2;
-            line-height: 1.4;
+            line-height: 1.35;
             letter-spacing: -0.4px;
             margin-bottom: 9px;
           }
-          a {
+          span {
+            display: block;
             width: 122px;
             font-size: $fs-14;
             background: url(../images/main/support_icon_arrow.png) no-repeat center right 30px/20px 10px;
@@ -2083,7 +1942,8 @@
         display: flex; 
         align-items: center;
         justify-content: space-between;
-        
+     
+
         li{          
           a{ 
             display: flex; 
@@ -2107,7 +1967,8 @@
               font-weight: 600;
             }
 
-            &:hover{
+            &:hover{  
+              transform: translateY(-2px);
               span{
                   background-color: #17469d
               }
@@ -2175,13 +2036,14 @@
     .application_service{ 
       border-radius: 20px; 
       padding: 29px 27px; 
-      margin-bottom: 33px;
-      background: #d1e9ff url(../images/main/service_bg.png) no-repeat bottom right / 160px auto;
+      margin-bottom: 30px;
+      background: #d1e9ff url(../images/main/service_bg.png) no-repeat bottom -14px right / 160px auto;
       
       h3{
         font-size: $fs-28;
         position: relative;
-        margin-bottom: 28px;
+        margin-bottom: 20px;
+        line-height: 1.2;
       }
       
       .service_buttons{
@@ -2210,7 +2072,7 @@
 
     .certification_inquiry{
       h3{
-        margin-bottom: 20px;
+        margin-bottom: 25px;
       }
       
       > div{
@@ -2517,7 +2379,7 @@
 
 /* 홍보 섹션 */
 .promo {
-  margin-top: 157px;
+  margin-top: 136px;
   padding: 74px 0;
   position: relative;
   z-index: 1;
@@ -2801,5 +2663,30 @@
 // ... existing code ...
 
 }
+
+.fullpage-scroll section {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+.fullpage-scroll .main_banner {
+  height: 100vh;
+  min-height: 0;
+}
+.fullpage-scroll .domain {
+  height: 100vh;
+}
+.fullpage-scroll .news,
+.fullpage-scroll .certification,
+.fullpage-scroll .promo {
+  height: 100vh;
+  margin-top: 0;
+  padding-top: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
 
 
