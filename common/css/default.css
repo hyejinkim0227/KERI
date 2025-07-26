@@ -294,7 +294,7 @@ caption, legend {
   margin: -1px;
 }
 
-.hide {
+.sr-only {
   height: 1px;
   width: 1px;
   overflow: hidden;
@@ -6942,6 +6942,7 @@ table.tableB tbody tr.notice {
   position: relative;
   height: 100%;
   width: 100%;
+  padding: 90px 300px 0 140px;
 }
 .main .domain .domain-content .slick-list {
   height: 100%;
