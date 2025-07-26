@@ -1294,7 +1294,6 @@ input, select, textarea {
 }
 .sitemap > .container .dep1 > li {
   display: flex;
-  flex-direction: column;
   margin-bottom: 0;
   padding: 0 30px;
   border-right: 1px solid #e5e5e5;
@@ -1304,7 +1303,7 @@ input, select, textarea {
 }
 .sitemap > .container .dep1 > li > a {
   display: block;
-  width: 100%;
+  width: 240px;
   border-top: none;
   font-size: 28px;
   font-weight: 700;
@@ -1325,16 +1324,17 @@ input, select, textarea {
   background-size: contain;
 }
 .sitemap > .container .dep2_wrap {
-  display: flex;
+  width: calc(100% - 240px);
 }
 .sitemap > .container .dep2_wrap > div {
   display: none;
 }
 .sitemap > .container .dep2_wrap > ul {
-  padding-top: 30px;
+  display: flex;
 }
 .sitemap > .container .dep2_wrap > ul > li {
   margin-bottom: 25px;
+  width: 25%;
 }
 .sitemap > .container .dep2_wrap > ul > li > a {
   font-size: 18px;

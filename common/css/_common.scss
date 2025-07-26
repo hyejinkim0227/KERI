@@ -414,10 +414,10 @@ $sidebar-width: 117px;
     > .container {position:relative;padding:65px 65px 80px;border-radius: 0; background-color: #fff; max-width: none; width: 100%; height: 100%; box-sizing: border-box;
             display: flex; flex-direction: column;
             .dep1 {display: flex; flex-direction: column; margin: 0; padding: 0; height: 100%; text-align:left;
-                > li {display: flex; flex-direction: column; margin-bottom: 0; padding: 0 30px; border-right: 1px solid #e5e5e5;
+                > li {display: flex;  margin-bottom: 0; padding: 0 30px; border-right: 1px solid #e5e5e5;
                     &:last-child { border-right: none; }
                     
-                    > a {display:block; width: 100%; border-top: none; font-size: 28px; font-weight: 700; color: #000; padding: 0 0 40px 0; margin-bottom: 0; border-bottom: 2px solid #000; position: relative;
+                    > a {display:block; width: 240px; border-top: none; font-size: 28px; font-weight: 700; color: #000; padding: 0 0 40px 0; margin-bottom: 0; border-bottom: 2px solid #000; position: relative;
                         &:after {
                             content: '';
                             position: absolute;
@@ -431,10 +431,10 @@ $sidebar-width: 117px;
                     }
                 }
             }              
-            .dep2_wrap { display: flex;
+            .dep2_wrap { width: calc(100% - 240px);
                 > div {display:none;}
-                > ul {padding-top: 30px;
-                    > li {margin-bottom: 25px;
+                > ul {display: flex; 
+                    > li {margin-bottom: 25px; width: 25%;
                         > a {font-size: 18px; font-weight: 600; color: #254093; display: inline-block; line-height: 1.4; margin-bottom: 15px; position: relative;
                             &[target="_blank"]{
                                 &:after{
