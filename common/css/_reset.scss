@@ -159,7 +159,9 @@
   font-family: 'SBAggro';
   font-style: normal;
   font-weight: 300;
-  src: url('../fonts/SBAggroL.ttf') format('truetype'), /* Safari, Android, iOS */
+  src: url('../fonts/SBAggroL.woff2') format('woff2'), /* Modern browsers */
+       url('../fonts/SBAggroL.woff') format('woff'), /* Modern browsers */
+       url('../fonts/SBAggroL.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../fonts/SBAggroL.otf') format('opentype'); /* Fallback */
 }
 
@@ -167,7 +169,9 @@
   font-family: 'SBAggro';
   font-style: normal;
   font-weight: 500;
-  src: url('../fonts/SBAggroM.ttf') format('truetype'), /* Safari, Android, iOS */
+  src: url('../fonts/SBAggroM.woff2') format('woff2'), /* Modern browsers */
+       url('../fonts/SBAggroM.woff') format('woff'), /* Modern browsers */
+       url('../fonts/SBAggroM.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../fonts/SBAggroM.otf') format('opentype'); /* Fallback */
 }
 
@@ -175,7 +179,9 @@
   font-family: 'SBAggro';
   font-style: normal;
   font-weight: 700;
-  src: url('../fonts/SBAggroB.ttf') format('truetype'), /* Safari, Android, iOS */
+  src: url('../fonts/SBAggroB.woff2') format('woff2'), /* Modern browsers */
+       url('../fonts/SBAggroB.woff') format('woff'), /* Modern browsers */
+       url('../fonts/SBAggroB.ttf') format('truetype'), /* Safari, Android, iOS */
        url('../fonts/SBAggroB.otf') format('opentype'); /* Fallback */
 }
 
@@ -332,7 +338,7 @@
 /********* reset.css **********/
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ul, ol, li, form, fieldset, legend, label, input, button, select, textarea, header, main, footer, section, article, aside, menu, nav, table, caption, tbody, tfoot, thead, tr, th, td, summary, figure, figcaption, hgroup { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; -webkit-box-sizing: border-box; box-sizing: border-box;}
 html, body { width: 100%; height: 100%; }
-body {font-size: 16px; line-height: 1.4; color: #000; letter-spacing: -0.05em;font-family:'PretendardGOV','SUIT','sans-serif';}
+body {font-size: 16px; line-height: 1.4; color: #000; letter-spacing: -0.05em;font-family:'SUIT','PretendardGOV','Pretendard';}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
 h1, h2, h3, h4, h5, h6 { font-size: 1em; font-weight: normal;}
@@ -343,7 +349,7 @@ p { max-height: 9999px; }
 address { font-style: normal; }
 button { margin: 0; padding: 0; -webkit-box-sizing: border-box; box-sizing: border-box; border: 0 none; background-color: transparent; font-family: inherit; font-size: inherit; cursor: pointer;-webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; appearance: none; -webkit-box-sizing: border-box; box-sizing: border-box; cursor: pointer;  }
 caption,legend { height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px); clip: rect(1px, 1px, 1px, 1px); margin: -1px;}
-.hide { height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px); clip: rect(1px, 1px, 1px, 1px); margin: -1px; position:absolute;left:0;right:0;}
+.sr-only { height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px); clip: rect(1px, 1px, 1px, 1px); margin: -1px; position:absolute;left:0;right:0;}
 .clear {clear:both;}
 .br {display:block;}
 table {display:table;width:100%;border-collapse:collapse;border-spacing:0;table-layout:fixed;}
