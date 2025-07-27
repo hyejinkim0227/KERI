@@ -492,7 +492,24 @@ $(function () {
             nextArrow: $('.support_btn_next'),
             autoplay: true,
             autoplaySpeed: 4000,
-            pauseOnHover: true
+            pauseOnHover: true,
+            swipe: true,
+            touchMove: true,
+            responsive: [
+                {
+                    breakpoint: 1080,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        autoplay: false,
+                        swipe: true,
+                        touchMove: true,
+                        draggable: true,
+                        centerMode: true,
+                        centerPadding: '40px'
+                    }
+                }
+            ]
         });
     }
 
@@ -530,12 +547,11 @@ $(function () {
     
     if ($targetSection.length > 0) {
       var targetTop = $targetSection.offset().top;
-      // 헤더 높이만큼 빼고 추가 여백 60px 적용
-      var headerHeight = $('.header').outerHeight() || 0;
-      var extraMargin = 60;
+      // 고정 오프셋 110px 적용
+      var fixedOffset = 110;
       
       $('html,body').stop().animate({ 
-        scrollTop: targetTop - headerHeight - extraMargin 
+        scrollTop: targetTop - fixedOffset 
       }, 700, function() {
         // 애니메이션 완료 후 스크롤 업데이트 재활성화
         setTimeout(function() {
@@ -585,8 +601,7 @@ $(function () {
     }
     
     var scrollTop = $(window).scrollTop();
-    var headerHeight = $('.header').outerHeight() || 0;
-    var extraMargin = 60;
+    var fixedOffset = 110;
     var currentSection = '';
     
     // 각 섹션의 위치 확인
@@ -601,7 +616,7 @@ $(function () {
     for (var i = 0; i < sections.length; i++) {
       var section = sections[i];
       if (section.element.length > 0) {
-        var sectionTop = section.element.offset().top - headerHeight - extraMargin;
+        var sectionTop = section.element.offset().top - fixedOffset;
         var sectionBottom = sectionTop + section.element.outerHeight();
         
         if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
@@ -1444,7 +1459,15 @@ $(function () {
       var $slider = $(this);
       var $items = $slider.find('li');
       var numItems = $items.length;
-      var itemsPerPage = 6;
+      
+      // 반응형 itemsPerPage 설정
+      var itemsPerPage;
+      if (window.innerWidth <= 1080) {
+        itemsPerPage = 3;
+      } else {
+        itemsPerPage = 6;
+      }
+      
       var $controls = $('.news_controls');
       
       // 기존 슬라이더 제거
@@ -1455,14 +1478,14 @@ $(function () {
       // 버튼은 항상 보여주기
       $controls.find('.news_prev, .news_next').show();
       
-      // 6개 이하면 슬라이더 비활성화하고 버튼만 비활성화
+      // 설정된 개수 이하면 슬라이더 비활성화하고 버튼만 비활성화
       if (numItems <= itemsPerPage) {
         $controls.find('.news_prev, .news_next').addClass('disabled');
         $slider.removeClass('news-slider-active');
         return;
       }
       
-      // 6개 이상이면 슬라이더 활성화
+      // 설정된 개수 이상이면 슬라이더 활성화
       $slider.addClass('news-slider-active');
       
       // 간단한 페이징 방식으로 변경
@@ -1506,6 +1529,11 @@ $(function () {
 
   // 초기 슬라이더 설정
   initNewsSlider();
+
+  // 창 크기 변경 시 다시 초기화
+  $(window).on('resize', function() {
+    initNewsSlider();
+  });
 
   //게시판 상세 글자크기 조절
   $('.fs_up').on('click', function () {
@@ -1676,6 +1704,22 @@ $(function () {
 
   // $('body').css('height', window.innerHeight);
 });
+// AOS 속성 제어 함수
+function handleAOSAttributes() {
+  if ($(window).width() <= 1080) {
+    // 1080px 이하에서 메인 배너 우측 AOS 제거
+    $('.main_banner_right').removeAttr('data-aos data-aos-delay data-aos-duration data-aos-easing');
+  } else {
+    // 1080px 초과에서 AOS 속성 복원
+    $('.main_banner_right').attr({
+      'data-aos': 'fade-left',
+      'data-aos-delay': '300',
+      'data-aos-duration': '1000',
+      'data-aos-easing': 'ease'
+    });
+  }
+}
+
 $(window).on('resize', function () {
   $('.header_en,.header,.search_open').removeAttr('style').removeClass('active scrolled');
   headH = $('.header').outerHeight(); //기본 헤더 높이 전역변수
@@ -1698,6 +1742,9 @@ $(window).on('resize', function () {
   slideScroll();
   $('.nation > li').removeClass('active');
   $('.nation > li > div').removeAttr('style');
+  
+  // AOS 속성 제어
+  handleAOSAttributes();
   
   // 도메인 슬라이더 리사이즈 시 재초기화
   if ($('.domain').length) {
@@ -1865,6 +1912,9 @@ $(document).ready(function() {
   setTimeout(function() {
     initDomainSlider();
   }, 100);
+  
+  // AOS 속성 초기 제어
+  handleAOSAttributes();
 });
 
 // 섹션별 풀페이지 스크롤 기능
@@ -1891,7 +1941,7 @@ function initFullPageScroll() {
       page--;
     }
     
-    var posTop = (page-1) * $(window).height();
+    var posTop = (page-1) * $(window).height() - 110;
     $html.animate({scrollTop : posTop}, 800);
     
     updateFullPageIndicator(page);
@@ -1905,7 +1955,7 @@ function initFullPageScroll() {
     const index = $(this).parent().index() + 1;
     page = index;
     
-    var posTop = (page-1) * $(window).height();
+    var posTop = (page-1) * $(window).height() - 110;
     $html.animate({scrollTop : posTop}, 800);
     
     updateFullPageIndicator(page);
@@ -1926,14 +1976,14 @@ function initFullPageScroll() {
       e.preventDefault();
       if(page == lastPage) return;
       page++;
-      var posTop = (page-1) * $(window).height();
+      var posTop = (page-1) * $(window).height() - 110;
       $html.animate({scrollTop : posTop}, 800);
       updateFullPageIndicator(page);
     } else if (e.keyCode === 38 || e.keyCode === 33) { // 위 화살표 또는 Page Up
       e.preventDefault();
       if(page == 1) return;
       page--;
-      var posTop = (page-1) * $(window).height();
+      var posTop = (page-1) * $(window).height() - 110;
       $html.animate({scrollTop : posTop}, 800);
       updateFullPageIndicator(page);
     }
@@ -1963,7 +2013,7 @@ function initFullPageScroll() {
         page--;
       }
       
-      var posTop = (page-1) * $(window).height();
+      var posTop = (page-1) * $(window).height() - 110;
       $html.animate({scrollTop : posTop}, 800);
       updateFullPageIndicator(page);
     }
@@ -2006,6 +2056,8 @@ $(document).ready(function() {
       $indicator.css('opacity', '1');
       
       // 현재 보이는 섹션에 따라 active 클래스 변경
+      let currentActiveSection = null;
+      
       $sections.each(function() {
         const $section = $(this);
         if ($section.length === 0) return;
@@ -2013,12 +2065,39 @@ $(document).ready(function() {
         const sectionTop = $section.offset().top;
         const sectionBottom = sectionTop + $section.height();
         
-        if (scrollTop >= sectionTop - 100 && scrollTop < sectionBottom) {
-          const navType = $section.data('mainnavi');
+        // 반응형에 따른 오프셋 조정
+        const navType = $section.data('mainnavi');
+        let offset = $(window).width() <= 1080 ? 100 : 100;
+        
+        if (scrollTop >= sectionTop - offset && scrollTop < sectionBottom) {
           $indicator.find('li').removeClass('active');
           $indicator.find(`li[data-mainnavi="${navType}"]`).addClass('active');
+          currentActiveSection = navType;
         }
       });
+      
+      // news 섹션 활성화 시 marginTop 추가/제거 (1080px 이하에서만)
+      if ($(window).width() <= 1080) {
+        const $newsSection = $('[data-mainnavi="news"]');
+        
+        if (currentActiveSection === 'news') {
+          // news 섹션이 활성화되면 marginTop 추가
+          if (!$newsSection.hasClass('news-margin-active')) {
+            $newsSection.addClass('news-margin-active').css('padding-top', '100px');
+          }
+        } else {
+          // 다른 섹션이 활성화되면 marginTop 제거
+          if ($newsSection.hasClass('news-margin-active')) {
+            $newsSection.removeClass('news-margin-active').css('margin-top', '');
+          }
+        }
+      } else {
+        // 1080px 초과일 때는 항상 marginTop 제거
+        const $newsSection = $('[data-mainnavi="news"]');
+        if ($newsSection.hasClass('news-margin-active')) {
+          $newsSection.removeClass('news-margin-active').css('margin-top', '');
+        }
+      }
     } else {
       $indicator.css('opacity', '0');
     }
@@ -2030,14 +2109,34 @@ $(document).ready(function() {
     const $targetSection = $(`[data-mainnavi="${navType}"]`).first();
     
     if ($targetSection.length) {
+      let clickOffset = 110;
+      
+      // news 섹션의 경우 1080px 이하에서 h2 타이틀이 보이도록 조정
+      if (navType === 'news' && $(window).width() <= 1080) {
+        clickOffset = 40;
+      }
+      
       $('html, body').animate({
-        scrollTop: $targetSection.offset().top
+        scrollTop: $targetSection.offset().top - clickOffset
       }, 500);
     }
   });
   
   // 초기 실행
   $(window).trigger('scroll');
+  
+  // 창 크기 변경 시 news 섹션 marginTop 처리
+  $(window).on('resize', function() {
+    const $newsSection = $('[data-mainnavi="news"]');
+    
+    if ($(window).width() > 1080) {
+      // 1080px 초과일 때는 marginTop 제거
+      if ($newsSection.hasClass('news-margin-active')) {
+        $newsSection.removeClass('news-margin-active').css('margin-top', '');
+      }
+    }
+    // 1080px 이하일 때는 스크롤 이벤트에서 처리
+  });
 });
 
 // TOP 버튼 기능

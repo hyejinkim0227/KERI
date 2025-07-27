@@ -287,8 +287,9 @@ $(function () {
         }
     });
 
-	//Fullpage
-	var myFullpage = new fullpage('#wrapper', {
+	//Fullpage - 주석 처리됨 (common.js에서 자체 구현 사용)
+	/*
+	$('#wrapper').fullpage({
 		//Navigation
 		//menu: '#menu',
 		//lockAnchors: false,
@@ -414,7 +415,48 @@ $(function () {
 		afterSlideLoad: function (section, origin, destination, direction) {},
 		onSlideLeave: function (section, origin, destination, direction) {}
 	});
+	*/
 
+	// certification 섹션 슬라이더 초기화 (스크롤 이벤트로 처리)
+	$(window).on('scroll', function() {
+		var certificationOffset = $('.certification').offset();
+		if (certificationOffset && $(window).scrollTop() >= certificationOffset.top - $(window).height() / 2) {
+			if(!$('.support_list').hasClass('slick-initialized')){
+				$('.support_list').slick({
+					slidesToShow: 2,
+					slidesToScroll: 1,
+					speed: 600,
+					autoplay: true,
+					autoplaySpeed: 3000,
+					infinite: true,
+					dots: false,
+					arrows: true,
+					prevArrow: $('.support_banner .support_btn_prev'),
+					nextArrow: $('.support_banner .support_btn_next'),
+					pauseOnHover: false,
+					pauseOnFocus: false,
+					swipe: true,
+					draggable: true,
+					responsive: [
+						{
+						breakpoint: 1080,
+						settings: {
+							slidesToShow: 1,
+							slidesToScroll: 1
+						}
+						},
+						{
+						breakpoint: 720,
+						settings: {
+							slidesToShow: 1,
+							slidesToScroll: 1
+						}
+						}
+					]
+				});
+			}
+		}
+	});
 
 	// tab
 	$(".tab_box > li").on("click", function () {

@@ -677,13 +677,13 @@ $sidebar-width: 117px;
       }
       
       .sitemap_open {
-        width: 32px;
-        height: 32px;
+        width: 20px;
+        height: 20px;
         background: none;
         position: relative;
         cursor: pointer;
         
-      background: url(../images/common/m_icon_menu.png) no-repeat center/32px auto;
+      background: url(../images/common/m_icon_menu.png) no-repeat center/20px auto;
         
         &::after {
           opacity: 0;
