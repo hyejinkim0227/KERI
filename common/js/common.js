@@ -36,14 +36,26 @@ function slideScroll() {
   }
 }
 
-function openSitemapEn() {
+// 통합된 사이트맵 함수 (한국어/영문 공통)
+function openSitemap(isEnglish = false) {
   //사이트맵 gnb복사 후 열기
-  $('.gnb > .dep1').clone().appendTo('.sitemap > .container');
-  $('.sitemap .dep2').removeAttr('style');
+  const sourceSelector = isEnglish ? '.gnb > .dep1' : '#gnb .dep1';
+  const targetSelector = isEnglish ? '.sitemap > .container' : '.sitemap .container';
+  
+  $(sourceSelector).clone().appendTo(targetSelector);
+  
+  if (isEnglish) {
+    $('.sitemap .dep2').removeAttr('style');
+  } else {
+    $('.sitemap .dep2_wrap').removeAttr('style');
+  }
+  
   $('.sitemap').stop().fadeIn().attr('tabindex', '0').focus();
+  // body 스크롤 완전 차단
+  $('body').addClass('sitemap-open');
 }
 
-function closeSitemapEn() {
+function closeSitemap() {
   //사이트맵 닫고 복사한 nav 지우기
   $('.sitemap')
     .stop()
@@ -51,6 +63,17 @@ function closeSitemapEn() {
       $(this).find('.dep1').remove();
     })
     .removeAttr('tabindex');
+  // body 스크롤 차단 해제
+  $('body').removeClass('sitemap-open');
+}
+
+// 하위 호환성을 위한 래퍼 함수들
+function openSitemapEn() {
+  openSitemap(true);
+}
+
+function closeSitemapEn() {
+  closeSitemap();
 }
 function mSchOnOff(target) {
   $(event.target).toggleClass('active').parent().parent().prev().find('.search').fadeToggle(300);
@@ -167,22 +190,7 @@ function imgResize() {
   }
 }
 
-function openSitemap() {
-  //사이트맵 gnb복사 후 열기
-  $('#gnb .dep1').clone().appendTo('.sitemap .container');
-  $('.sitemap .dep2_wrap').removeAttr('style');
-  $('.sitemap').stop().fadeIn().attr('tabindex', '0').focus();
-}
 
-function closeSitemap() {
-  //사이트맵 닫고 복사한 nav 지우기
-  $('.sitemap')
-    .stop()
-    .fadeOut(function () {
-      $(this).find('.dep1').remove();
-    })
-    .removeAttr('tabindex');
-}
 
 function focusLoop() {
   //이벤트가 발생한 요소의 상위 tabindex="0"을 찾아 포커스이동
@@ -213,7 +221,7 @@ function bodyScroll(arg) {
 function mMenuActive1() {
   // 모바일 메뉴 dep1 on/off
   $('.sitemap .dep1 > li > a').click(function () {
-    if (!pcChk(720)) {
+    if (!pcChk(1080)) {
       $('.sitemap .dep1 > li').removeClass('active');
       $(this).closest('li').addClass('active');
       return false;
@@ -222,7 +230,7 @@ function mMenuActive1() {
 }
 function mMenuActive2() {
   // 모바일에서 link클래스가 없는 a태그 클릭시 하위메뉴 열고 닫힘
-  if (!pcChk(720)) {
+  if (!pcChk(1080)) {
     $('.sitemap .dep2_wrap ul > li > a').click(function () {
       if ($(this).parent().hasClass('active')) {
         $('.sitemap .dep2_wrap ul > li').removeClass('active');
@@ -238,14 +246,14 @@ function mMenuActive2() {
 function mMenuActive3() {
   // 모바일 메뉴 dep3 on/off
   $('.sitemap .dep2_wrap ol > li > a').click(function () {
-    if (!pcChk(720)) {
+    if (!pcChk(1080)) {
       $('.sitemap .dep2_wrap ol > li').removeClass('active');
       $(this).closest('li').addClass('active');
     }
   });
 }
 function snsPositon() {
-  if (!pcChk(720)) {
+  if (!pcChk(1080)) {
     $('.sitemap .sns').insertAfter($('.sitemap .dep1'));
   }
 }
@@ -522,11 +530,12 @@ $(function () {
     
     if ($targetSection.length > 0) {
       var targetTop = $targetSection.offset().top;
-      // 헤더 높이만큼 빼기 (헤더가 고정되어 있는 경우)
+      // 헤더 높이만큼 빼고 추가 여백 60px 적용
       var headerHeight = $('.header').outerHeight() || 0;
+      var extraMargin = 60;
       
       $('html,body').stop().animate({ 
-        scrollTop: targetTop - headerHeight 
+        scrollTop: targetTop - headerHeight - extraMargin 
       }, 700, function() {
         // 애니메이션 완료 후 스크롤 업데이트 재활성화
         setTimeout(function() {
@@ -577,6 +586,7 @@ $(function () {
     
     var scrollTop = $(window).scrollTop();
     var headerHeight = $('.header').outerHeight() || 0;
+    var extraMargin = 60;
     var currentSection = '';
     
     // 각 섹션의 위치 확인
@@ -591,7 +601,7 @@ $(function () {
     for (var i = 0; i < sections.length; i++) {
       var section = sections[i];
       if (section.element.length > 0) {
-        var sectionTop = section.element.offset().top - headerHeight - 50; // 50px 여유
+        var sectionTop = section.element.offset().top - headerHeight - extraMargin;
         var sectionBottom = sectionTop + section.element.outerHeight();
         
         if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
@@ -782,8 +792,7 @@ $(function () {
     saveFocus(); //포커스 요소 저장
     snsPositon(); //sns 위치 조정
     mGnbInit();
-    bodyScroll('off'); //body 스크롤 없애기
-    if (!pcChk(720)) {
+    if (!pcChk(1080)) {
       //모바일의 경우 실행
       $('.header .util,.sitemap').addClass('active');
     }
@@ -796,7 +805,6 @@ $(function () {
     saveFocus(); //포커스 요소 저장
     // snsPositon(); //sns 위치 조정
     mGnbInit();
-    bodyScroll('off'); //body 스크롤 없애기
     if (!pcChk(720)) {
       //모바일의 경우 실행
       $('.header_en,.sitemap').addClass('active');
@@ -809,7 +817,7 @@ $(function () {
   // 사이트맵 닫기
   $('.header .btn_sitemap_close').on({
     click: function () {
-      if (!pcChk(720)) {
+      if (!pcChk(1080)) {
         //모바일의 경우 사이트맵
         $('.sitemap').removeClass('active');
         var delUtil = setTimeout(function () {
@@ -819,7 +827,6 @@ $(function () {
       }
       closeSitemap(); //사이트맵닫기
       returnFocus(); //이전 포커스 요소로 되돌리기
-      bodyScroll('on'); //body 스크롤 보이기
     },
   });
   // 사이트맵 닫기
@@ -835,7 +842,6 @@ $(function () {
       }
       closeSitemapEn(); //사이트맵닫기
       returnFocus(); //이전 포커스 요소로 되돌리기
-      bodyScroll('on'); //body 스크롤 보이기
     },
   });
 
@@ -1678,9 +1684,8 @@ $(window).on('resize', function () {
   }
   $('.util,.sitemap').removeClass('active');
   closeSitemap(); //사이트맵닫기
-  bodyScroll('on'); //body 스크롤 보이기
   introScroll();
-  if (!pcChk(720)) {
+  if (!pcChk(1080)) {
     tableChange();
   }
   $('.header').removeClass('active scrolled').removeAttr('style');
@@ -1693,6 +1698,13 @@ $(window).on('resize', function () {
   slideScroll();
   $('.nation > li').removeClass('active');
   $('.nation > li > div').removeAttr('style');
+  
+  // 도메인 슬라이더 리사이즈 시 재초기화
+  if ($('.domain').length) {
+    setTimeout(function() {
+      initDomainSlider();
+    }, 100);
+  }
 });
 $(window).on('load', function () {
   //lnb 컨텐츠 높이 통일
@@ -1719,6 +1731,65 @@ function slick_on_pc(slider, settings) {
 function initDomainSlider() {
   if ($('.domain').length) {
     
+    // 기존 슬라이더가 있다면 제거
+    if ($('.domain-content.slider-for').hasClass('slick-initialized')) {
+      $('.domain-content.slider-for').slick('unslick');
+    }
+    if ($('.domain-nav.slider-nav').hasClass('slick-initialized')) {
+      $('.domain-nav.slider-nav').slick('unslick');
+    }
+    
+    // 1080px 이하에서는 모바일 슬라이더
+    if ($(window).width() <= 1080) {
+      
+      // 모바일 세로 카드 슬라이더
+      $('.domain-content.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: '20px',
+        dots: true,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        pauseOnHover: true,
+        infinite: true,
+        variableWidth: false
+      });
+      
+      // 모바일 슬라이더 이벤트 처리
+      $('.domain-content.slider-for').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+        // 페이지네이션 업데이트
+        $('.domain-controls .pagination .current').text(nextSlide + 1);
+      });
+      
+      // 모바일 컨트롤 버튼 연결
+      $('.domain-controls .prev').on('click', function() {
+        $('.domain-content.slider-for').slick('slickPrev');
+      });
+      
+      $('.domain-controls .next').on('click', function() {
+        $('.domain-content.slider-for').slick('slickNext');
+      });
+      
+      $('.domain-controls .pause').on('click', function() {
+        var slider = $('.domain-content.slider-for');
+        if ($(this).hasClass('paused')) {
+          slider.slick('slickPlay');
+          $(this).removeClass('paused');
+        } else {
+          slider.slick('slickPause');
+          $(this).addClass('paused');
+        }
+      });
+      
+      // 컨트롤 버튼 표시
+      $('.domain-controls').show();
+      
+      return;
+    }
+    
+    // PC에서만 기존 슬라이더 초기화
     // 콘텐츠 슬라이더 (메인)
     $('.domain-content.slider-for').slick({
       slidesToShow: 1,
@@ -1742,32 +1813,10 @@ function initDomainSlider() {
       centerPadding: '0px',
       focusOnSelect: true,
       infinite: true,
-      arrows: false,
-      responsive: [
-        {
-          breakpoint: 1080,
-          settings: {
-            vertical: false,
-            verticalSwiping: false,
-            slidesToShow: 3,
-            centerMode: true,
-            centerPadding: '40px'
-          }
-        },
-        {
-          breakpoint: 720,
-          settings: {
-            vertical: false,
-            verticalSwiping: false,
-            slidesToShow: 1,
-            centerMode: false,
-            centerPadding: '0px'
-          }
-        }
-      ]
+      arrows: false
     });
     
-    // 슬라이더 이벤트 처리
+    // PC 슬라이더 이벤트 처리
     $('.domain-nav.slider-nav').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
       // 페이지네이션 업데이트
       $('.domain-controls .pagination .current').text(nextSlide + 1);
@@ -1780,7 +1829,7 @@ function initDomainSlider() {
       }
     });
     
-    // 컨트롤 버튼 연결
+    // PC 컨트롤 버튼 연결
     $('.domain-controls .prev').on('click', function() {
       $('.domain-nav.slider-nav').slick('slickPrev');
     });
@@ -1793,12 +1842,15 @@ function initDomainSlider() {
       var slider = $('.domain-content.slider-for');
       if ($(this).hasClass('paused')) {
         slider.slick('slickPlay');
-        $(this).removeClass('paused').text('||');
+        $(this).removeClass('paused');
       } else {
         slider.slick('slickPause');
-        $(this).addClass('paused').text('▶');
+        $(this).addClass('paused');
       }
     });
+    
+    // 컨트롤 버튼 표시
+    $('.domain-controls').show();
     
     // 초기 상태 설정 (첫 번째 슬라이드는 index 0이므로 홀수번째)
     $('.domain').removeClass('even-slide');
@@ -2006,5 +2058,55 @@ $(document).ready(function() {
     $('html, body').animate({
       scrollTop: 0
     }, 600, 'swing');
+  });
+});
+
+// 모달 공통 - 배경 스크롤 방지 함수
+function preventBodyScroll() {
+  const scrollY = window.scrollY;
+  $('body').addClass('modal-open').css('top', `-${scrollY}px`);
+}
+
+function allowBodyScroll() {
+  const scrollY = $('body').css('top');
+  $('body').removeClass('modal-open').css('top', '');
+  if (scrollY) {
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+  }
+}
+
+// 관련사이트/관련기관 모달 기능
+$(document).ready(function() {
+  // 모달 열기
+  $('.btn_modal_open').on('click', function() {
+    const modalType = $(this).data('modal');
+    const $modal = $(`#modal-${modalType}`);
+    
+    if ($modal.length) {
+      preventBodyScroll();
+      $modal.addClass('show');
+    }
+  });
+  
+  // 모달 닫기 (X 버튼)
+  $('.btn_modal_close').on('click', function() {
+    $(this).closest('.modal_overlay').removeClass('show');
+    allowBodyScroll();
+  });
+  
+  // 모달 닫기 (배경 클릭)
+  $('.modal_overlay').on('click', function(e) {
+    if (e.target === this) {
+      $(this).removeClass('show');
+      allowBodyScroll();
+    }
+  });
+  
+  // 모달 닫기 (ESC 키)
+  $(document).on('keydown', function(e) {
+    if (e.keyCode === 27) { // ESC 키
+      $('.modal_overlay.show').removeClass('show');
+      allowBodyScroll();
+    }
   });
 });

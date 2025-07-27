@@ -27,22 +27,7 @@ function gnb3Close() {
             });
     }
 }
-function openSitemapEn() {
-    //사이트맵 gnb복사 후 열기
-    $('.gnb > .dep1').clone().appendTo('.sitemap > .container');
-    $('.sitemap .dep2').removeAttr('style');
-    $('.sitemap').stop().fadeIn().attr('tabindex', '0').focus();
-}
-
-function closeSitemapEn() {
-    //사이트맵 닫고 복사한 nav 지우기
-    $('.sitemap')
-        .stop()
-        .fadeOut(function () {
-            $(this).find('.dep1').remove();
-        })
-        .removeAttr('tabindex');
-}
+// 사이트맵 함수는 common.js에서 통합 관리됨
 
 function focusLoop() {
     //이벤트가 발생한 요소의 상위 tabindex="0"을 찾아 포커스이동
@@ -98,9 +83,9 @@ function imgResizeEm() {
     });
 }
 
-function mMenuActive1(){// 모바일 메뉴 dep1 on/off
+  function mMenuActive1(){// 모바일 메뉴 dep1 on/off
     $('.sitemap .dep1 > li > a').click(function(){
-      if(!pcChk(720)){
+      if(!pcChk(1080)){
         $('.sitemap .dep1 > li').removeClass('active');
         $(this).closest('li').addClass('active');
         return false;
@@ -108,7 +93,7 @@ function mMenuActive1(){// 모바일 메뉴 dep1 on/off
     });  
   }
   function mMenuActive2En(){// 모바일에서 link클래스가 없는 a태그 클릭시 하위메뉴 열고 닫힘
-    if(!pcChk(720)){ 
+    if(!pcChk(1080)){ 
       $('.sitemap .dep2_wrap ul > li > a').click(function(){
         if($(this).parent().hasClass('active')){
           $('.sitemap .dep2_wrap ul > li').removeClass('active');
@@ -123,7 +108,7 @@ function mMenuActive1(){// 모바일 메뉴 dep1 on/off
   }
   function mMenuActive3(){// 모바일 메뉴 dep3 on/off
     $('.sitemap .dep2_wrap ol > li > a').click(function(){
-      if(!pcChk(720)){
+      if(!pcChk(1080)){
         $('.sitemap .dep2_wrap ol > li').removeClass('active');
         $(this).closest('li').addClass('active');
       }
@@ -149,7 +134,7 @@ $(function () {
         // snsPositon(); //sns 위치 조정
         mGnbInit();
         bodyScroll('off');//body 스크롤 없애기
-        if(!pcChk(720)){ //모바일의 경우 실행
+        if(!pcChk(1080)){ //모바일의 경우 실행
           $('.header_en,.sitemap').addClass('active');
         }
         mMenuActive1();
@@ -197,7 +182,7 @@ $(function () {
      // 사이트맵 닫기
   $('.btn_sitemap_close').on({
     click:function(){
-      if(!pcChk(720)){//모바일의 경우 사이트맵
+      if(!pcChk(1080)){//모바일의 경우 사이트맵
         $('.sitemap').removeClass('active');
         var delUtil = setTimeout(function(){
           $('.header_en').removeClass('active');
