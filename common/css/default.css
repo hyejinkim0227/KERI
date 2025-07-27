@@ -6927,7 +6927,8 @@ table.tableB tbody tr.notice {
   height: 100%;
 }
 .main .certification {
-  padding-bottom: 60px;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
   margin-top: 130px;
   position: relative;
   overflow: hidden;
@@ -7379,11 +7380,10 @@ table.tableB tbody tr.notice {
   }
 }
 .main .promo {
-  margin-top: 68px;
   padding: 74px 0;
   position: relative;
   z-index: 1;
-  scroll-margin-top: 60px;
+  scroll-margin-top: 150px;
 }
 .main .promo::before {
   content: "";
@@ -7664,42 +7664,6 @@ table.tableB tbody tr.notice {
   }
   .main .promo_top .interview_wrap {
     order: 1;
-  }
-  .main .promo_top .interview_wrap .interview {
-    flex-direction: column;
-    gap: 15px;
-  }
-  .main .promo_top .interview_wrap .interview > div {
-    width: 100%;
-    max-width: 100%;
-  }
-  .main .promo_top .interview_wrap .interview > div a {
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
-  }
-  .main .promo_top .interview_wrap .interview > div a b {
-    margin: 0;
-    font-size: 0.75rem;
-    padding: 6px 8px;
-    white-space: nowrap;
-  }
-  .main .promo_top .interview_wrap .interview > div a span {
-    margin: 0;
-    font-size: 1rem;
-    flex: 1;
-    line-height: 1.4;
-  }
-  .main .promo_top .interview_wrap .interview > div a img {
-    width: 80px;
-    height: 80px;
-    border-radius: 15px;
-    -o-object-fit: cover;
-       object-fit: cover;
-    flex-shrink: 0;
   }
   .main .promo_top .publications_wrap {
     order: 2;
