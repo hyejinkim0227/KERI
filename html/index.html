@@ -17,16 +17,17 @@
   <!-- 공통 js -->
   <script src="../common/js/jquery-1.12.4.min.js"></script>
   <script src="../common/js/wow.js"></script>
-  <!-- <script src="../common/js/prefixfree.min.js"></script> -->
   <script src="../common/js/slick.js"></script>
 
   <!-- AOS JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <!-- 공통 함수 (먼저 로드) -->
+  <script src="../common/js/common-shared.js"></script>
+  <!-- 사이트별 스크립트 -->
   <script src="../common/js/common.js"></script>
   <!-- //공통 js -->
-  <!--[if lt IE 10]>
-            <script src="../common/js/html5shiv.js"></script>
-        <![endif]-->
+
 </head>
 
 <body>
@@ -40,9 +41,6 @@
     <!--//스킵내비게이션 -->
     <!-- 헤더 -->
     <div class="header">
-      <div class="top_menu container">
-        
-      </div>
       <div class="head">
         <h1 class="logo">
           <a href="#"><span class="sr-only">한국전기연구원</span></a>
@@ -57,7 +55,7 @@
                   <span>About KERI</span>
                 </div>
                 <ul>
-                  <li class="active">
+                  <li>
                     <a href="#">원장인사말</a>
                     <ol>
                       <li><a href="#">원장인사말</a></li>
@@ -480,7 +478,7 @@
           </a>
         </li>
       </ul>
-      <div class="fullpage-wrapper">
+      <div class="fullpage-wrapper"  id="fullpage">
       <!-- 메인배너 -->
       <section class="main_banner" data-mainnavi="search">
         <div class="main_banner_left" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
@@ -935,16 +933,127 @@
                   </ul>
                 </div>
                 <div class="tab_panel">
-                  <div class="news_slider">채용공고 컨텐츠</div>
+                    <ul class="news_slider">
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">채용공고</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>한국전기연구원 방문고객관리시스템 도입 안내</strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">채용공고</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>2025년도 제1차 공개경쟁 채용 공고</strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">채용공고</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">채용공고</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">채용공고</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">채용공고</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                        </a>
+                      </li>
+                    </ul>
                 </div>
                 <div class="tab_panel">
-                  <div class="news_slider">보도자료 컨텐츠</div>
+                  <div class="news_slider">
+                    <ul class="news_slider">
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">보도자료</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>한국전기연구원 방문고객관리시스템 도입 안내</strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">보도자료</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>2025년도 제1차 공개경쟁 채용 공고</strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">보도자료</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">보도자료</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">보도자료</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div>
+                            <span class="label blue">보도자료</span>
+                            <span class="date">2024.07.10</span>
+                          </div>
+                          <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
                 <div class="tab_panel">
                   <div class="news_slider">입찰공고 컨텐츠</div>
                 </div>
                 <div class="news_controls">
-                 
                   <a href="#" class="news_prev"><span class="sr-only">이전</span></a>
                   <a href="#" class="news_next"><span class="sr-only">다음</span></a> 
                   <a href="#" class="more"><span class="sr-only">더보기</span></a>
@@ -1105,7 +1214,13 @@
           <div class="promo_top" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
             <div class="interview_wrap">
               <h3>연구인터뷰</h3>
-              <div class="interview">
+              <div class="interview_header">
+                <div class="interview_controls">
+                  <button type="button" class="interview_prev"><span class="sr-only">이전</span></button>
+                  <button type="button" class="interview_next"><span class="sr-only">다음</span></button>
+                </div>
+              </div>
+              <div class="interview interview_slider">
                 <div>
                   <a href="#">
                     <b>분산전력시스템연구센터</b>
@@ -1113,21 +1228,8 @@
                     <img src="../common/images/main/interview_img_01.png" alt="인터뷰1">
                   </a>
                 </div>
-                <div>
-                  <a href="#">
-                    <b>분산전력시스템연구센터</b>
-                    <span>미래를 바꾸는 기술 분산자원 및 마이크로그리드</span>
-                    <img src="../common/images/main/interview_img_01.png" alt="인터뷰1">
-                  </a>
-                </div>
-                <div>
-                  <a href="#">
-                    <b>분산전력시스템연구센터</b>
-                    <span>미래를 바꾸는 기술 분산자원 및 마이크로그리드</span>
-                    <img src="../common/images/main/interview_img_01.png" alt="인터뷰1">
-                  </a>
-                </div>
-                <!-- <div>
+
+                 <div>
                   <a href="#">
                     <b>나노융합연구센터</b>
                     <span>얇은 금속 나노박막을 열처리, 마이크로파 유도 가열 기술</span>
@@ -1141,13 +1243,6 @@
                     <img src="../common/images/main/interview_img_03.png" alt="인터뷰3">
                   </a>
                 </div>
-                <div>
-                  <a href="#">
-                    <b>차세대전지연구센터</b>
-                    <span>얇은 금속 나노박막을 열처리, 마이크로파 유도 가열 기술</span>
-                    <img src="../common/images/main/interview_img_03.png" alt="인터뷰3">
-                  </a>
-                </div> -->
               </div>
             </div>
             <div class="publications_wrap">
@@ -1174,7 +1269,7 @@
               </div>
               <div class="video_text">
                 <b>YOUTUBE</b>
-                <span>한국전기연구원<br>홍보영상</span>
+                <span>한국전기연구원 <em class="block">홍보영상</em></span>
               </div>
             </div>
           
@@ -1389,7 +1484,7 @@
     <!-- //TOP 버튼 -->
   </div>
   
-  <script src="../common/js/publish.js"></script>
+  <!-- AOS 초기화 스크립트 -->
   <script>
     // AOS 초기화
     AOS.init({

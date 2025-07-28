@@ -207,8 +207,8 @@
       background: url(../images/main/header_bg.png) no-repeat top left/66px 53px;
       width: 66px;
       height: 53px;
-      top: 66px;
-      left: -27px;
+      top: 64px;
+      left: -26px;
       z-index: 1;
     }
     &:before {
@@ -895,140 +895,13 @@
     }
   }
 
-  // /*배너*/
-  // .side_banner {
-  //   padding: 50px 0;
-    
-  //   .container {
-  //     max-width: 1300px;
-  //   }
-    
-  //   .slide {
-  //     a {
-  //       > div {
-  //         position: relative;
-  //         width: 100%;
-  //         height: 0;
-  //         padding-top: 9.594%;
-          
-  //         > img, > span {
-  //           position: absolute;
-  //           left: 0;
-  //           top: 0;
-  //           bottom: 0;
-  //           width: 100%;
-  //           height: 100%;
-  //         }
-          
-  //         > span {
-  //           display: none;
-  //         }
-  //       }
-  //     }
-  //   }
-    
-  //   .control {
-  //     text-align: center;
-  //     margin-top: 15px;
-      
-  //     .pagination_dot {
-  //       text-align: center;
-  //       display: inline-block;
-  //       vertical-align: middle;
-  //       font-size: 0;
-  //       line-height: 0;
-        
-  //       li {
-  //         float: left;
-  //         font-size: 9px;
-  //         line-height: 1;
-  //         margin: 0 4px;
-  //       }
-        
-  //       .slick-active button {
-  //         background-color: #000;
-  //         width: 20px;
-  //       }
-        
-  //       button {
-  //         $dotSize : 9px;
-  //         transition: all 0.3s;
-  //         width: $dotSize;
-  //         height: $dotSize;
-  //         border-radius: $dotSize;
-  //         background-color: #e4e4e4;
-  //         overflow: hidden;
-  //         text-indent: 50px;
-  //       }
-  //     }
-      
-  //     > button {
-  //       width: 12px;
-  //       height: 12px;
-  //       overflow: hidden;
-  //       text-indent: 50px;
-  //       vertical-align: middle;
-  //       white-space: nowrap;
-  //       margin-left: 10px;
-        
-  //       &.pause {
-  //         background: url(../images/main/btn_sdbanner_pause.png) no-repeat center center;
-  //       }
-  //       &.play {
-  //         background: url(../images/main/btn_sdbanner_play.png) no-repeat center center;
-  //       }
-  //     }
-  //   }
-
-  //   // 반응형 - 태블릿 (1080px 이하)
-  //   @media screen and (max-width: 1080px) {
-  //     padding: 40px 0;
-      
-  //     .container {
-  //       padding: 0 30px;
-  //     }
-  //   }
-
-  //   // 반응형 - 모바일 (720px 이하)  
-  //   @media screen and (max-width: 720px) {
-  //     padding: 30px 0;
-      
-  //     .container {
-  //       padding: 0 15px;
-  //     }
-      
-  //     .slide {
-  //       a {
-  //         > div {
-  //           padding-top: 28.7878%;
-            
-  //           > img {
-  //             display: none;
-  //           }
-  //           > span {
-  //             display: block;
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
   /*연구 분야 도메인*/
   .domain { 
     position: relative;
     border-radius: 0 0 0 97px;
     background: url(../images/main/domain_bg.png) no-repeat center center;
-    scroll-margin-top: 60px;
+    margin-bottom: 30px;
     
-    // &::before {
-    //   content: '';
-    //   display: block;
-    //   height: 90px;
-
-    //   visibility: hidden;
-    //   pointer-events: none;
-    // }
 
     .container {
       position: relative;
@@ -1274,9 +1147,9 @@
 
     // 짝수번째 슬라이드일 때 컨트롤 버튼 위치 변경
     &.even-slide .domain-controls {
-      left:calc(100% - 400px);
+      right: 40px; // domain-content의 padding-right(140px) + 여백(20px)
+      left: unset;
       top: 42%;
-      right: unset;
       bottom: auto;
       transform: unset;
     }
@@ -1300,7 +1173,7 @@
                   url(../images/main/m_domain_bg.png) no-repeat bottom center;
      background-size: cover;
       border-radius: 0;
-
+      
       .container {
         flex-direction: column;
         height: auto;
@@ -1398,27 +1271,9 @@
           }
         }
         
-        // 슬릭 도트 커스터마이징
-        // .slick-dots {
-        //   bottom: -50px;
-          
-        //   li {
-        //     button {
-        //       &:before {
-        //         color: rgba(255, 255, 255, 0.5);
-        //         font-size: 12px;
-        //       }
-        //     }
-            
-        //     &.slick-active button:before {
-        //       color: #fff;
-        //     }
-        //   }
-        // }
       }
 
       .domain-controls {
-       
         bottom: 46%;
         left: auto;
         right: 114px;
@@ -1438,13 +1293,13 @@
         }
       }
 
-      // 짝수 슬라이드 위치 조정 해제
+      // 짝수 슬라이드 위치 조정 - 화면 정가운데에서 +200px
       &.even-slide .domain-controls {
-        left: auto;
+        left: calc(50% + 200px);
         top: auto;
         right: auto;
-        bottom: auto;
-        position: relative;
+        bottom: 46%;
+        position: absolute;
         transform: none;
         justify-content: center;
         margin-top: 50px;
@@ -1457,8 +1312,8 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
-    padding-top: 130px;
-    // margin-bottom: 100px;
+    padding-top: 30px;
+     margin-bottom: 50px;
     // scroll-margin-top: 70px;
 
     &::after {
@@ -1731,7 +1586,7 @@
         height: 92.6px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-aroundß;
         padding: 20px 30px;
         background: rgba(46, 60, 113, 0.7);
         color: #fff;
@@ -1774,7 +1629,7 @@
     // 반응형 - 태블릿 (1080px 이하)
     @media screen and (max-width: 1080px) {
       margin-top: 0px;
-      padding-top: 100px;
+      padding-top: 140px;
 
       &::after {
         display: none;
@@ -2114,9 +1969,9 @@
 
   /* 인증 섹션 */
   .certification {
-    margin-bottom: 40px;
-    padding-bottom: 30px;
-    margin-top: 130px;
+    padding-top: 30px;
+  //  margin-bottom: 30px;
+    padding-bottom: 60px;
     position: relative;
     overflow: hidden; // 흐르는 텍스트가 영역을 벗어나지 않도록
 
@@ -2258,7 +2113,7 @@
         ul{ 
           display: flex; 
           align-items: center;
-          justify-content: space-between;
+          justify-content: space-around;
      
 
           li{          
@@ -2332,10 +2187,10 @@
             }
           div{
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
         
              b{
               color: #1a2a5c;
@@ -2428,7 +2283,6 @@
     // 반응형 - 태블릿 (1080px 이하)
     @media screen and (max-width: 1080px) {
       margin-top: 80px;
-      padding: 50px 0;
       
       &:before {
         display: none;
@@ -2564,7 +2418,7 @@
           height: auto;
           margin-bottom: 25px;
           padding: 30px 20px;
-         
+          align-items: flex-start;
           gap: 10px;
 
           li {
@@ -2588,6 +2442,7 @@
               > b {
                 font-size: $fs-17;
                 margin-bottom: 5px;
+                word-break: keep-all;
               }
 
               > em {
@@ -2664,163 +2519,6 @@
         }
       }
     }
-
-    // 반응형 - 모바일 (720px 이하)
-    // @media screen and (max-width: 720px) {
-    //   padding: 50px 0;
-
-    //   .container{
-    //     gap: 25px;
-    //     padding: 0 15px;
-    //   }
-
-    //   // .support{
-    //   //   .support_banner{
-    //   //     padding: 20px 15px;
-    //   //     margin-bottom: 20px;
-    //   //     border-radius: 20px;
-
-    //   //     >div{
-    //   //       flex-direction: column;
-    //   //       align-items: flex-start;
-    //   //       gap: 10px;
-
-    //   //       h3{
-    //   //         font-size: 20px;
-    //   //       }
-
-    //   //       .control{
-    //   //         align-self: flex-end;
-
-    //   //         button{
-    //   //           width: 32px;
-    //   //           height: 32px;
-    //   //         }
-    //   //       }
-    //   //     }
-    //   //   }
-
-    //   //   .support_search{
-    //   //     gap: 15px;
-
-    //   //     h3{
-    //   //       font-size: 18px;
-
-    //   //       > span{
-    //   //         display: block;
-    //   //         margin-top: 5px;
-    //   //         font-size: 12px;
-    //   //       }
-    //   //     }
-
-    //   //     ul{
-    //   //       flex-wrap: wrap;
-    //   //       gap: 15px;
-
-    //   //       li{
-    //   //         width: calc(50% - 7.5px);
-
-    //   //         a{
-    //   //           gap: 10px;
-
-    //   //           span{
-    //   //             width: 60px;
-    //   //             height: 60px;
-    //   //           }
-
-    //   //           b{
-    //   //             font-size: 12px;
-    //   //             text-align: center;
-    //   //           }
-    //   //         }
-    //   //       }
-    //   //     }
-    //   //   }
-    //   // }
-
-    //   // .certifin{
-    //   //   .service_cards{
-    //   //     flex-direction: column;
-    //   //     height: auto;
-    //   //     padding: 20px;
-    //   //     gap: 15px;
-
-    //   //     li{
-    //   //       width: 100%;
-
-    //   //       a{
-    //   //         flex-direction: row;
-    //   //         text-align: left;
-
-    //   //         > span{
-    //   //           width: 50px;
-    //   //           height: 50px;
-    //   //           margin-bottom: 0;
-    //   //           margin-right: 15px;
-    //   //         }
-
-    //   //         > b{
-    //   //           font-size: 14px;
-    //   //           margin-bottom: 5px;
-    //   //         }
-
-    //   //         >em{
-    //   //           font-size: 12px;
-    //   //         }
-    //   //       }
-    //   //     }
-    //   //   }
-
-    //   //   .application_service{
-    //   //     padding: 15px;
-    //   //     margin-bottom: 20px;
-
-    //   //     h3{
-    //   //       font-size: 18px;
-    //   //       margin-bottom: 12px;
-    //   //     }
-
-    //   //     .service_buttons{
-    //   //       flex-direction: column;
-    //   //       gap: 8px;
-
-    //   //       a{
-    //   //         width: 100%;
-    //   //         height: 40px;
-    //   //         line-height: 40px;
-    //   //         font-size: 14px;
-
-    //   //         &:last-child{
-    //   //           width: 100%;
-    //   //         }
-    //   //       }
-    //   //     }
-    //   //   }
-
-    //   //   .certification_inquiry{
-    //   //     h3{
-    //   //       font-size: 18px;
-    //   //       margin-bottom: 15px;
-
-    //   //       > span{
-    //   //         display: block;
-    //   //         margin-top: 5px;
-    //   //         font-size: 12px;
-    //   //       }
-    //   //     }
-
-    //   //     > div{
-    //   //       flex-direction: column;
-    //   //       gap: 8px;
-
-    //   //       a{
-    //   //         padding: 12px;
-    //   //         font-size: 13px;
-    //   //       }
-    //   //     }
-    //   //   }
-    //   // }
-    // }
   }
   // 물 흐르는 효과 애니메이션 정의
   @keyframes flowingText {
@@ -2865,8 +2563,26 @@
     &_top {
       display: flex;
       justify-content: space-between;
-      margin: 40px 0 50px;
+      margin: 40px 0;
       gap: 38px;
+
+      .interview_wrap {
+        h3 {
+          margin-bottom: 20px;
+        }
+        
+        .interview_header {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          margin-bottom: 20px;
+          margin-top: -40px; // h3와 겹치지 않도록 조정
+          
+          .interview_controls {
+            display: none; // 데스크톱에서는 숨김
+          }
+        }
+      }
 
       .interview {
         display: flex;
@@ -3145,15 +2861,124 @@
         .interview_wrap {
           order: 1;
           
+          h3 {
+            margin-bottom: 15px;
+          }
+          
+          .interview_header {
+            margin-bottom: 15px;
+            margin-top: -35px;
+            justify-content: flex-end;
+            
+            .interview_controls {
+              display: flex; // 모바일에서는 표시
+              gap: 10px;
+              
+              button {
+                display: none;
+                width: 36px;
+                height: 36px;
+                border: 1px solid #ddd;
+                border-radius: 50%;
+                background: #fff;
+                cursor: pointer;
+                position: relative;
+                transition: all 0.3s ease;
+                
+                &:hover {
+                  border-color: #0b50d0;
+                  background-color: #0b50d0;
+                  
+                  &::after {
+                    border-color: #fff;
+                  }
+                }
+                
+                &::after {
+                  content: '';
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  width: 6px;
+                  height: 6px;
+                  border: 2px solid #666;
+                  border-right: none;
+                  border-bottom: none;
+                  transition: border-color 0.3s ease;
+                }
+                
+                &.interview_prev::after {
+                  transform: translate(-40%, -50%) rotate(-45deg);
+                }
+                
+                &.interview_next::after {
+                  transform: translate(-60%, -50%) rotate(135deg);
+                }
+              }
+            }
+          }
+          
           .interview {
+            // 모바일에서는 기본 flex 스타일 제거
+            display: block;
+            >div{
+              width: 100%;
+              max-width: 1080px;
+              box-shadow: none;
+            }
+            
+            &.interview_slider {
+              .slick-slide {
+                margin: 0 8px;
+                
+                > div {
+                  width: 100%;
 
-        
+                  border-radius: 30px;
+                  box-shadow: 8.9px 4.5px 21px 0 rgba(0, 0, 0, 0.1);
+                  background-color: #fff;
+                  overflow: hidden;
+                  
+                  a {
+                    display: block;
+                    width: 250px;
+                    height: 300px;
+                    
+                    b {
+                      display: inline-block;
+                      margin: 20px 15px 10px;
+                      font-size: 0.75rem;
+                      font-weight: 300;
+                      color: #0b50d0;
+                      background-color: #ecf2fe;
+                      padding: 6px 8px;
+                      border-radius: 6px;
+                      font-family: $ff-sbaggro;
+                    }
+                    
+                    span {
+                      display: block;
+                      font-size: 1rem;
+                      font-weight: 700;
+                      line-height: 1.4;
+                      letter-spacing: -0.45px;
+                      margin: 0 15px 15px;
+                    }
+                    
+                    img {
+                      display: block;
+                      width: 100%;
+                      border-radius: 0 0 30px 30px;
+                    }
+                  }
+                }
+              }
+            }
           }
         }
 
         .publications_wrap {
           order: 2;
-          
           .inner {
             width: 100%;
             height: auto;
@@ -3162,9 +2987,9 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-
-            &:after {
-              display: none;
+            &:after{
+             top: 35px;
+             right: 52px;
             }
 
             strong {
@@ -3220,20 +3045,13 @@
           }
 
           .video_text {
-            text-align: center;
-
-            b {
-              margin: 0 0 10px;
-              padding-left: 0;
-              padding-top: 45px;
-              background-position: center top;
-              font-size: $fs-14;
-              line-height: 1.4;
-            }
 
             span {
               font-size: $fs-17;
               line-height: 1.4;
+              em.block{
+                display: inline-block !important;
+              }
             }
           }
         }
@@ -3250,10 +3068,10 @@
           }
 
           ul {
-            width: 100%;
+            width: 150px;
             justify-content: flex-start;
-            gap: 15px;
-
+            gap: 10px;
+gap
             li a {
               width: 50px;
               height: 50px;
@@ -3292,6 +3110,8 @@
   }
 
 }
+
+
 
 .main_navi {
   // ... existing code ...
