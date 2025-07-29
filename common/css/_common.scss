@@ -110,7 +110,6 @@
   letter-spacing: -0.39px;
   font-size: $fs-15;
   font-family: $ff-centuryGothic;
-  font-weight: 600;
 
   // 스크롤 시 나타남
   &.show {
@@ -744,14 +743,6 @@
           .sitemap_top{padding: 20px; background-color: #f0f4f7; margin-bottom: 0;}
         }
         .btn_sitemap_close{top: 10px; right: 25px; width: 50px; height: 50px; background-size: 16px auto;}
-
-
-
-
-
-
-
-
       }
 
       > .container {
@@ -797,46 +788,7 @@
             }
           }
         }
-        > .sns {
-          margin-left: 0;
-          margin-top: 130px;
-          padding-left: 20px;
-          width: 32%;
-          display: block;
-          text-align: left;
-          li {
-            margin-left: 0;
-            a {
-              text-indent: 0;
-              font-size: 10px;
-              line-height: 25px;
-              width: auto;
-              height: auto;
-              text-align: left;
-              font-weight: bold;
-              &.facebook {
-                background-image: none;
-                color: #005cb3;
-              }
-              &.insta {
-                background-image: none;
-                color: #ff377e;
-              }
-              &.twitter {
-                background-image: none;
-                color: #4896fd;
-              }
-              &.youtube {
-                background-image: none;
-                color: #d90004;
-              }
-              &.blog {
-                background-image: none;
-                color: #00ba35;
-              }
-            }
-          }
-        }
+
         .dep1 {
           margin: 0;
           padding: 0;
@@ -1128,6 +1080,7 @@ body.sitemap-open {
       margin-left: 30px;
       padding-right: 24px;
       border-top: 1px solid #000;
+      word-break: keep-all;
       > div {
         display: none;
       }
@@ -1138,6 +1091,12 @@ body.sitemap-open {
         > li {
           margin-bottom: 25px;
           width: calc((100% - 132px) / 4);
+          
+          // ol li a에 hover했을 때 부모 메뉴에 $color1 적용
+          &:has(ol li a:hover) > a {
+            color: $color1;
+          }
+          
           > a {
             position: relative;
             width: 100%;
@@ -1942,7 +1901,7 @@ body.modal-open {
   h3 {
     margin: 0;
     font-size: $fs-32;
-    font-weight: bold;
+
     font-family: $ff-sbaggro;
     font-weight: 600;
   }

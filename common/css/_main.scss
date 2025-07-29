@@ -23,18 +23,43 @@
   }
 }
 
-$sidebar-width: 118px;
+$sidebar-width: 116px;
 
 #fullpage{
  // padding-left: $sidebar-width;
 }
+section{
+  margin-left: $sidebar-width;
+  width: calc(100% - $sidebar-width);
+  height: 100vh;
+  overflow: visible;
+
+  .fp-tableCell{
+    position: relative; 
+    width: 100%; 
+    max-width: 1920px; 
+    margin: 0 auto; 
+    overflow: visible;
+    min-width: 320px; // 최소 너비 보장
+  }
+
+  // 모바일에서 사이드바가 없을 때 여백 제거
+  @media screen and (max-width: 1080px) {
+    margin-left: 0;
+    width: 100%;
+    height: auto; // 모바일에서 자동 높이
+    min-height: 100vh; // 최소 높이는 유지
+    overflow-y: auto; // 세로 스크롤 허용
+  }
+}
+
 .main {
   
   h2 {
     position: relative;
     font-family: $ff-sbaggro; 
     font-size: $fs-40;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.25;
     letter-spacing: -1px;
     margin-bottom: 59px; 
@@ -82,7 +107,6 @@ $sidebar-width: 118px;
     color: #000;
     
     > span{
-      display: block;
       font-size: $fs-13;
       font-weight: 300;
       padding-left: 16px;
@@ -158,7 +182,6 @@ $sidebar-width: 118px;
           position: static;
           transform: none;
           color: #000;
-          font-weight: bold;
           font-size: $fs-13;
           font-family: $ff-sbaggro;
           padding-top: 29px;
@@ -205,9 +228,10 @@ $sidebar-width: 118px;
     justify-content: center;
     position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background:  url(../images/main/main_bg.png) no-repeat center center/cover;
     background-attachment: scroll, fixed;
+    
     overflow: hidden;
     &::after{
       content: '';
@@ -426,6 +450,7 @@ $sidebar-width: 118px;
       right: 0;
       top:0;
       width: 379px;
+      max-width: 35vw; // 화면 크기에 따라 조정
       z-index: 2;
       .m_main_banner_right_btn{
         display: none;
@@ -436,6 +461,7 @@ $sidebar-width: 118px;
         padding: 143px 38px 34px 41px;
         height: 661px;
         border-radius: 0 0 0 60px;
+        overflow: hidden; // 텍스트가 컨테이너를 벗어나지 않도록
         h3 {
           color: #fff;
           margin-bottom: 40px;
@@ -594,28 +620,28 @@ $sidebar-width: 118px;
     @media screen and (max-width: $tb1080) {
       background: url(../images/main/m_main_bg.png) no-repeat top center/cover;
       margin-top: 55px;
-      height: 100vh;
+      height: auto; // 자동 높이로 변경
       min-height: 100vh;
-      padding: 0;
+      padding: 0 0 20px; // 하단 여백 추가
       display: flex;
       flex-direction: column;
-    
-      align-items: center;
+      align-items: stretch; // 전체 너비 활용
+      overflow-y: auto; // 세로 스크롤 허용
       &:after{
         display: none;
       }
 
       .main_banner_left {
-        margin: 127px 0 0 0;
-        padding: 0 20px;
+        margin: 80px 0 0 0; // 상단 여백 줄임
+        padding: 0 20px 20px; // 하단 패딩 추가
         width: 100%;
         max-width: 100%;
         display: flex;
         flex-direction: column;
-      
         align-items: center;
         text-align: center;
-        height: 100%;
+        height: auto; // 자동 높이로 변경
+        flex: 1; // 남는 공간 활용
 
         h3 {
           font-size: $fs-18;
@@ -734,6 +760,8 @@ $sidebar-width: 118px;
         position: relative;
         width: 100%;
         max-width: 100%;
+        margin-top: 30px; // 상단 여백 추가
+        
         .m_main_banner_right_btn{
           display: flex;
           align-items: center;
@@ -748,6 +776,7 @@ $sidebar-width: 118px;
           font-weight: 500;
           line-height: 45px;
           text-align: center;
+          border-radius: 10px 10px 0 0; // 상단만 둥글게
 
           &::after{
             content: '';  
@@ -755,13 +784,88 @@ $sidebar-width: 118px;
             width: 6px;
             height: 4px;
             background: url(../images/main/m_main_banner_right_btn.png) no-repeat center /6px 4px;
-
+          }
+        }
+        
+        .main_banner_right_con{
+          display: block; // 모바일에서도 표시
+          background: rgba(0, 0, 0, 0.45);
+          border-radius: 0 0 10px 10px; // 하단만 둥글게
+          padding: 20px 15px;
+          height: auto; // 자동 높이
+          margin-top: 0;
+          
+          h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: $fs-16;
           }
 
+          ul {
+            li {
+              border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+              a {
+                display: flex;
+                align-items: flex-start;
+                color: rgba(255, 255, 255, 0.9);
+                padding: 12px 0;
+                font-size: $fs-14;
+                line-height: 1.3;
+
+                span {
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 18px;
+                  height: 18px;
+                  background: $color1;
+                  border-radius: 6px;
+                  font-size: 12px;
+                  font-weight: 700;
+                  margin-right: 10px;
+                  flex-shrink: 0;
+                  color: #fff;
+                  margin-top: 2px;
+                }
+              }
+
+              &:first-child {
+                a {
+                  padding-top: 0;
+                }
+              }
+
+              &:last-child {
+                border-bottom: none;
+              }
+
+              &:nth-child(4),
+              &:nth-child(5) {
+                a span {
+                  background: #fff;
+                  color: #000;
+                }
+              }
+            }
+          }
+          
+          > a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: $fs-14;
+            font-weight: 500;
+            border: solid 1px #fff;
+            line-height: 40px;
+            box-sizing: border-box;
+            font-family: $ff-suit;
+          }
         }
-        .main_banner_right_con{
-          display: none;
-        }
+        
         .video-container{
           display: none;
         }
@@ -909,14 +1013,14 @@ $sidebar-width: 118px;
     .container {
       position: relative;
       z-index: 2;
-      max-width: 1400px; // 1200px에서 1400px로 증가
+      max-width: min(1600px, 100%); // 최대 너비를 늘리고 반응형으로 조정
       margin: 0 auto;
       height: 830px;
       width: 100%;
       display: flex;
       align-items: stretch;
-      margin-left: 0;
       overflow: visible; // visual 이미지가 보이도록
+      min-width: 320px; // 최소 너비 보장
     }
 
     // 좌측 네비게이션 (slick.js)
@@ -1354,8 +1458,8 @@ $sidebar-width: 118px;
 
     .news_tab {
       position: relative;
-      width: calc(100% - 100px);
-      max-width: 1450px;
+      width: 100%;
+      max-width: min(calc(100% - 100px), 1450px);
       height: 480px;
       display: flex;
       align-items: flex-start;
@@ -1505,7 +1609,7 @@ $sidebar-width: 118px;
                   background: #1f60c2 
                 }
                 &.orange { 
-                  background: #ff8839
+                  background: #ff8739
                 }
               }
 
@@ -1570,7 +1674,8 @@ $sidebar-width: 118px;
       height: 496px;
       margin-top: -270px;
       z-index: 1;
-      width: calc(100% - 493px);
+      width: min(calc(100% - 493px), 100%);
+      min-width: 400px; // 최소 너비 보장
       justify-content: flex-end;
       display: flex;
       align-items: flex-end;
@@ -2537,7 +2642,8 @@ $sidebar-width: 118px;
     &::before{
       content: '';
       display: block;
-      width: calc(100% - 114px);
+      width: min(calc(100% - 114px), 100%);
+      min-width: 300px; // 최소 너비 보장
       height: 525px;
       background: #f6f6f6;
       border-radius: 100px 100px 0 0;
@@ -3111,22 +3217,45 @@ gap
 
 .fullpage-scroll section {
   height: 100vh;
+  
+  // 모바일에서는 자동 높이 사용
+  @media screen and (max-width: 1080px) {
+    height: auto;
+    min-height: 100vh;
+  }
 }
+
 .fullpage-scroll .main_banner {
   height: 100vh;
   min-height: auto;
+  
+  // 모바일에서는 자동 높이 사용
+  @media screen and (max-width: 1080px) {
+    height: auto;
+    min-height: 100vh;
+  }
 }
+
 .fullpage-scroll .domain {
   height: 100vh;
+  
+  // 모바일에서는 자동 높이 사용
+  @media screen and (max-width: 1080px) {
+    height: auto;
+    min-height: 100vh;
+  }
 }
+
 .fullpage-scroll .news,
 .fullpage-scroll .certification,
 .fullpage-scroll .promo {
   height: 100vh;
-  // margin-top: 0;
-  //display: flex;
-  //flex-direction: column;
-  // justify-content: center;
+  
+  // 모바일에서는 자동 높이 사용
+  @media screen and (max-width: 1080px) {
+    height: auto;
+    min-height: 100vh;
+  }
 }
 
 

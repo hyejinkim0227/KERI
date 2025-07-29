@@ -313,7 +313,7 @@ caption, legend {
   border: 0;
 }
 
-.br {
+.block {
   display: block;
 }
 
@@ -357,11 +357,6 @@ iframe {
 
 /*요소중앙정렬*/
 /*아이템 정렬*/
-/* ======== 공통 유틸리티 클래스 ======== */
-.block {
-  display: block;
-}
-
 #wrapper {
   width: 100%;
   overflow: hidden;
@@ -470,7 +465,6 @@ iframe {
   letter-spacing: -0.39px;
   font-size: 0.9375rem;
   font-family: "century-gothic-bold", "Pretendard";
-  font-weight: 600;
 }
 .top_btn.show {
   opacity: 1;
@@ -1103,46 +1097,6 @@ iframe {
   .header .sitemap > .container > ol > li:first-of-type:before {
     content: none;
   }
-  .header .sitemap > .container > .sns {
-    margin-left: 0;
-    margin-top: 130px;
-    padding-left: 20px;
-    width: 32%;
-    display: block;
-    text-align: left;
-  }
-  .header .sitemap > .container > .sns li {
-    margin-left: 0;
-  }
-  .header .sitemap > .container > .sns li a {
-    text-indent: 0;
-    font-size: 10px;
-    line-height: 25px;
-    width: auto;
-    height: auto;
-    text-align: left;
-    font-weight: bold;
-  }
-  .header .sitemap > .container > .sns li a.facebook {
-    background-image: none;
-    color: #005cb3;
-  }
-  .header .sitemap > .container > .sns li a.insta {
-    background-image: none;
-    color: #ff377e;
-  }
-  .header .sitemap > .container > .sns li a.twitter {
-    background-image: none;
-    color: #4896fd;
-  }
-  .header .sitemap > .container > .sns li a.youtube {
-    background-image: none;
-    color: #d90004;
-  }
-  .header .sitemap > .container > .sns li a.blog {
-    background-image: none;
-    color: #00ba35;
-  }
   .header .sitemap > .container .dep1 {
     margin: 0;
     padding: 0;
@@ -1433,6 +1387,7 @@ body.sitemap-open {
   margin-left: 30px;
   padding-right: 24px;
   border-top: 1px solid #000;
+  word-break: keep-all;
 }
 .sitemap > .container .dep2_wrap > div {
   display: none;
@@ -1445,6 +1400,9 @@ body.sitemap-open {
 .sitemap > .container .dep2_wrap > ul > li {
   margin-bottom: 25px;
   width: calc((100% - 132px) / 4);
+}
+.sitemap > .container .dep2_wrap > ul > li:has(ol li a:hover) > a {
+  color: #17469d;
 }
 .sitemap > .container .dep2_wrap > ul > li > a {
   position: relative;
@@ -2249,7 +2207,6 @@ body.modal-open {
 .modal_header h3 {
   margin: 0;
   font-size: 2rem;
-  font-weight: bold;
   font-family: "SBAggro", "Pretendard";
   font-weight: 600;
 }
@@ -2351,6 +2308,30 @@ body.modal-open {
     opacity: 1;
   }
 }
+section {
+  margin-left: 116px;
+  width: calc(100% - 116px);
+  height: 100vh;
+  overflow: visible;
+}
+section .fp-tableCell {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  overflow: visible;
+  min-width: 320px;
+}
+@media screen and (max-width: 1080px) {
+  section {
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+}
+
 .main {
   /*메인배너*/
   /*연구 분야 도메인*/
@@ -2362,7 +2343,7 @@ body.modal-open {
   position: relative;
   font-family: "SBAggro", "Pretendard";
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.25;
   letter-spacing: -1px;
   margin-bottom: 59px;
@@ -2400,7 +2381,6 @@ body.modal-open {
   color: #000;
 }
 .main h3 > span {
-  display: block;
   font-size: 0.8125rem;
   font-weight: 300;
   padding-left: 16px;
@@ -2468,7 +2448,6 @@ body.modal-open {
   position: static;
   transform: none;
   color: #000;
-  font-weight: bold;
   font-size: 0.8125rem;
   font-family: "SBAggro", "Pretendard";
   padding-top: 29px;
@@ -2515,7 +2494,7 @@ body.modal-open {
   justify-content: center;
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: url(../images/main/main_bg.png) no-repeat center center/cover;
   background-attachment: scroll, fixed;
   overflow: hidden;
@@ -2711,6 +2690,7 @@ body.modal-open {
   right: 0;
   top: 0;
   width: 379px;
+  max-width: 35vw;
   z-index: 2;
 }
 .main .main_banner .main_banner_right .m_main_banner_right_btn {
@@ -2722,6 +2702,7 @@ body.modal-open {
   padding: 143px 38px 34px 41px;
   height: 661px;
   border-radius: 0 0 0 60px;
+  overflow: hidden;
 }
 .main .main_banner .main_banner_right .main_banner_right_con h3 {
   color: #fff;
@@ -2844,26 +2825,28 @@ body.modal-open {
   .main .main_banner {
     background: url(../images/main/m_main_bg.png) no-repeat top center/cover;
     margin-top: 55px;
-    height: 100vh;
+    height: auto;
     min-height: 100vh;
-    padding: 0;
+    padding: 0 0 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    overflow-y: auto;
   }
   .main .main_banner:after {
     display: none;
   }
   .main .main_banner .main_banner_left {
-    margin: 127px 0 0 0;
-    padding: 0 20px;
+    margin: 80px 0 0 0;
+    padding: 0 20px 20px;
     width: 100%;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    height: 100%;
+    height: auto;
+    flex: 1;
   }
   .main .main_banner .main_banner_left h3 {
     font-size: 1.125rem;
@@ -2960,6 +2943,7 @@ body.modal-open {
     position: relative;
     width: 100%;
     max-width: 100%;
+    margin-top: 30px;
   }
   .main .main_banner .main_banner_right .m_main_banner_right_btn {
     display: flex;
@@ -2975,6 +2959,7 @@ body.modal-open {
     font-weight: 500;
     line-height: 45px;
     text-align: center;
+    border-radius: 10px 10px 0 0;
   }
   .main .main_banner .main_banner_right .m_main_banner_right_btn::after {
     content: "";
@@ -2984,7 +2969,67 @@ body.modal-open {
     background: url(../images/main/m_main_banner_right_btn.png) no-repeat center/6px 4px;
   }
   .main .main_banner .main_banner_right .main_banner_right_con {
-    display: none;
+    display: block;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 0 0 10px 10px;
+    padding: 20px 15px;
+    height: auto;
+    margin-top: 0;
+  }
+  .main .main_banner .main_banner_right .main_banner_right_con h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1rem;
+  }
+  .main .main_banner .main_banner_right .main_banner_right_con ul li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .main .main_banner .main_banner_right .main_banner_right_con ul li a {
+    display: flex;
+    align-items: flex-start;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 12px 0;
+    font-size: 0.875rem;
+    line-height: 1.3;
+  }
+  .main .main_banner .main_banner_right .main_banner_right_con ul li a span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: #17469d;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 10px;
+    flex-shrink: 0;
+    color: #fff;
+    margin-top: 2px;
+  }
+  .main .main_banner .main_banner_right .main_banner_right_con ul li:first-child a {
+    padding-top: 0;
+  }
+  .main .main_banner .main_banner_right .main_banner_right_con ul li:last-child {
+    border-bottom: none;
+  }
+  .main .main_banner .main_banner_right .main_banner_right_con ul li:nth-child(4) a span, .main .main_banner .main_banner_right .main_banner_right_con ul li:nth-child(5) a span {
+    background: #fff;
+    color: #000;
+  }
+  .main .main_banner .main_banner_right .main_banner_right_con > a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: solid 1px #fff;
+    line-height: 40px;
+    box-sizing: border-box;
+    font-family: "SUIT", "Pretendard";
   }
   .main .main_banner .main_banner_right .video-container {
     display: none;
@@ -3163,14 +3208,14 @@ body.modal-open {
 .main .domain .container {
   position: relative;
   z-index: 2;
-  max-width: 1400px;
+  max-width: min(1600px, 100%);
   margin: 0 auto;
   height: 830px;
   width: 100%;
   display: flex;
   align-items: stretch;
-  margin-left: 0;
   overflow: visible;
+  min-width: 320px;
 }
 .main .domain .domain-nav {
   flex: 0 0 320px;
@@ -3519,8 +3564,8 @@ body.modal-open {
 }
 .main .news .news_tab {
   position: relative;
-  width: calc(100% - 100px);
-  max-width: 1450px;
+  width: 100%;
+  max-width: min(100% - 100px, 1450px);
   height: 480px;
   display: flex;
   align-items: flex-start;
@@ -3654,7 +3699,7 @@ body.modal-open {
   background: #1f60c2;
 }
 .main .news .news_tab .news_tab_content .tab_panel ul li a .label.orange {
-  background: #ff8839;
+  background: #ff8739;
 }
 .main .news .news_tab .news_tab_content .tab_panel ul li a .date {
   font-family: "TheJamsil", "Pretendard";
@@ -3709,7 +3754,8 @@ body.modal-open {
   height: 496px;
   margin-top: -270px;
   z-index: 1;
-  width: calc(100% - 493px);
+  width: min(100% - 493px, 100%);
+  min-width: 400px;
   justify-content: flex-end;
   display: flex;
   align-items: flex-end;
@@ -4401,7 +4447,8 @@ body.modal-open {
 .main .promo::before {
   content: "";
   display: block;
-  width: calc(100% - 114px);
+  width: min(100% - 114px, 100%);
+  min-width: 300px;
   height: 525px;
   background: #f6f6f6;
   border-radius: 100px 100px 0 0;
@@ -4893,20 +4940,46 @@ body.modal-open {
 .fullpage-scroll section {
   height: 100vh;
 }
+@media screen and (max-width: 1080px) {
+  .fullpage-scroll section {
+    height: auto;
+    min-height: 100vh;
+  }
+}
 
 .fullpage-scroll .main_banner {
   height: 100vh;
   min-height: auto;
 }
+@media screen and (max-width: 1080px) {
+  .fullpage-scroll .main_banner {
+    height: auto;
+    min-height: 100vh;
+  }
+}
 
 .fullpage-scroll .domain {
   height: 100vh;
+}
+@media screen and (max-width: 1080px) {
+  .fullpage-scroll .domain {
+    height: auto;
+    min-height: 100vh;
+  }
 }
 
 .fullpage-scroll .news,
 .fullpage-scroll .certification,
 .fullpage-scroll .promo {
   height: 100vh;
+}
+@media screen and (max-width: 1080px) {
+  .fullpage-scroll .news,
+  .fullpage-scroll .certification,
+  .fullpage-scroll .promo {
+    height: auto;
+    min-height: 100vh;
+  }
 }
 
 .fw_b {
