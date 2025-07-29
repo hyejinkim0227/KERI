@@ -26,7 +26,7 @@
 $sidebar-width: 118px;
 
 #fullpage{
-  padding-left: $sidebar-width;
+ // padding-left: $sidebar-width;
 }
 .main {
   
@@ -166,11 +166,11 @@ $sidebar-width: 118px;
       }
     }
   
-    li[data-menuanchor="search"] .section-name{ background: url(../images/main/indicator_search.png) no-repeat top center/21px 19px; }
-    li[data-menuanchor="domain"] .section-name{ background: url(../images/main/indicator_domain.png) no-repeat top center/20px 20px; }
-    li[data-menuanchor="news"] .section-name{ background: url(../images/main/indicator_news.png) no-repeat top center/21px 19px; } 
-    li[data-menuanchor="certification"] .section-name{ background: url(../images/main/indicator_certification.png) no-repeat top center/21px 24px; }
-    li[data-menuanchor="promo"] .section-name{ background: url(../images/main/indicator_promo.png) no-repeat top center/20px 23px; }
+    li[data-menuanchor="section1"] .section-name{ background: url(../images/main/indicator_search.png) no-repeat top center/21px 19px; }
+    li[data-menuanchor="section2"] .section-name{ background: url(../images/main/indicator_domain.png) no-repeat top center/20px 20px; }
+    li[data-menuanchor="section3"] .section-name{ background: url(../images/main/indicator_news.png) no-repeat top center/21px 19px; } 
+    li[data-menuanchor="section4"] .section-name{ background: url(../images/main/indicator_certification.png) no-repeat top center/21px 24px; }
+    li[data-menuanchor="section5"] .section-name{ background: url(../images/main/indicator_promo.png) no-repeat top center/20px 23px; }
   
     // 반응형 - 태블릿 (1080px 이하)
     @media screen and (max-width: 1080px) {

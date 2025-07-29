@@ -582,14 +582,14 @@
     <!-- //헤더 -->
     <!-- 컨텐츠 -->
     <div id="contents"  class="main" style="position: relative;">
-      <ul id="indicator side_nav" class="side_nav">
+      <ul id="indicator" class="side_nav">
         <li data-menuanchor="section1" class="active">
-          <a href="section1">
+          <a href="#section1">
             <span class="section-name">검색</span>
           </a>
         </li>
-          <li data-menuanchor="section2">
-            <a href="#section2">
+        <li data-menuanchor="section2">
+          <a href="#section2">
             <span class="section-name">분야</span>
           </a>
         </li>
@@ -613,7 +613,7 @@
       <!-- fullpage.js 전체 컨테이너 -->
       <div id="fullpage" >
           <!-- 메인배너 -->
-          <section class="section section1 fp-auto-height fp-section fp-table main_banner" data-mainnavi="search" data-anchor="section1" id="section1">
+          <section class="section section1 fp-auto-height fp-section fp-table main_banner" data-mainnavi="search" data-anchor="section1" id="search">
             <div class="main_banner_left aos-init aos-animate" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
               <h3>전기를 넘어, 에너지 혁신의 중심으로 <b>KERI, 전기기술의 미래를 이끌다</b></h3>
               <div class="search">
@@ -702,7 +702,7 @@
           </section>
           <!-- //메인베너 -->
           <!-- 분야 -->
-          <section class="section section2 domain fp-auto-height fp-section fp-table"  data-mainnavi="domain" data-anchor="section2" id="section2">
+          <section class="section section2 domain fp-auto-height fp-section fp-table"  data-mainnavi="domain" data-anchor="section2" id="domain">
             <div class="container fp-tableCell">
                 <!-- 좌측 네비게이션 -->
                 <div class="domain-nav slider-nav">
@@ -903,7 +903,7 @@
           </section>
           <!-- //분야 -->
           <!-- 소식 -->
-          <section class="section section3 news fp-auto-height fp-section fp-table  active fp-completely" data-mainnavi="news" data-anchor="section3" id="section3">
+          <section class="section section3 news fp-auto-height fp-section fp-table  active fp-completely" data-mainnavi="news" data-anchor="section3" id="news">
             <div class="container fp-tableCell">
               <h2>KERI 소식</h2>
               <div class="news_tab" data-aos-delay="300" data-aos-duration="800" data-aos-easing="ease-in-out">
@@ -1207,7 +1207,7 @@
           </section>
           <!-- //소식 -->
           <!-- 인증 -->
-          <section class="section certification section4 fp-auto-height fp-section fp-table" data-mainnavi="certification" data-anchor="section4" id="section4">
+          <section class="section certification section4 fp-auto-height fp-section fp-table" data-mainnavi="certification" data-anchor="section4" id="certification">
             <div class="fp-tableCell">
               <div class="flowing-text-bg"><span class="sr-only">Electrotechnology</span></div>
               <div class="container">
@@ -1339,7 +1339,7 @@
           </section>
           <!-- //인증 -->
           <!-- 홍보 -->
-          <section class="section promo section5 fp-auto-height fp-section fp-table" data-mainnavi="promo" data-anchor="promo" id="section5">
+          <section class="section promo section5 fp-auto-height fp-section fp-table" data-mainnavi="promo" data-anchor="section5" id="promo">
             <div class="container fp-tableCell">
               <h2>KERI 홍보</h2>
               <div class="promo_top" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
@@ -1661,7 +1661,7 @@
       $('#fullpage').fullpage({
   responsiveWidth: 721,
   anchors: ["section1", "section2", "section3", "section4", "section5"],
-  menu: '#side_nav',
+  menu: '#indicator',
 
   afterLoad: function(anchorLink, index){
     animation_move(index);

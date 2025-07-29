@@ -2351,10 +2351,6 @@ body.modal-open {
     opacity: 1;
   }
 }
-#fullpage {
-  padding-left: 118px;
-}
-
 .main {
   /*메인배너*/
   /*연구 분야 도메인*/
@@ -2477,19 +2473,19 @@ body.modal-open {
   font-family: "SBAggro", "Pretendard";
   padding-top: 29px;
 }
-.main #indicator li[data-menuanchor=search] .section-name {
+.main #indicator li[data-menuanchor=section1] .section-name {
   background: url(../images/main/indicator_search.png) no-repeat top center/21px 19px;
 }
-.main #indicator li[data-menuanchor=domain] .section-name {
+.main #indicator li[data-menuanchor=section2] .section-name {
   background: url(../images/main/indicator_domain.png) no-repeat top center/20px 20px;
 }
-.main #indicator li[data-menuanchor=news] .section-name {
+.main #indicator li[data-menuanchor=section3] .section-name {
   background: url(../images/main/indicator_news.png) no-repeat top center/21px 19px;
 }
-.main #indicator li[data-menuanchor=certification] .section-name {
+.main #indicator li[data-menuanchor=section4] .section-name {
   background: url(../images/main/indicator_certification.png) no-repeat top center/21px 24px;
 }
-.main #indicator li[data-menuanchor=promo] .section-name {
+.main #indicator li[data-menuanchor=section5] .section-name {
   background: url(../images/main/indicator_promo.png) no-repeat top center/20px 23px;
 }
 @media screen and (max-width: 1080px) {
