@@ -117,7 +117,16 @@ function gnbReset() {
     $('.header')
       .stop()
       .animate({ height: headH + 'px' }, 200, function () {
-
+        // dep2_wrap이 닫힌 후 현재 섹션이 첫 번째가 아니라면 scrolled 클래스 복원
+        if ($('#fullpage').length > 0) {
+          var $activeSection = $('.fp-section.active, .section.active');
+          if ($activeSection.length > 0) {
+            var currentSection = $activeSection.index() + 1;
+            if (currentSection > 1) {
+              $('.header').addClass('scrolled');
+            }
+          }
+        }
       });
     $('.header').removeClass('active');
   }
@@ -168,6 +177,17 @@ function resetSearch() {
     $('.header').removeClass('active');
     $('.util > .search_box,.search_open').removeClass('active');
     $('.search_open').attr('title', '검색창 열기');
+    
+    // 검색창이 닫힌 후 현재 섹션이 첫 번째가 아니라면 scrolled 클래스 복원
+    if ($('#fullpage').length > 0) {
+      var $activeSection = $('.fp-section.active, .section.active');
+      if ($activeSection.length > 0) {
+        var currentSection = $activeSection.index() + 1;
+        if (currentSection > 1) {
+          $('.header').addClass('scrolled');
+        }
+      }
+    }
   });
 }
 
@@ -265,6 +285,53 @@ function stopIframe(target) {
     // iframe의 `src` 속성을 다시 원래 값으로 설정하여 재생을 멈춥니다.
     $(target).find('iframe').attr('src', src);
   }
+}
+
+/**
+ * 헤더 스크롤 이벤트를 초기화합니다.
+ * 첫 번째 섹션을 제외하고 스크롤했을 때 header에 scrolled 클래스를 추가/제거합니다.
+ */
+function initHeaderScroll() {
+  // PC 환경(1080px 초과)에서만 실행
+  if (!pcChk(1080)) {
+    return;
+  }
+  
+  // 첫 번째 섹션의 높이를 계산
+  var firstSectionHeight = 0;
+  
+  // #intro 섹션이 있으면 그것을 첫 번째 섹션으로 사용
+  if ($('#intro').length) {
+    firstSectionHeight = $('#intro').outerHeight();
+  } 
+  // #intro가 없으면 .main 내의 첫 번째 섹션 또는 첫 번째 main 요소 사용
+  else if ($('.main').length) {
+    var firstSection = $('.main').first();
+    firstSectionHeight = firstSection.outerHeight();
+  }
+  // 그것도 없으면 기본값으로 윈도우 높이 사용
+  else {
+    firstSectionHeight = $(window).height();
+  }
+  
+  // 스크롤 이벤트 핸들러
+  $(window).on('scroll.headerScroll', function() {
+    // PC 환경에서만 실행
+    if (!pcChk(1080)) {
+      $('.header').removeClass('scrolled');
+      return;
+    }
+    
+    var scrollTop = $(window).scrollTop();
+    var $header = $('.header');
+    
+    // 첫 번째 섹션 높이를 넘어서면 scrolled 클래스 추가
+    if (scrollTop > firstSectionHeight) {
+      $header.addClass('scrolled');
+    } else {
+      $header.removeClass('scrolled');
+    }
+  });
 }
 
 $(function () {
@@ -783,7 +850,17 @@ $(function () {
 });
 
 $(window).on('resize', function () {
-  $('.header,.search_open').removeAttr('style').removeClass('active scrolled');
+  // dep2_wrap이 열려있거나 header가 active 상태일 때는 scrolled 클래스 유지
+  var isDepMenuOpen = $('.header #gnb .dep2_wrap').is(':visible');
+  var isHeaderActive = $('.header').hasClass('active');
+  var shouldKeepScrolled = isDepMenuOpen || isHeaderActive;
+  
+  if (!shouldKeepScrolled) {
+    $('.header,.search_open').removeAttr('style').removeClass('active scrolled');
+  } else {
+    $('.header,.search_open').removeAttr('style').removeClass('active');
+  }
+  
   // GNB 메뉴도 초기화
   $('.header #gnb > ul > li').removeClass('active');
   headH = $('.header').outerHeight(); //기본 헤더 높이 전역변수
@@ -795,8 +872,22 @@ $(window).on('resize', function () {
   if (!pcChk(1080)) {
     tableChange();
   }
-  $('.header').removeClass('active scrolled').removeAttr('style');
+  
+  // dep2_wrap이 열려있거나 header가 active 상태일 때는 scrolled 클래스 유지
+  if (!shouldKeepScrolled) {
+    $('.header').removeClass('active scrolled').removeAttr('style');
+  } else {
+    $('.header').removeClass('active').removeAttr('style');
+  }
   imgResize(); //.img 이미지 사이즈 조절
+  
+  // 헤더 스크롤 이벤트 재초기화 (디바운싱 적용)
+  clearTimeout(window.headerScrollTimer);
+  window.headerScrollTimer = setTimeout(function() {
+    // 기존 스크롤 이벤트 제거 후 재초기화
+    $(window).off('scroll.headerScroll');
+    initHeaderScroll();
+  }, 300);
   
   // 도메인 슬라이더 리사이즈 시 재초기화 (디바운싱 적용)
   if ($('.domain').length) {
@@ -816,6 +907,9 @@ $(window).on('load', function () {
   $('.header #gnb > ul > li').removeClass('active');
   $('.header').removeClass('active');
   gnbReset(); // GNB 리셋 함수도 실행
+  
+  // 헤더 스크롤 이벤트 초기화
+  initHeaderScroll();
 });
 
 function slick_on_pc(slider, settings) {
@@ -989,22 +1083,22 @@ $(document).ready(function() {
   const $indicator = $('#indicator');
   const $contents = $('#contents');
   const $sections = $('[data-mainnavi]');
-  const $footer = $('.footer'); // 클래스 선택자로 수정
+  const $footer = $('#footer'); // ID 선택자로 수정
   
-  // 스크롤 이벤트 핸들러
-  $(window).on('scroll', function() {
-    // 요소 존재 체크
-    if ($contents.length === 0 || $footer.length === 0) {
-      return;
-    }
-    
-    const scrollTop = $(window).scrollTop();
-    const contentsTop = $contents.offset().top;
-    const footerTop = $footer.offset().top;
-    const windowHeight = $(window).height();
-    
-    // contents 영역과 footer 영역 사이에서만 indicator 표시
-    if (scrollTop >= contentsTop && scrollTop + windowHeight <= footerTop) {
+      // 스크롤 이벤트 핸들러
+    $(window).on('scroll', function() {
+      // 요소 존재 체크
+      if ($contents.length === 0 || $footer.length === 0) {
+        return;
+      }
+      
+      const scrollTop = $(window).scrollTop();
+      const contentsTop = $contents.offset().top;
+      const footerTop = $footer.offset().top;
+      const windowHeight = $(window).height();
+      
+      // contents 영역에서 indicator 표시, 푸터 직전까지만
+      if (scrollTop >= contentsTop && scrollTop + windowHeight <= footerTop + 100) {
       $indicator.css('opacity', '1');
       
       // 현재 보이는 섹션에 따라 active 클래스 변경
@@ -1095,20 +1189,29 @@ $(document).ready(function() {
 $(document).ready(function() {
   const $topBtn = $('#topBtn');
   
-  // 스크롤 이벤트 - top 버튼 show/hide
+  // 스크롤 이벤트 - top 버튼 show/hide (모바일 환경에서만 동작)
   $(window).on('scroll', function() {
-    if ($(window).scrollTop() > 300) {
-      $topBtn.addClass('show');
-    } else {
-      $topBtn.removeClass('show');
+    // fullpage.js가 비활성화된 환경(주로 모바일)에서만 동작
+    if ($(window).width() <= 720) {
+      if ($(window).scrollTop() > 300) {
+        $topBtn.addClass('show');
+      } else {
+        $topBtn.removeClass('show');
+      }
     }
   });
   
   // top 버튼 클릭 이벤트 - 페이지 상단으로 부드럽게 이동
   $topBtn.on('click', function() {
-    $('html, body').animate({
-      scrollTop: 0
-    }, 600, 'swing');
+    // fullpage.js 환경에서는 fullpage 메소드 사용
+    if ($(window).width() > 720 && typeof $.fn.fullpage !== 'undefined') {
+      $.fn.fullpage.moveTo(1); // 첫 번째 섹션으로 이동
+    } else {
+      // 일반 환경에서는 기본 스크롤 사용
+      $('html, body').animate({
+        scrollTop: 0
+      }, 600, 'swing');
+    }
   });
 });
 
@@ -1162,45 +1265,50 @@ $(document).ready(function() {
   });
 });
 
-// certification 섹션 슬라이더 초기화 (스크롤 이벤트로 처리)
-$(window).on('scroll', function() {
-  var certificationOffset = $('.certification').offset();
-  if (certificationOffset && $(window).scrollTop() >= certificationOffset.top - $(window).height() / 2) {
-    if(!$('.support_list').hasClass('slick-initialized')){
-      $('.support_list').slick({
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        speed: 600,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        infinite: true,
-        dots: false,
-        arrows: true,
-        prevArrow: $('.support_banner .support_btn_prev'),
-        nextArrow: $('.support_banner .support_btn_next'),
-        pauseOnHover: false,
-        pauseOnFocus: false,
-        swipe: true,
-        draggable: true,
-        responsive: [
-          {
-          breakpoint: 1080,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-          },
-          {
-          breakpoint: 720,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-          }
-        ]
-      });
-    }
+// 기술지원 슬라이더 초기화 함수
+function initSupportSlider() {
+  if(!$('.support_list').hasClass('slick-initialized')){
+    $('.support_list').slick({
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      speed: 600,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      infinite: true,
+      dots: false,
+      arrows: true,
+      prevArrow: $('.support_banner .support_btn_prev'),
+      nextArrow: $('.support_banner .support_btn_next'),
+      pauseOnHover: false,
+      pauseOnFocus: false,
+      swipe: true,
+      draggable: true,
+      responsive: [
+        {
+        breakpoint: 1080,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+        },
+        {
+        breakpoint: 720,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+        }
+      ]
+    });
   }
+}
+
+// DOM 로드 완료 후 슬라이더 초기화
+$(document).ready(function() {
+  // 0.5초 후 슬라이더 초기화 (DOM이 완전히 로드된 후)
+  setTimeout(function() {
+    initSupportSlider();
+  }, 500);
 });
 
 // 탭 박스 기능
@@ -1242,50 +1350,47 @@ $('.modal_pop[data-pop="pop1"] .pause').on('click', function () {
 // 연구인터뷰 슬라이더 초기화 함수
 function initInterviewSlider() {
   if ($('.interview_slider').length) {
-    const windowWidth = $(window).width();
-    
-    // 모바일(1080px 이하)에서만 슬라이더 활성화
-    if (windowWidth <= 1080) {
-      // 기존 슬라이더가 없을 때만 초기화
-      if (!$('.interview_slider').hasClass('slick-initialized')) {
-        $('.interview_slider').slick({
-          dots: false,
-          infinite: true,
-          speed: 600,
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          autoplay: false,
-          autoplaySpeed: 4000,
-          arrows: false,
-          draggable: true,
-          swipe: true,
-          touchMove: true,
-          centerMode: true,
-          centerPadding: '50px',
-          responsive: [
-            {
-              breakpoint: 768,
-              settings: {
-                centerPadding: '0px'
-              }
+    // 기존 슬라이더가 없을 때만 초기화 (웹과 모바일 모두 활성화)
+    if (!$('.interview_slider').hasClass('slick-initialized')) {
+      $('.interview_slider').slick({
+        dots: false,
+        infinite: true,
+        speed: 600,
+        slidesToShow: 3, // 웹에서 3개씩 보여주기
+        slidesToScroll: 1,
+        autoplay: false, // 자동플레이 비활성화
+        arrows: false, // 화살표 버튼 비활성화
+        draggable: true,
+        swipe: true,
+        touchMove: true,
+        centerMode: false,
+        responsive: [
+          {
+            breakpoint: 1080,
+            settings: {
+              slidesToShow: 2,
+              centerMode: true,
+              centerPadding: '50px'
             }
-          ]
-        });
-
-        // 커스텀 화살표 버튼 이벤트
-        $('.interview_prev').off('click').on('click', function() {
-          $('.interview_slider').slick('slickPrev');
-        });
-
-        $('.interview_next').off('click').on('click', function() {
-          $('.interview_slider').slick('slickNext');
-        });
-      }
-    } else {
-      // 데스크톱에서는 슬라이더 비활성화
-      if ($('.interview_slider').hasClass('slick-initialized')) {
-        $('.interview_slider').slick('unslick');
-      }
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1, // 모바일에서 1개씩 보여주기
+              centerMode: true,
+              centerPadding: '50px'
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              centerMode: false,
+              centerPadding: '0px'
+            }
+          }
+        ]
+      });
     }
   }
 }
@@ -1295,11 +1400,13 @@ $(document).ready(function() {
   initInterviewSlider();
 });
 
-// 윈도우 리사이즈 시 인터뷰 슬라이더 재초기화
+// 윈도우 리사이즈 시 슬라이더 refresh (재초기화는 불필요)
 $(window).on('resize', function() {
   clearTimeout(window.interviewResizeTimer);
   window.interviewResizeTimer = setTimeout(function() {
-    initInterviewSlider();
+    if ($('.interview_slider').hasClass('slick-initialized')) {
+      $('.interview_slider').slick('refresh');
+    }
   }, 250);
 });
 
@@ -1519,3 +1626,120 @@ function initNewsSlider() {
 function tableChange() {
   // 테이블 반응형 처리가 필요한 경우 여기에 구현
 }
+
+// YouTube Player 변수
+let player;
+
+/**
+ * YouTube API 준비 콜백 함수
+ */
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube-player', {
+      events: {
+        onReady: function(event) {
+            event.target.mute();        // autoplay 제한 회피
+            event.target.playVideo();   // 재생
+            console.log('YouTube Player Ready');
+          }
+      }
+    });
+}
+
+// YouTube API가 함수를 찾을 수 있도록 전역으로 노출
+window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
+/**
+ * fullpage.js 초기화 및 설정
+ */
+function initFullpage() {
+  if ($('#fullpage').length) {
+    $('#fullpage').fullpage({
+      responsiveWidth: 721,
+      anchors: ["section1", "section2", "section3", "section4", "section5", "footer"],
+      menu: '#indicator',
+
+      afterLoad: function(anchorLink, index){
+        animation_move(index);
+
+        // 현재 섹션의 AOS 요소 수동 트리거
+        const $section = $('#fullpage .section').eq(index - 1);
+        $section.find('[data-aos]').addClass('aos-animate');
+        AOS.refresh();
+
+        // section4(certification 섹션)에서 기술지원 슬라이더 초기화
+        if (index === 4 && typeof initSupportSlider === 'function') {
+          setTimeout(function() {
+            initSupportSlider();
+          }, 300);
+        }
+
+        // section5(promo 섹션)에서 연구인터뷰 슬라이더 초기화
+        if (index === 5 && typeof initInterviewSlider === 'function') {
+          setTimeout(function() {
+            initInterviewSlider();
+          }, 300);
+        }
+
+        // section6(footer 섹션) 처리
+        if (index === 6) {
+          $('.header').addClass('scrolled');
+          $('#indicator').css('opacity', '0'); // 푸터에서는 indicator 숨김
+        }
+
+        // TOP 버튼 표시/숨김 제어 (afterLoad에서도 처리)
+        if(index > 1) {
+          $('#topBtn').addClass('show');
+        } else {
+          $('#topBtn').removeClass('show');
+        }
+      },
+
+      onLeave: function(index, nextIndex, direction){
+        // 스크롤시 헤더 scrolled 클래스 즉시 적용
+        if(nextIndex > 1) {
+          $('.header').addClass('scrolled');
+        } else {
+          $('.header').removeClass('scrolled');
+        }
+
+        // TOP 버튼 표시/숨김 제어
+        if(nextIndex > 1) {
+          $('#topBtn').addClass('show');
+        } else {
+          $('#topBtn').removeClass('show');
+        }
+
+        // 푸터에서 나갈 때 indicator 다시 표시
+        if (index === 6 && nextIndex !== 6) {
+          $('#indicator').css('opacity', '1');
+        }
+
+        // 이전 섹션의 AOS 초기화 (선택적)
+        const $section = $('#fullpage .section').eq(index - 1);
+        $section.find('[data-aos]').removeClass('aos-animate');
+
+        // YouTube 재생 제어
+        setTimeout(function() {
+          if (player && typeof player.playVideo === 'function') {
+            player.mute();
+            player.playVideo();
+          }
+        }, 10);
+      }
+    });
+  }
+}
+
+/**
+ * 섹션 애니메이션 함수
+ * @param {number} index - 현재 섹션 인덱스
+ */
+function animation_move(index){
+    //console.log(index);
+    $('#fullpage .section').eq(index-1).find('.inner_sp').addClass('on');
+}
+
+// 문서 준비 완료 시 fullpage.js 초기화
+$(document).ready(function() {
+  initFullpage();
+});

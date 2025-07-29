@@ -1204,8 +1204,6 @@
               </div>
             </div>
             </div>
-           
-
           </section>
           <!-- //소식 -->
           <!-- 인증 -->
@@ -1347,12 +1345,12 @@
               <div class="promo_top" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
                 <div class="interview_wrap">
                   <h3>연구인터뷰</h3>
-                  <div class="interview_header">
+                  <!-- <div class="interview_header">
                     <div class="interview_controls">
                       <button type="button" class="interview_prev"><span class="sr-only">이전</span></button>
                       <button type="button" class="interview_next"><span class="sr-only">다음</span></button>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="interview interview_slider">
                     <div>
                       <a href="#">
@@ -1374,6 +1372,27 @@
                         <b>차세대전지연구센터</b>
                         <span>얇은 금속 나노박막을 열처리, 마이크로파 유도 가열 기술</span>
                         <img src="../common/images/main/interview_img_03.png" alt="인터뷰3">
+                      </a>
+                    </div>
+                    <div>
+                      <a href="#">
+                        <b>분산전력시스템연구센터</b>
+                        <span>미래를 바꾸는 기술 분산자원 및 마이크로그리드</span>
+                        <img src="../common/images/main/interview_img_01.png" alt="인터뷰1">
+                      </a>
+                    </div>
+                    <div>
+                      <a href="#">
+                        <b>분산전력시스템연구센터</b>
+                        <span>미래를 바꾸는 기술 분산자원 및 마이크로그리드</span>
+                        <img src="../common/images/main/interview_img_01.png" alt="인터뷰1">
+                      </a>
+                    </div>
+                    <div>
+                      <a href="#">
+                        <b>분산전력시스템연구센터</b>
+                        <span>미래를 바꾸는 기술 분산자원 및 마이크로그리드</span>
+                        <img src="../common/images/main/interview_img_01.png" alt="인터뷰1">
                       </a>
                     </div>
                   </div>
@@ -1630,75 +1649,8 @@
     
   
   </div>
-  <!-- AOS 초기화 스크립트 -->
-  <!-- AOS는 common.js에서 초기화되므로 중복 초기화 제거 -->
-  <!--
-  <script>
-    // AOS 초기화
-    AOS.init({
-        duration: 1000,
-        once: true
-    });
-  </script>
-  -->
-  <script>
+ 
 
-
-    let player;
-
-    //onYouTubeIframeAPIReady();
-
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('youtube-player', {
-          events: {
-            onReady: function(event) {
-                event.target.mute();        // autoplay 제한 회피
-                event.target.playVideo();   // 재생
-                console.log('YouTube Player Ready');
-
-              }
-          }
-        });
-    }
-
-    $(document).ready(function() {
-      $('#fullpage').fullpage({
-  responsiveWidth: 721,
-  anchors: ["section1", "section2", "section3", "section4", "section5"],
-  menu: '#indicator',
-
-  afterLoad: function(anchorLink, index){
-    animation_move(index);
-
-    // 현재 섹션의 AOS 요소 수동 트리거
-    const $section = $('#fullpage .section').eq(index - 1);
-    $section.find('[data-aos]').addClass('aos-animate');
-    AOS.refresh();
-  },
-
-  onLeave: function(index, nextIndex, direction){
-    // 이전 섹션의 AOS 초기화 (선택적)
-    const $section = $('#fullpage .section').eq(index - 1);
-    $section.find('[data-aos]').removeClass('aos-animate');
-
-    // YouTube 재생 제어
-    setTimeout(function() {
-      if (player && typeof player.playVideo === 'function') {
-        player.mute();
-        player.playVideo();
-      }
-    }, 10);
-  }
-});
-
-    });
-
-    function animation_move(index){
-        //console.log(index);
-        $('#fullpage .section').eq(index-1).find('.inner_sp').addClass('on');
-    }
-
-</script>
 </body>
 
 </html>
