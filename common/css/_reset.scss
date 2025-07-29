@@ -367,7 +367,7 @@ select::-ms-expand { display: none; }
 input::-ms-check { display: none; }
 form {display:block;width:100%;}
 input, select, textarea {padding: 0 15px; -webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; appearance: none; -webkit-box-sizing: border-box; box-sizing: border-box; width: 100%; display: block; border: 0; font-family: inherit; }
-
+iframe{border: none; outline: none; }
 
 // image path
 $imgPath: "../images/";
@@ -375,7 +375,6 @@ $imgPath: "../images/";
 //color
 
 $color1:#17469d;
-$color2:#9c1d1d;
 $grey:#666;
 $bg-color1: #f9fafb;
 $bg-color2: #f5f7f9;

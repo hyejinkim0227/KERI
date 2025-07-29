@@ -23,8 +23,13 @@
   }
 }
 
-.main {
+$sidebar-width: 118px;
 
+#fullpage{
+  padding-left: $sidebar-width;
+}
+.main {
+  
   h2 {
     position: relative;
     font-family: $ff-sbaggro; 
@@ -103,9 +108,12 @@
       }
     }
   }
+
+
+
   #indicator {
     position: fixed;  // absolute에서 fixed로 다시 변경
-    left: 50px;
+    left: 41px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 99;
@@ -158,11 +166,11 @@
       }
     }
   
-    li[data-mainnavi="search"] .section-name{ background: url(../images/main/indicator_search.png) no-repeat top center/21px 19px; }
-    li[data-mainnavi="domain"] .section-name{ background: url(../images/main/indicator_domain.png) no-repeat top center/20px 20px; }
-    li[data-mainnavi="news"] .section-name{ background: url(../images/main/indicator_news.png) no-repeat top center/21px 19px; } 
-    li[data-mainnavi="certification"] .section-name{ background: url(../images/main/indicator_certification.png) no-repeat top center/21px 24px; }
-    li[data-mainnavi="promo"] .section-name{ background: url(../images/main/indicator_promo.png) no-repeat top center/20px 23px; }
+    li[data-menuanchor="search"] .section-name{ background: url(../images/main/indicator_search.png) no-repeat top center/21px 19px; }
+    li[data-menuanchor="domain"] .section-name{ background: url(../images/main/indicator_domain.png) no-repeat top center/20px 20px; }
+    li[data-menuanchor="news"] .section-name{ background: url(../images/main/indicator_news.png) no-repeat top center/21px 19px; } 
+    li[data-menuanchor="certification"] .section-name{ background: url(../images/main/indicator_certification.png) no-repeat top center/21px 24px; }
+    li[data-menuanchor="promo"] .section-name{ background: url(../images/main/indicator_promo.png) no-repeat top center/20px 23px; }
   
     // 반응형 - 태블릿 (1080px 이하)
     @media screen and (max-width: 1080px) {
@@ -189,15 +197,16 @@
     }
   }
 
+
   /*메인배너*/
   .main_banner {
+    display: flex;
+    align-self: start;
+    justify-content: center;
     position: relative;
     width: 100%;
     height: 100vh;
-    min-height: 800px;
-    background: 
-                url(../images/main/main_bg.png) no-repeat center center;
-    background-size: cover, cover;
+    background:  url(../images/main/main_bg.png) no-repeat center center/cover;
     background-attachment: scroll, fixed;
     overflow: hidden;
     &::after{
@@ -230,8 +239,8 @@
       max-width:750px;
       display: flex;
       flex-direction: column;
-      margin-top: 190px;
-      margin-left: 200px;
+      justify-content: center;
+
 
     
       h3 {  
@@ -497,12 +506,6 @@
         border-radius: 60px 0 0 0;
         overflow: hidden;
         opacity: 0.8;
-        
-        iframe {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
       }
     }
 
@@ -1586,7 +1589,7 @@
         height: 92.6px;
         display: flex;
         align-items: center;
-        justify-content: space-aroundß;
+        justify-content: space-around;
         padding: 20px 30px;
         background: rgba(46, 60, 113, 0.7);
         color: #fff;
@@ -1962,8 +1965,6 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
     }
   }
 
@@ -2422,11 +2423,7 @@
           gap: 10px;
 
           li {
-          
-            
             a {
-           
-        
               gap: 20px;
               justify-content: flex-start;
            
@@ -2520,7 +2517,7 @@
       }
     }
   }
-  // 물 흐르는 효과 애니메이션 정의
+  // 폰트 물 흐르는 효과 애니메이션 정의
   @keyframes flowingText {
     0% {
       transform: translateX(-100%);
@@ -2731,11 +2728,6 @@
           height: 210px;
           border-radius: 30px;
           overflow: hidden;
-          iframe {
-            width: 100%;
-            height: 100%;
-          }
-   
         }
         .video_text {
           b {
@@ -3112,28 +3104,25 @@ gap
 }
 
 
-
 .main_navi {
   // ... existing code ...
 
 }
 
 .fullpage-scroll section {
- // height: 100vh;
-  width: 100%;
-  position: relative;
+  height: 100vh;
 }
 .fullpage-scroll .main_banner {
-  //height: 100vh;
-  min-height: 0;
+  height: 100vh;
+  min-height: auto;
 }
 .fullpage-scroll .domain {
-  // height: 100vh;
+  height: 100vh;
 }
 .fullpage-scroll .news,
 .fullpage-scroll .certification,
 .fullpage-scroll .promo {
-  //height: 100vh;
+  height: 100vh;
   // margin-top: 0;
   //display: flex;
   //flex-direction: column;

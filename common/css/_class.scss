@@ -1,5 +1,5 @@
 .fw_b {font-weight:600;}
-.fc_blue {color:$color2;}
+
 .fc_blue2 {color:#0059d1;}
 .fc_blue3 {color:#0097d9;}
 .fc_1 {color:#0261c8;}
@@ -147,4 +147,27 @@
 .mr30 {margin-right: 30px;}
 .mr35 {margin-right: 35px;}
 .mr40 {margin-right: 40px;}
+
+/* AOS와 FullPage.js 호환성을 위한 CSS */
+// .fp-section [data-aos] {
+//   will-change: transform, opacity;
+//   transition-timing-function: ease-in-out;
+//   transition-property: opacity, transform;
+// }
+
+// /* AOS 애니메이션이 FullPage.js 섹션에서 제대로 작동하도록 */
+// .fp-section .aos-animate {
+//   transition-duration: inherit;
+// }
+
+// /* FullPage.js 반응형 모드에서 AOS 호환성 */
+// .fp-responsive [data-aos] {
+//   transform: none !important;
+//   opacity: 1 !important;
+// }
+
+// .fp-responsive .aos-animate {
+//   transform: none !important;
+//   opacity: 1 !important;
+// }
 
