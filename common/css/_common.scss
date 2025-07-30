@@ -373,9 +373,10 @@
   .util {
     display: flex;
     align-items: center;
-    width: 379px;
+    width: 380px;
     justify-content: space-between;
     padding-left: 38px;
+    gap: 26px;
     .lang {
       height: 40px;
       padding-left: 30px;
@@ -389,15 +390,15 @@
         20px 21px;
     }
     .popup_zone {
-        line-height: 40px;
-      width: 152px;
+      line-height: 40px;
+      width: 140px;
       padding-left: 27px;
-      background: url(../images/common/icon_popup_zone.png) no-repeat left
-        center/20px;
+      background: url(../images/common/icon_popup_zone.png) no-repeat left center/20px;
       color: #fff;
       font-family: $ff-sbaggro;
       font-weight: 300;
       letter-spacing: -0.33px;
+      font-size: $fs-13;
     }
     .search_box {
       display: none;
@@ -497,7 +498,7 @@
     }
 
     .sitemap_open {
-      width: 54px;
+      width: 40px;
       height: 40px;
       background: url(../images/common/icon_sitemap_open.png) no-repeat center;
       vertical-align: middle;
@@ -560,6 +561,9 @@
   // 스크롤 시 헤더 스타일 (PC에서만 적용)
   @include minWidth($tb1080 + 1) {
     &.scrolled {
+      .head{
+        background: #fff;
+      }
       #gnb {
         > ul {
           > li {
@@ -567,6 +571,7 @@
               color: #000;
               height: $header-height;
               line-height: $header-height;
+           
             }
           }
         }
@@ -587,28 +592,26 @@
           background-image: url(../images/common/icon_head_search_black.png);
         }
       }
-      &:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: $header-height;
-        background-color: #fff;
-        border-bottom: 1px solid #ddd;
-        z-index: -1;
-      }
     }
   }
-
-  @include maxWidth($pc1200) {
-    #gnb {
-      > ul > li {
-        > a {
-          padding: 0 10px;
-          font-size: 18px;
+  @include maxWidth(1380px){
+    #gnb{width: 600px;
+      ul{
+        >li{
+          >a{
+            padding: 0 10px;
+          }
         }
       }
+    }
+    .util{
+      width: 320px;
+      gap: 10px;
+    }
+  }
+  @media screen and (max-width: 1280px) {
+    #gnb { width: 550px;
+
     }
   }
 
@@ -1537,7 +1540,7 @@ body.sitemap-open {
   }
 
 
-  @include maxWidth($tb1080) {
+  @media screen and (max-width: 900px) {
     padding: 0;
     .container {
       padding: 0 15px;
@@ -1610,17 +1613,19 @@ body.sitemap-open {
   left: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.88);
-  z-index: 99999;
+  z-index: 100001;
+  justify-content: center;
+  align-items: center;
   .modal_pop {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    position: relative;
     width: 100%;
     max-width: 1300px;
-    transform: translate(-50%, -50%);
-    height: calc(100% - 190px);
-    margin-top: 42px;
-    padding-top: 50px;
+    transform: none;
+    height: auto;
+    max-height: 90vh;
+    margin: 0;
+    padding: 50px;
+    overflow-y: auto;
     h2 {
       color: #fff;
       font-size: 40px;
@@ -1867,7 +1872,7 @@ body.modal-open {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10000;
+  z-index: 100001;
   display: none;
   justify-content: center;
   align-items: center;

@@ -39,13 +39,9 @@
       let currentIndex = 0;
       let count = 0;
 
-      AOS.init({
-  disable: true,
-  once: false,
-  duration: 800,
-  easing: 'ease-in-out',
-  offset: 120
-});
+      AOS.init({ once: true });
+
+
 
       // $('section.section2 .tab_sp .tab > li').on('click', function(){
       //     var i = $(this).index();
@@ -83,15 +79,10 @@
               $list.children('li').eq(3).addClass('on').siblings('li').removeClass('on');
           }
 
-          // $('section.section2 .tab_sp .tab > li').eq(3).css('transform', 'translateY(height2)');
-
-          // $li3.insertAfter($li4);
-
           const $items = $('section.section2 .content_sp .content_lst > li');
 
 
           $items.removeClass('on');
-          // $('section.section2 .tab_sp .tab li').removeClass('on');
 
           currentIndex = (currentIndex + 1) % 2;
 
@@ -161,7 +152,7 @@
   }
 
 </script>
-<body data-aos-easing="ease" data-aos-duration="400"data-aos-delay="0" class="fp-responsive fp-viewing-page3">
+<body class="fp-responsive">
   <div id="wrapper" class="main">
     <!-- 스킵내비게이션 -->
     <div class="skip_navi">
@@ -582,40 +573,40 @@
     <!-- //헤더 -->
     <!-- 컨텐츠 -->
     <div id="contents"  class="main" style="position: relative;">
-      <ul id="indicator" class="side_nav">
-        <li data-menuanchor="section1" class="active">
-          <a href="#section1">
-            <span class="section-name">검색</span>
-          </a>
-        </li>
-        <li data-menuanchor="section2">
-          <a href="#section2">
-            <span class="section-name">분야</span>
-          </a>
-        </li>
-        <li data-menuanchor="section3">
-          <a href="#section3">
-            <span class="section-name">소식</span>
-          </a>
-        </li>
-        <li data-menuanchor="section4">
-          <a href="#section4">
-            <span class="section-name">서비스</span>
-          </a>
-        </li>
-        <li data-menuanchor="section5">
-          <a href="#section5">
-            <span class="section-name">홍보</span>
-          </a>
-        </li>
-      </ul>
+        <ul id="indicator" class="side_nav">
+          <li data-menuanchor="page1" data-mainnavi="search" class="active">
+            <a href="#page1">
+              <span class="section-name">검색</span>
+            </a>
+          </li>
+          <li data-menuanchor="page2" data-mainnavi="domain">
+            <a href="#page2">
+              <span class="section-name">분야</span>
+            </a>
+          </li>
+          <li data-menuanchor="page3" data-mainnavi="news">
+            <a href="#page3">
+              <span class="section-name">소식</span>
+            </a>
+          </li>
+          <li data-menuanchor="page4" data-mainnavi="certification">
+            <a href="#page4">
+              <span class="section-name">서비스</span>
+            </a>
+          </li>
+          <li data-menuanchor="page5" data-mainnavi="promo">
+            <a href="#page5">
+              <span class="section-name">홍보</span>
+            </a>
+          </li>
+        </ul>
       
       <!-- fullpage.js 전체 컨테이너 -->
       <div id="fullpage" >
           <!-- 메인배너 -->
-          <section class="section section1  main_banner fp-auto-height fp-section fp-table " data-mainnavi="search" data-anchor="section1" id="search">
+          <section class="section section1  main_banner fp-auto-height fp-section fp-table active" data-mainnavi="search" data-anchor="page1" id="search">
             <div class="fp-tableCell  ">
-              <div class="main_banner_left aos-init aos-animate" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
+              <div class="main_banner_left" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
                 <h3>전기를 넘어, 에너지 혁신의 중심으로 <b>KERI, 전기기술의 미래를 이끌다</b></h3>
                 <div class="search">
                   <form name="#" method="POST" action="#">
@@ -678,7 +669,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="main_banner_right" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
+              <div class="main_banner_right" data-aos="fade-left" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
                 <button type="button" class="m_main_banner_right_btn">한국전기연구원 최신성과 및 영상 열기</button>
                 <div class="main_banner_right_con">
                   <h3>최신성과</h3>
@@ -704,10 +695,10 @@
           </section>
           <!-- //메인베너 -->
           <!-- 분야 -->
-          <section class="section section2 domain fp-auto-height fp-section fp-table"  data-mainnavi="domain" data-anchor="section2" id="domain">
+          <section class="section section2 domain fp-auto-height fp-section fp-table"  data-mainnavi="domain" data-anchor="page2" id="domain">
             <div class="container fp-tableCell">
                 <!-- 좌측 네비게이션 -->
-                <div class="domain-nav slider-nav">
+                <div class="domain-nav slider-nav"> 
                     <div class="nav-item" data-index="0">
                       <h3>전력망연구</h3>
                       <img src="../common/images/main/domain_icon_08.png" alt="전력망연구">
@@ -905,168 +896,25 @@
           </section>
           <!-- //분야 -->
           <!-- 소식 -->
-          <section class="section section3 news fp-auto-height fp-section fp-table  active fp-completely" data-mainnavi="news" data-anchor="section3" id="news">
+          <section class="section section3 news fp-auto-height fp-section fp-table fp-completely" data-mainnavi="news" data-anchor="page3" id="news">
             <div class="container fp-tableCell">
               <h2>KERI 소식</h2>
-              <div class="news_tab" data-aos-delay="300" data-aos-duration="800" data-aos-easing="ease-in-out">
-                <div class="container">
-                  <ul class="news_tab_menu">
-                    <li class="active"><button type="button">전체</button></li>
-                    <li><button type="button">공지사항</button></li>
-                    <li><button type="button">채용공고</button></li>
-                    <li><button type="button">보도자료</button></li>
-                    <li><a href="https://www.keri.re.kr/bid/" target="_blank" title="새창열기">입찰공고</a></li>
-                  </ul>
-                  <div class="news_tab_content">
-                    <div class="tab_panel active">
-                      <ul class="news_slider">
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label blue">공지사항</span>
-                              <span class="date">2024.07.10</span>
-                            </div>
-                            <strong>한국전기연구원 방문고객관리시스템 도입 안내</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label blue">공지사항</span>
-                              <span class="date">2024.07.10</span>
-                            </div>
-                            <strong>2025년도 제1차 공개경쟁 채용 공고</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label blue">공지사항</span>
-                              <span class="date">2024.07.10</span>
-                            </div>
-                            <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label orange">보도자료</span>
-                              <span class="date">2024.07.10</span>
-                            </div>
-                            <strong>커피믹스 만드는 '분무 건조' 기법으로 고용량 이차전지커피믹스 만드는 '분무 건조' 기법으로 고용량 이차전지</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label orange">보도자료</span>
-                              <span class="date">2024.07.10</span>
-                            </div>
-                            <strong>달 탐사 로버'용 전기파워트레인 기술 독립 목표!</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label orange">보도자료</span>
-                              <span class="date">2024.07.10</span>
-                            </div>
-                            <strong>[창원산업진흥원] 2025년 창원시 청년해외인턴 모집공고</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label orange">보도자료</span>
-                              <span class="date">2024.07.10</span>
-                            </div>
-                            <strong>[창원산업진흥원] 2025년 창원시 청년해외인턴 모집공고</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label blue">공지사항</span>
-                              <span class="date">2024.07.09</span>
-                            </div>
-                            <strong>KERI 2024년 하반기 성과발표회 개최 안내</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label orange">보도자료</span>
-                              <span class="date">2024.07.08</span>
-                            </div>
-                            <strong>차세대 전력반도체 기술개발 성과 발표</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label blue">공지사항</span>
-                              <span class="date">2024.07.07</span>
-                            </div>
-                            <strong>전기안전관리규정 개정 안내</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label orange">보도자료</span>
-                              <span class="date">2024.07.06</span>
-                            </div>
-                            <strong>스마트그리드 국제표준 개발 참여 확대</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label blue">공지사항</span>
-                              <span class="date">2024.07.05</span>
-                            </div>
-                            <strong>KERI 창립 50주년 기념 심포지엄 개최</strong>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="tab_panel">
-                      <ul class="news_slider">
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label blue">공지사항</span>
-                              <span class="date">2024.07.10</span>
-                            </div>
-                            <strong>한국전기연구원 방문고객관리시스템 도입 안내</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label blue">공지사항</span>
-                              <span class="date">2024.07.10</span>
-                            </div>
-                            <strong>2025년도 제1차 공개경쟁 채용 공고</strong>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <div>
-                              <span class="label blue">공지사항</span>
-                              <span class="date">2024.07.10</span>
-                            </div>
-                            <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="tab_panel">
+                <div class="news_tab" data-aos="fade-right" data-aos-delay="400" data-aos-duration="800" data-aos-easing="ease">
+                  <div class="container">
+                    <ul class="news_tab_menu">
+                      <li class="active"><button type="button">전체</button></li>
+                      <li><button type="button">공지사항</button></li>
+                      <li><button type="button">채용공고</button></li>
+                      <li><button type="button">보도자료</button></li>
+                      <li><a href="https://www.keri.re.kr/bid/" target="_blank" title="새창열기">입찰공고</a></li>
+                    </ul>
+                    <div class="news_tab_content">
+                      <div class="tab_panel active">
                         <ul class="news_slider">
                           <li>
                             <a href="#">
                               <div>
-                                <span class="label blue">채용공고</span>
+                                <span class="label blue">공지사항</span>
                                 <span class="date">2024.07.10</span>
                               </div>
                               <strong>한국전기연구원 방문고객관리시스템 도입 안내</strong>
@@ -1075,7 +923,7 @@
                           <li>
                             <a href="#">
                               <div>
-                                <span class="label blue">채용공고</span>
+                                <span class="label blue">공지사항</span>
                                 <span class="date">2024.07.10</span>
                               </div>
                               <strong>2025년도 제1차 공개경쟁 채용 공고</strong>
@@ -1084,7 +932,7 @@
                           <li>
                             <a href="#">
                               <div>
-                                <span class="label blue">채용공고</span>
+                                <span class="label blue">공지사항</span>
                                 <span class="date">2024.07.10</span>
                               </div>
                               <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
@@ -1093,34 +941,176 @@
                           <li>
                             <a href="#">
                               <div>
-                                <span class="label blue">채용공고</span>
+                                <span class="label orange">보도자료</span>
                                 <span class="date">2024.07.10</span>
                               </div>
-                              <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                              <strong>커피믹스 만드는 '분무 건조' 기법으로 고용량 이차전지커피믹스 만드는 '분무 건조' 기법으로 고용량 이차전지</strong>
                             </a>
                           </li>
                           <li>
                             <a href="#">
                               <div>
-                                <span class="label blue">채용공고</span>
+                                <span class="label orange">보도자료</span>
                                 <span class="date">2024.07.10</span>
                               </div>
-                              <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                              <strong>달 탐사 로버'용 전기파워트레인 기술 독립 목표!</strong>
                             </a>
                           </li>
                           <li>
                             <a href="#">
                               <div>
-                                <span class="label blue">채용공고</span>
+                                <span class="label orange">보도자료</span>
+                                <span class="date">2024.07.10</span>
+                              </div>
+                              <strong>[창원산업진흥원] 2025년 창원시 청년해외인턴 모집공고</strong>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <div>
+                                <span class="label orange">보도자료</span>
+                                <span class="date">2024.07.10</span>
+                              </div>
+                              <strong>[창원산업진흥원] 2025년 창원시 청년해외인턴 모집공고</strong>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <div>
+                                <span class="label blue">공지사항</span>
+                                <span class="date">2024.07.09</span>
+                              </div>
+                              <strong>KERI 2024년 하반기 성과발표회 개최 안내</strong>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <div>
+                                <span class="label orange">보도자료</span>
+                                <span class="date">2024.07.08</span>
+                              </div>
+                              <strong>차세대 전력반도체 기술개발 성과 발표</strong>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <div>
+                                <span class="label blue">공지사항</span>
+                                <span class="date">2024.07.07</span>
+                              </div>
+                              <strong>전기안전관리규정 개정 안내</strong>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <div>
+                                <span class="label orange">보도자료</span>
+                                <span class="date">2024.07.06</span>
+                              </div>
+                              <strong>스마트그리드 국제표준 개발 참여 확대</strong>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <div>
+                                <span class="label blue">공지사항</span>
+                                <span class="date">2024.07.05</span>
+                              </div>
+                              <strong>KERI 창립 50주년 기념 심포지엄 개최</strong>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="tab_panel">
+                        <ul class="news_slider">
+                          <li>
+                            <a href="#">
+                              <div>
+                                <span class="label blue">공지사항</span>
+                                <span class="date">2024.07.10</span>
+                              </div>
+                              <strong>한국전기연구원 방문고객관리시스템 도입 안내</strong>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <div>
+                                <span class="label blue">공지사항</span>
+                                <span class="date">2024.07.10</span>
+                              </div>
+                              <strong>2025년도 제1차 공개경쟁 채용 공고</strong>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <div>
+                                <span class="label blue">공지사항</span>
                                 <span class="date">2024.07.10</span>
                               </div>
                               <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
                             </a>
                           </li>
                         </ul>
-                    </div>
-                    <div class="tab_panel">
-                      <div class="news_slider">
+                      </div>
+                      <div class="tab_panel">
+                          <ul class="news_slider">
+                            <li>
+                              <a href="#">
+                                <div>
+                                  <span class="label blue">채용공고</span>
+                                  <span class="date">2024.07.10</span>
+                                </div>
+                                <strong>한국전기연구원 방문고객관리시스템 도입 안내</strong>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div>
+                                  <span class="label blue">채용공고</span>
+                                  <span class="date">2024.07.10</span>
+                                </div>
+                                <strong>2025년도 제1차 공개경쟁 채용 공고</strong>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div>
+                                  <span class="label blue">채용공고</span>
+                                  <span class="date">2024.07.10</span>
+                                </div>
+                                <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div>
+                                  <span class="label blue">채용공고</span>
+                                  <span class="date">2024.07.10</span>
+                                </div>
+                                <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div>
+                                  <span class="label blue">채용공고</span>
+                                  <span class="date">2024.07.10</span>
+                                </div>
+                                <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <div>
+                                  <span class="label blue">채용공고</span>
+                                  <span class="date">2024.07.10</span>
+                                </div>
+                                <strong>단락시험설비 2025년도 연차정기 점검에 따른 운휴 기간</strong>
+                              </a>
+                            </li>
+                          </ul>
+                      </div>
+                      <div class="tab_panel">
                         <ul class="news_slider">
                           <li>
                             <a href="#">
@@ -1178,40 +1168,39 @@
                           </li>
                         </ul>
                       </div>
-                    </div>
-                    <div class="tab_panel">
-                      <div class="news_slider">입찰공고 컨텐츠</div>
-                    </div>
-                    <div class="news_controls">
-                      <a href="#" class="news_prev"><span class="sr-only">이전</span></a>
-                      <a href="#" class="news_next"><span class="sr-only">다음</span></a> 
-                      <a href="#" class="more"><span class="sr-only">더보기</span></a>
+                      <div class="tab_panel">
+                        <div class="news_slider">입찰공고 컨텐츠</div>
+                      </div>
+                      <div class="news_controls">
+                        <a href="#" class="news_prev"><span class="sr-only">이전</span></a>
+                        <a href="#" class="news_next"><span class="sr-only">다음</span></a> 
+                        <a href="#" class="more"><span class="sr-only">더보기</span></a>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div class="news_bottom" data-aos="fade-left" data-aos-delay="100" data-aos-duration="700" data-aos-easing="ease">
+                  <div class="container">
+                    <a href="#">
+                      <span>경영목표</span>
+                    </a>
+                    <a href="#">
+                      <span>조직도</span>
+                    </a>
+                    <a href="#">
+                      <span>찾아오시는 길</span>
+                    </a>
+                </div>
               </div>
-              <div class="news_bottom" data-aos-delay="600" data-aos-duration="800" data-aos-easing="ease-in-out">
-                <div class="container">
-                  <a href="#">
-                    <span>경영목표</span>
-                  </a>
-                  <a href="#">
-                    <span>조직도</span>
-                  </a>
-                  <a href="#">
-                    <span>찾아오시는 길</span>
-                  </a>
-              </div>
-            </div>
             </div>
           </section>
           <!-- //소식 -->
           <!-- 인증 -->
-          <section class="section certification section4 fp-auto-height fp-section fp-table" data-mainnavi="certification" data-anchor="section4" id="certification">
+          <section class="section certification section4 fp-auto-height fp-section fp-table" data-mainnavi="certification" data-anchor="page4" id="certification">
             <div class="fp-tableCell">
               <div class="flowing-text-bg"><span class="sr-only">Electrotechnology</span></div>
               <div class="container">
-                <div class="support" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
+                <div class="support" data-aos="fade-up" data-aos-delay="400" data-aos-duration="600" data-aos-easing="ease">
                     <h2>기술지원</h2>
                     <!-- 기술이전 -->
                     <div class="support_banner">
@@ -1272,7 +1261,7 @@
                       </ul>
                     </div>
                 </div>
-                <div class="certifin" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
+                <div class="certifin" data-aos="fade-down" data-aos-delay="300" data-aos-duration="600" data-aos-easing="ease">
                   <h2>시험인증검사</h2>
                   <div class="certification_con">
                       <!-- 서비스  -->
@@ -1335,14 +1324,13 @@
               </div>
               </div>
             </div>
-           
           </section>
           <!-- //인증 -->
           <!-- 홍보 -->
-          <section class="section promo section5 fp-auto-height fp-section fp-table" data-mainnavi="promo" data-anchor="section5" id="promo">
+          <section class="section promo section5 fp-auto-height fp-section fp-table" data-mainnavi="promo" data-anchor="page5" id="promo">
             <div class="container fp-tableCell">
               <h2>KERI 홍보</h2>
-              <div class="promo_top" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
+              <div class="promo_top" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease" data-aos-once="true" >
                 <div class="interview_wrap">
                   <h3>연구인터뷰</h3>
                   <!-- <div class="interview_header">
@@ -1406,7 +1394,7 @@
                   </div>
                 </div>
               </div>
-              <div class="promo_bottom" data-aos-delay="500" data-aos-duration="1000" data-aos-easing="ease">
+              <div class="promo_bottom" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000" data-aos-easing="ease">
                 <div class="video_box">
                   <div class="video_wrap">
                     <iframe 
@@ -1443,9 +1431,8 @@
           </section>
           <!-- //홍보 -->
           <!-- 푸터 -->
-          <div class="section footer fp-auto-height fp-section fp-table"  id="footer">
-            <div class="footer fp-tableCell">
-              <div class="">
+          <section class="section footer fp-auto-height fp-section fp-table" data-anchor="page6" data-mainnavi="footer">
+            <div class="fp-tableCell">
                 <nav class="fnb container">
                   <ol>
                     <li>
@@ -1633,9 +1620,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
-          </div>
+          </section>
       </div>
       <!-- //fullpage -->
        

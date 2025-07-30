@@ -23,29 +23,202 @@
   }
 }
 
+@keyframes fadeUp {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeLeft {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeRight {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
 $sidebar-width: 116px;
+
+// 섹션별 애니메이션 스타일
+.main_banner {
+  .main_banner_left {
+    &.on {
+      animation: fadeUp 1.5s 0.3s both;
+    }
+  }
+  
+  .main_banner_right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 379px;
+    overflow: hidden;
+    
+    img {
+      transform: translateX(100%);
+      transition: transform 1.5s 0.3s;
+    }
+    
+    &.on img {
+      transform: translateX(0);
+    }
+  }
+}
+
+.section1 {
+  .img {
+    &.img1 {
+      &.on {
+        animation: fadeUp 1.5s 0.3s both;
+      }
+    }
+    
+    &.img2 {
+      overflow: hidden;
+      
+      img {
+        transform: translateX(100%);
+        transition: transform 1.5s 0.3s;
+      }
+      
+      &.on img {
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+.section3 {
+  .img {
+    &.img1 {
+      img {
+        transform: translateX(100%);
+        transition: transform 1.5s;
+      }
+      
+      &.on img {
+        transform: translateX(0);
+      }
+    }
+    
+    &.img2 {
+      img {
+        transform: translateX(-100%);
+        transition: transform 1.5s 0.5s;
+      }
+      
+      &.on img {
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+.section4 {
+  .img {
+    opacity: 0;
+    transition: all 1s;
+    
+    &.img1 {
+      transform: translateY(100px);
+      transition-delay: 0.4s;
+    }
+    
+    &.img2 {
+      transform: translateY(-100px);
+    }
+    
+    &.on {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+.section5 {
+  .img {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 1s;
+    
+    &.img2 {
+      transition-delay: 0.4s;
+    }
+    
+    &.on {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
 
 #fullpage{
  // padding-left: $sidebar-width;
 }
 section{
   margin-left: $sidebar-width;
-  width: calc(100% - $sidebar-width) !important;
+  width: calc(100% - $sidebar-width);
   height: 100vh;
   overflow: visible;
+  padding-top: 90px !important;
+  table-layout: auto !important;
 
+  &.footer{
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding-top: 0 !important;
+  }
   .fp-tableCell{
     position: relative; 
     width: 100%;
     max-width: 1920px; 
     margin: 0 auto; 
     overflow: visible;
+    width: calc(100% - $sidebar-width);
     min-width: 320px; // 최소 너비 보장;
   }
 
   // 모바일에서 사이드바가 없을 때 여백 제거
   @media screen and (max-width: 1080px) {
-    margin-left: 0;
+    margin:0 auto;
     width: 100%;
     height: auto; // 모바일에서 자동 높이
     min-height: 100vh; // 최소 높이는 유지
@@ -189,11 +362,11 @@ section{
       }
     }
   
-    li[data-menuanchor="section1"] .section-name{ background: url(../images/main/indicator_search.png) no-repeat top center/21px 19px; }
-    li[data-menuanchor="section2"] .section-name{ background: url(../images/main/indicator_domain.png) no-repeat top center/20px 20px; }
-    li[data-menuanchor="section3"] .section-name{ background: url(../images/main/indicator_news.png) no-repeat top center/21px 19px; } 
-    li[data-menuanchor="section4"] .section-name{ background: url(../images/main/indicator_certification.png) no-repeat top center/21px 24px; }
-    li[data-menuanchor="section5"] .section-name{ background: url(../images/main/indicator_promo.png) no-repeat top center/20px 23px; }
+    li[data-menuanchor="page1"] .section-name{ background: url(../images/main/indicator_search.png) no-repeat top center/21px 19px; }
+    li[data-menuanchor="page2"] .section-name{ background: url(../images/main/indicator_domain.png) no-repeat top center/20px 20px; }
+    li[data-menuanchor="page3"] .section-name{ background: url(../images/main/indicator_news.png) no-repeat top center/21px 19px; } 
+    li[data-menuanchor="page4"] .section-name{ background: url(../images/main/indicator_certification.png) no-repeat top center/21px 24px; }
+    li[data-menuanchor="page5"] .section-name{ background: url(../images/main/indicator_promo.png) no-repeat top center/20px 23px; }
   
     // 반응형 - 태블릿 (1080px 이하)
     @media screen and (max-width: 1080px) {
@@ -227,14 +400,13 @@ section{
     align-self: start;
     justify-content: center;
     position: relative;
-    width: 100%;
     min-height: 100vh;
     background:  url(../images/main/main_bg.png) no-repeat center center/cover;
     background-attachment: scroll, fixed;
     
-   .container{
-  width: calc(100% - $sidebar-width) !important;
-   }
+  .fp-tableCell{
+    width: calc(100% - 230px);
+  }  
 
     &::after{
       content: '';
@@ -441,8 +613,8 @@ section{
           b {
             text-align: center;
             color: #fff;
-            font-family: $ff-pretendard;
             font-weight:600;
+            word-break: keep-all;
           }
         }
       }
@@ -451,10 +623,11 @@ section{
     .main_banner_right {
       position: absolute;
       right: 0;
-      top:0;
-      width: 379px;
+      top:-90px;
+      width: 380px;
       max-width: 35vw; // 화면 크기에 따라 조정
       z-index: 2;
+
       .m_main_banner_right_btn{
         display: none;
       }
@@ -526,9 +699,7 @@ section{
           font-family: $ff-suit;
           
         }
-       
       }
-
       .video-container {
         width: 378px;
         height: 250px;
@@ -538,13 +709,44 @@ section{
       }
     }
 
-    @media screen and (max-width: 1450px){
-      .main_banner_left{
-        margin-right: 378px;
+    @media screen and (max-width: 1380px){
+      .main_banner{
+        .fp-tableCell{
+          margin-left: 100px;
+          width: calc(100% - 150px);
+        }
+      } 
+      .main_banner_right{
+        width: 320px;
+        .main_banner_right_con{
+          padding: 140px 20px 30px 35px;
+        }
       }
+      .main_banner_left{
+        max-width: 650px;
+          h3{
+            font-size: $fs-30;
+            b{
+              font-size: $fs-46;
+            }
+          }
+          .search {
+            form {
+              .search_input {
+                button{
+                  padding-left: 20px;
+                }
+                &:after{
+                  right: 175px;
+                }
+              }
+            }
+          }
+          >ul{ gap: 20px;}
+       }
     }
-    
-    // 반응형 스타일 - 태블릿 (1080px 이하)
+
+    // 반응형 스타일 - 태블릿 (900px 이하)
     @media screen and (max-width: 1080px) {
       min-height: 700px;
 
@@ -619,8 +821,8 @@ section{
       }
     }
 
-    // 반응형 스타일 - 모바일 (1080px 이하)
-    @media screen and (max-width: $tb1080) {
+    // 반응형 스타일 - 모바일 (900px 이하)
+    @media screen and (max-width: 900px) {
       background: url(../images/main/m_main_bg.png) no-repeat top center/cover;
       margin-top: 55px;
       height: auto; // 자동 높이로 변경
@@ -1009,9 +1211,7 @@ section{
   .domain { 
     position: relative;
     border-radius: 0 0 0 97px;
-    background: url(../images/main/domain_bg.png) no-repeat center center;
-    margin-bottom: 30px;
-    
+    background: #020203 url(../images/main/domain_bg.png) no-repeat center center;
 
 
     .container {
@@ -1037,65 +1237,91 @@ section{
       .slick-list {
         height: 100%;
         overflow: hidden;
+        padding: 81px 0 !important;
       }
       
       .slick-track {
         height: 100%;
-      }
-      
-      .nav-item {
-        padding: 20px 25px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        opacity: 0.5;
-        height: 80px;
         display: flex !important;
         flex-direction: column;
-        justify-content: center;
+      }
+      
+      // nav-item 스타일 우선순위 강화
+      .slick-slide.nav-item,
+      .nav-item.slick-slide {
+        padding: 40px 20px !important;
+        cursor: pointer;
+        transition: all 0.3s ease !important;
+        opacity: 0.5 !important;
+        height: 80px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        transform: scale(0.9) !important;
+        margin: 0 !important;
 
         // 가로 중앙 정렬
-        background: transparent;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-        border-right: 1px solid rgba(255, 255, 255, 0.16);
+        background: transparent !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
          
         h3 {
-          font-family: $ff-sbaggro;
-          font-weight: 300;
-          margin: 0;
-          color: rgba(255, 255, 255, 0.8);
-          font-size: $fs-16;
+          font-family: $ff-sbaggro !important;
+          font-weight: 300 !important;
+          margin: 0 !important;
+          color: rgba(255, 255, 255, 0.8) !important;
+          font-size: $fs-16 !important;
+          transition: all 0.3s ease !important;
         }
+        
         img {
-          display: none;
+          display: none !important;
+          transition: all 0.3s ease !important;
         }
 
-        // slick-center (활성화된 아이템)
-        &.slick-center {
-          width: 320px;
-          height: 162px;
-          opacity: 1;
-          border-radius: 15px;
-          position: relative;
-          z-index: 10;
-          background: $color1 url(../images/main/domain_arrow.png) no-repeat right bottom;
-          justify-content: space-between;
-
+                  // slick-center (활성화된 아이템)
+          &.slick-current.slick-center {
+            padding: 20px 100px !important;
+            width: 320px !important;
+            height: 162px !important;
+            opacity: 1 !important;
+            border-radius: 15px !important;
+            position: relative !important;
+            z-index: 10 !important;
+            background: $color1 url(../images/main/domain_arrow.png) no-repeat right bottom !important;
+            justify-content: space-between !important;
+            transform: scale(1) !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
 
           h3 {
-            display: block;
-            font-size: $fs-19;
-            font-weight: 400;
+            display: block !important;
+            font-size: $fs-19 !important;
+            font-weight: 400 !important;
+            color: #fff !important;
           }
+          
           img {
-            display: block;
-            width: auto;              // 원래 너비 유지
-            height: auto;             // 원래 높이 유지
-            max-width: 60px;          // 최대 너비 제한
-            max-height: 60px;         // 최대 높이 제한
-            object-fit: contain;      // 비율 유지하며 크기 맞춤
+            display: block !important;
+            width: auto !important;
+            height: auto !important;
+            max-width: 60px !important;
+            max-height: 60px !important;
+            object-fit: contain !important;
           }
         }
 
+        // 중앙 아이템 위아래의 아이템들 스타일 조정
+        &.slick-active {
+          opacity: 0.7 !important;
+          transform: scale(0.95) !important;
+          
+          &:not(.slick-center) {
+            h3 {
+              font-size: $fs-16 !important;
+            }
+          }
+        }
       }
       
       // slick dots 숨기기
@@ -1424,9 +1650,6 @@ section{
     position: relative;
     z-index: 1;
     overflow: hidden;
-    padding-top: 30px;
-     margin-bottom: 50px;
-    // scroll-margin-top: 70px;
 
     &::after {
       content: '';
@@ -1442,19 +1665,6 @@ section{
       animation: slideInFromLeft 0.6s ease-out 0.2s forwards;
       opacity: 0;
     }
-
-    // 모바일에서 AOS 효과 비활성화
-    @media screen and (max-width: 720px) {
-      .news_tab,
-      .news_bottom {
-        &[data-aos] {
-          transform: none !important;
-          opacity: 1 !important;
-          transition: none !important;
-        }
-      }
-    }
-    
 
     h2{
       text-align: center;
@@ -1478,27 +1688,25 @@ section{
         display: flex;
         gap: 78px;
       }
-
+      @media screen and (max-width: 1590px) {
+       padding-left: 50px;
+       width: calc(100% - 260px);
+      }
       // 반응형 처리
-      @media screen and (max-width: 1200px) {
-        padding: 60px 50px 60px 150px;
-        
-        .container {
-          gap: 50px;
+      @media screen and (max-width: 1280px) {
+        .container { gap: 50px;
+          .news_tab_content{
+            .tab_panel{
+              .news_slider{
+                grid-template-columns: repeat(2, 1fr);
+              }
+            }
+          }
         }
       }
 
-      @media screen and (max-width: 1080px) {
-        height: auto;
-        min-height: 480px;
-        padding: 50px 40px 50px 120px;
-        
-        .container {
-          gap: 40px;
-        }
-      }
 
-      @media screen and (max-width: 960px) {
+      @media screen and (max-width: 900px) {
         padding: 40px 30px;
         
         .container {
@@ -1773,66 +1981,86 @@ section{
       z-index: 1;
       width: min(calc(100% - 493px), 100%);
       min-width: 400px; // 최소 너비 보장
-      justify-content: flex-end;
+      justify-content: flex-start;
       display: flex;
       align-items: flex-end;
       margin-left: auto;
       background: #0d1d5b url(../images/main/news_bg.png) no-repeat right center / cover;
 
       .container{
-        display: flex;
-        justify-content:flex-start;
-        align-items: center;
-        gap: 39px;
-        width: 100%;
-      }
-      a {
-        width: 270px;
-        height: 92.6px;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        padding: 20px 30px;
-        background: rgba(46, 60, 113, 0.7);
-        color: #fff;
-        border-radius: 30px 10px 30px 10px;
-        font-family: $ff-sbaggro;
-        font-size: $fs-18;
-        box-shadow: 0.3px 17px 21px 0 rgba(0, 0, 0, 0.14);
-        transition: all 0.3s ease;
-        &::after{
-          content: '';
-          display: block;
-          width: 30px;
-          height: 30px;
-          background: url(../images/main/news_link.png) no-repeat center / 30px;
-        }
+          display: flex;
+          justify-content:flex-start;
+          align-items: center;
+          width: 100%;
+          gap: 40px;
+          max-width: 850px;
+          margin: unset;
 
-        &:hover {
-          transform: translateY(-2px);
-        }
-
-        span {
-          padding-left: 50px;
-          height: 100%;
+        a {
+          width: 100%;
+          max-width: 270px;
+          height: 92.6px;
           display: flex;
           align-items: center;
-        }
+          padding: 20px 30px;
+          background: rgba(46, 60, 113, 0.7);
+          color: #fff;
+          word-break: keep-all;
+          border-radius: 30px 10px 30px 10px;
+          font-family: $ff-sbaggro;
+          font-size: $fs-18;
+          justify-content: space-between;
+          box-shadow: 0.3px 17px 21px 0 rgba(0, 0, 0, 0.14);
+          transition: all 0.3s ease;
+            &::after{
+              content: '';
+              display: block;
+              width: 30px;
+              height: 30px;
+              background: url(../images/main/news_link.png) no-repeat center / 30px;
+            }
 
-        &:nth-child(1) span { 
-          background: url(../images/main/news_icon_01.png) no-repeat center left / 39px 35px; 
-        }
-        &:nth-child(2) span { 
-          background: url(../images/main/news_icon_02.png) no-repeat center left / 40px 38px; 
-        }
-        &:nth-child(3) span { 
-          background: url(../images/main/news_icon_03.png) no-repeat center left / 37px 33px; 
+            &:hover {
+              transform: translateY(-2px);
+            }
+
+            span {
+              padding-left: 50px;
+              height: 100%;
+              display: flex;
+              align-items: center;
+            }
+
+            &:nth-child(1) span { 
+              background: url(../images/main/news_icon_01.png) no-repeat center left / 39px 35px; 
+            }
+            &:nth-child(2) span { 
+              background: url(../images/main/news_icon_02.png) no-repeat center left / 40px 38px; 
+            }
+            &:nth-child(3) span { 
+              background: url(../images/main/news_icon_03.png) no-repeat center left / 37px 33px; 
+            }
+          }
         }
       }
-    }
+    @media screen and (max-width: 1470px){
+      .news_bottom {
+        width: 1200px;
+        padding-left: 50px;
+        .container{
+          gap: 20px;
+        
+          a{
+            padding: 10px 20px;
+          }
+        }
+      }
+    
 
-    // 반응형 - 태블릿 (1080px 이하)
-    @media screen and (max-width: 1080px) {
+    
+    }
+    // 반응형 - (900px 이하)
+    @media screen and (max-width: 900px) {
       margin-top: 0px;
       padding-top: 140px;
 
@@ -1847,8 +2075,7 @@ section{
       .news_tab {
         width: 100%;
         height: auto;
-
-   border-radius: 0 130px 0 0;
+        border-radius: 0 130px 0 0;
         padding: 0;
         padding-top: 10px;
         flex-direction: column;
@@ -1881,7 +2108,6 @@ section{
                 height: 30px;
                 font-size: $fs-15;
                
-                
                 &::after {
                   display: none;
                 }
@@ -1901,9 +2127,7 @@ section{
               }
 
               &:hover {
-                
                 color: #183365;
-             
               }
             }
 
@@ -2172,8 +2396,6 @@ section{
 
   /* 인증 섹션 */
   .certification {
-    padding-top: 30px;
-  //  margin-bottom: 30px;
     padding-bottom: 60px;
     position: relative;
     overflow: hidden; // 흐르는 텍스트가 영역을 벗어나지 않도록
@@ -2237,7 +2459,6 @@ section{
         box-sizing: border-box;
       
         >div{
-
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -2503,7 +2724,7 @@ section{
     }
 
     // 반응형 - 태블릿 (1080px 이하)
-    @media screen and (max-width: 1080px) {
+    @media screen and (max-width: 900px) {
       margin-top: 80px;
       
       &:before {

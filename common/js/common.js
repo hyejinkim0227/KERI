@@ -1,6 +1,29 @@
 // 공통 함수들은 common-shared.js에서 로드됨
 var headH; // 헤더 높이 저장하는 전역변수  
 var page = 0;
+var scrolledProtectionTimer; // scrolled 클래스 보호 타이머
+
+// scrolled 클래스 보호 함수
+function protectScrolledClass() {
+  var shouldHaveScrolled = $(window).scrollTop() > 150 || 
+                          $('.header #gnb > ul > li.active').length > 0 ||
+                          $('.header').hasClass('active');
+  
+  if (shouldHaveScrolled && !$('.header').hasClass('scrolled')) {
+    $('.header').addClass('scrolled');
+  }
+}
+
+// scrolled 클래스 보호 시작
+function startScrolledProtection() {
+  clearInterval(scrolledProtectionTimer);
+  scrolledProtectionTimer = setInterval(protectScrolledClass, 50);
+}
+
+// scrolled 클래스 보호 중지
+function stopScrolledProtection() {
+  clearInterval(scrolledProtectionTimer);
+}
 
 function resizeContentHeight() {
   var conH = $('#contents').outerHeight();
@@ -100,35 +123,77 @@ function snsPositon() {
 function resizeHeadHeight(target) {
   //pc화면에서 gnb모션
   if (pcChk(1080)) {
+    // dep2_wrap이 열릴 때 현재 scrolled 상태 확인
+    var wasScrolled = $('.header').hasClass('scrolled');
+    // 스크롤 위치도 확인하여 더 정확한 판단
+    var shouldKeepScrolled = wasScrolled || $(window).scrollTop() > 150;
+    
     var dep2H = $(target).next('.dep2_wrap').outerHeight();
     $('.header')
       .stop()
       .animate({ height: headH + dep2H + 'px' }, 200, function () {
-
+        // dep2_wrap이 열린 후 scrolled 클래스 복원
+        if (shouldKeepScrolled) {
+          $('.header').addClass('scrolled');
+        }
       });
     $('.header').addClass('active');
+    
+    // dep2_wrap이 열리는 즉시 scrolled 클래스 유지 (강제 적용)
+    if (shouldKeepScrolled) {
+      setTimeout(function() {
+        $('.header').addClass('scrolled');
+      }, 10);
+    }
+    
     $(target).closest('li').addClass('active').closest('li').siblings('li').removeClass('active');
+    
+    // 다시 한번 확실하게 적용
+    if (shouldKeepScrolled) {
+      setTimeout(function() {
+        $('.header').addClass('scrolled');
+      }, 50);
+    }
   }
 }
 
 function gnbReset() {
   //gnb 초기화
   if (pcChk(1080)) {
+    // dep1>li에 active가 있는지 확인 (제거하기 전에)
+    var hasActiveGnbItem = $('.header #gnb > ul > li.active').length > 0;
+    // 현재 scrolled 상태도 확인
+    var wasScrolled = $('.header').hasClass('scrolled');
+    // 스크롤 위치도 확인하여 더 정확한 판단
+    var shouldKeepScrolled = hasActiveGnbItem || wasScrolled || $(window).scrollTop() > 150;
+    
     $('.header')
       .stop()
       .animate({ height: headH + 'px' }, 200, function () {
-        // dep2_wrap이 닫힌 후 현재 섹션이 첫 번째가 아니라면 scrolled 클래스 복원
-        if ($('#fullpage').length > 0) {
-          var $activeSection = $('.fp-section.active, .section.active');
-          if ($activeSection.length > 0) {
-            var currentSection = $activeSection.index() + 1;
-            if (currentSection > 1) {
-              $('.header').addClass('scrolled');
+        // scrolled 클래스 유지 조건 확인
+        if (shouldKeepScrolled) {
+          $('.header').addClass('scrolled');
+        } else {
+          // dep2_wrap이 닫힌 후 현재 섹션이 첫 번째가 아니라면 scrolled 클래스 복원
+          if ($('#fullpage').length > 0) {
+            var $activeSection = $('.fp-section.active, .section.active');
+            if ($activeSection.length > 0) {
+              var currentSection = $activeSection.index() + 1;
+              if (currentSection > 1) {
+                $('.header').addClass('scrolled');
+              }
             }
           }
         }
       });
     $('.header').removeClass('active');
+    
+    // 애니메이션 후에도 다시 한번 확실하게 적용
+    if (shouldKeepScrolled) {
+      setTimeout(function() {
+        $('.header').addClass('scrolled');
+      }, 250);
+    }
   }
   // GNB 메뉴 모든 active 상태 제거
   $('.header #gnb > ul > li').removeClass('active');
@@ -193,7 +258,7 @@ function resetSearch() {
 
 function openPopup() {
   saveFocus(); //이벤트 발생한 요소 기억
-  $('.modal_wrap').fadeIn().find('.modal_pop').attr('tabindex', '0').focus().find('.pop_bg').attr('tabindex', 0);;
+  $('.modal_wrap').css('display', 'flex').hide().fadeIn().find('.modal_pop').attr('tabindex', '0').focus().find('.pop_bg').attr('tabindex', 0);;
 }
 
 function closePopup() {
@@ -204,7 +269,7 @@ function closePopup() {
 function openPopup2(arg) { //복수 팝업
   saveFocus(); //이벤트 발생한 요소 기억
   $('.modal_wrap .modal_pop').hide();
-  $('.modal_wrap').fadeIn().find('.modal_pop[data-pop="' + arg + '"]').show().attr('tabindex', '0').focus().find('.pop_bg').attr('tabindex', 0);
+  $('.modal_wrap').css('display', 'flex').hide().fadeIn().find('.modal_pop[data-pop="' + arg + '"]').show().attr('tabindex', '0').focus().find('.pop_bg').attr('tabindex', 0);
 }
 
 /**
@@ -292,52 +357,53 @@ function stopIframe(target) {
  * 첫 번째 섹션을 제외하고 스크롤했을 때 header에 scrolled 클래스를 추가/제거합니다.
  */
 function initHeaderScroll() {
-  // PC 환경(1080px 초과)에서만 실행
-  if (!pcChk(1080)) {
+  // 기존 스크롤 이벤트 제거
+  $(window).off('scroll.headerScroll');
+  
+  // fullpage.js 환경인지 확인
+  var isFullpageEnv = $('#fullpage').length > 0 && $(window).width() > 720;
+  
+  if (isFullpageEnv) {
+    // fullpage.js 환경에서는 afterLoad 콜백에서 처리됨
     return;
   }
   
-  // 첫 번째 섹션의 높이를 계산
-  var firstSectionHeight = 0;
-  
-  // #intro 섹션이 있으면 그것을 첫 번째 섹션으로 사용
-  if ($('#intro').length) {
-    firstSectionHeight = $('#intro').outerHeight();
-  } 
-  // #intro가 없으면 .main 내의 첫 번째 섹션 또는 첫 번째 main 요소 사용
-  else if ($('.main').length) {
-    var firstSection = $('.main').first();
-    firstSectionHeight = firstSection.outerHeight();
-  }
-  // 그것도 없으면 기본값으로 윈도우 높이 사용
-  else {
-    firstSectionHeight = $(window).height();
-  }
+  // 일반 스크롤 환경에서의 처리
+  // 스크롤 기준값을 더 작게 설정하여 빠른 반응 구현
+  var scrollThreshold = 150; // 150px 스크롤 시 바로 적용
   
   // 스크롤 이벤트 핸들러
   $(window).on('scroll.headerScroll', function() {
-    // PC 환경에서만 실행
-    if (!pcChk(1080)) {
-      $('.header').removeClass('scrolled');
-      return;
-    }
-    
     var scrollTop = $(window).scrollTop();
     var $header = $('.header');
     
-    // 첫 번째 섹션 높이를 넘어서면 scrolled 클래스 추가
-    if (scrollTop > firstSectionHeight) {
+    // dep2_wrap이 열려있거나 header가 active 상태일 때는 scrolled 상태 확인 후 유지
+    var isMenuOpen = $('.header').hasClass('active') || $('.header #gnb > ul > li.active').length > 0;
+    
+    // 스크롤 임계값을 넘어서면 scrolled 클래스 추가
+    if (scrollTop > scrollThreshold) {
       $header.addClass('scrolled');
     } else {
-      $header.removeClass('scrolled');
+      // 메뉴가 열려있지 않을 때만 scrolled 클래스 제거
+      if (!isMenuOpen) {
+        $header.removeClass('scrolled');
+      }
     }
   });
+  
+  // 초기 실행
+  $(window).trigger('scroll.headerScroll');
 }
 
 $(function () {
   // GNB(Global Navigation Bar) 초기화: 페이지 로드 시 모든 메뉴를 닫힌 상태로 설정
   $('.header #gnb > ul > li').removeClass('active');
   $('.header').removeClass('active');
+  
+  // 초기 scrolled 상태 설정
+  if ($(window).scrollTop() > 150) {
+    $('.header').addClass('scrolled');
+  }
 
   lnbInit(); // LNB 초기화 함수 호출
 
@@ -402,10 +468,14 @@ $(function () {
     // 마우스 진입 시 헤더 높이 조절 및 검색창 비활성화
     mouseenter: function () {
       $('.util > .search_box').removeClass('active');
+      // scrolled 클래스 보호 시작
+      startScrolledProtection();
       resizeHeadHeight(this);
     },
     // 포커스 진입 시 헤더 높이 조절
     focusin: function () {
+      // scrolled 클래스 보호 시작
+      startScrolledProtection();
       resizeHeadHeight(this);
     },
   });
@@ -422,6 +492,13 @@ $(function () {
         $('.header #gnb > ul > li').removeClass('active');
         gnbReset(); // 헤더 높이 초기화
       }
+      
+      // 잠시 후 보호 중지 (애니메이션 완료 후)
+      setTimeout(function() {
+        if (!$('.header').hasClass('active') && $('.header #gnb > ul > li.active').length === 0) {
+          stopScrolledProtection();
+        }
+      }, 500);
     },
   });
 
@@ -841,6 +918,34 @@ $(function () {
     $('.btn_quick .pop').css('visibility', 'hidden');
   });
 
+  // 뉴스 탭 메뉴 기능
+  console.log('뉴스 탭 메뉴 이벤트 바인딩 시작');
+  
+  $('.news_tab_menu li').on('click', function(){
+    console.log('뉴스 탭 li 클릭됨', $(this));
+    // 만약 `li` 내에 `a` 태그가 있다면 (링크 기능이 있다면) 함수 실행을 중단합니다.
+    if( $(this).find('a').length ) {
+      console.log('a 태그가 있어서 리턴');
+      return;
+    }
+    var idx = $(this).index(); // 클릭된 탭의 인덱스 가져오기
+    console.log('탭 인덱스:', idx);
+    $(this).addClass('active').siblings().removeClass('active'); // 클릭된 탭 활성화, 형제 탭 비활성화
+    $('.news_tab_content .tab_panel').eq(idx).addClass('active').siblings().removeClass('active'); // 해당 콘텐츠 활성화
+    initNewsSlider(); // 뉴스 슬라이더 초기화 함수 호출
+  });
+  
+  // 뉴스 탭 메뉴 버튼 직접 클릭 이벤트
+  $('.news_tab_menu li button').on('click', function(){
+    console.log('뉴스 탭 button 클릭됨', $(this));
+    var $li = $(this).closest('li');
+    var idx = $li.index(); // 클릭된 탭의 인덱스 가져오기
+    console.log('버튼 탭 인덱스:', idx);
+    $li.addClass('active').siblings().removeClass('active'); // 클릭된 탭 활성화, 형제 탭 비활성화
+    $('.news_tab_content .tab_panel').eq(idx).addClass('active').siblings().removeClass('active'); // 해당 콘텐츠 활성화
+    initNewsSlider(); // 뉴스 슬라이더 초기화 함수 호출
+  });
+
   //모바일의 경우 테이블 스타일 변환
   if (!pcChk(720)) {
     tableChange();
@@ -1015,7 +1120,46 @@ function initDomainSlider() {
       centerPadding: '0px',
       focusOnSelect: true,
       infinite: true,
-      arrows: false
+      arrows: false,
+      initialSlide: 4,
+      speed: 500,
+      cssEase: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      waitForAnimate: false, // 애니메이션 대기 비활성화
+      useTransform: true, // CSS transform 사용
+      adaptiveHeight: true, // 높이 자동 조정
+      responsive: [
+        {
+          breakpoint: 1080,
+          settings: {
+            vertical: false,
+            verticalSwiping: false,
+            slidesToShow: 1,
+            centerMode: true,
+            centerPadding: '20px'
+          }
+        }
+      ]
+    });
+    
+    // 슬라이더 초기화 후 강제로 새로고침
+    setTimeout(function() {
+      $('.domain-nav.slider-nav').slick('refresh');
+      $('.domain-content.slider-for').slick('refresh');
+    }, 100);
+    
+    // 콘텐츠 슬라이더 설정도 무한 롤링되도록 수정
+    $('.domain-content.slider-for').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false,
+      fade: true,
+      infinite: true, // 무한 롤링 활성화
+      asNavFor: '.domain-nav.slider-nav',
+      autoplay: true,
+      autoplaySpeed: 4000,
+      pauseOnHover: true,
+      speed: 500, // 전환 속도 설정
+      cssEase: 'cubic-bezier(0.4, 0, 0.2, 1)' // 부드러운 전환 효과
     });
     
     // PC 슬라이더 이벤트 처리
@@ -1083,10 +1227,15 @@ $(document).ready(function() {
   const $indicator = $('#indicator');
   const $contents = $('#contents');
   const $sections = $('[data-mainnavi]');
-  const $footer = $('#footer'); // ID 선택자로 수정
+  const $footer = $('[data-mainnavi="footer"]'); // footer 섹션 선택
   
-      // 스크롤 이벤트 핸들러
+      // 스크롤 이벤트 핸들러 (fullpage.js가 비활성화된 환경에서만 동작)
     $(window).on('scroll', function() {
+      // fullpage.js가 활성화된 환경(PC)에서는 실행하지 않음
+      if ($(window).width() > 720) {
+        return;
+      }
+      
       // 요소 존재 체크
       if ($contents.length === 0 || $footer.length === 0) {
         return;
@@ -1122,49 +1271,68 @@ $(document).ready(function() {
         }
       });
       
-      // news 섹션 활성화 시 marginTop 추가/제거 (1080px 이하에서만)
-      if ($(window).width() <= 1080) {
-        const $newsSection = $('[data-mainnavi="news"]');
+    //   // news 섹션 활성화 시 marginTop 추가/제거 (1080px 이하에서만)
+    //   if ($(window).width() <= 1080) {
+    //     const $newsSection = $('[data-mainnavi="news"]');
         
-        if (currentActiveSection === 'news') {
-          // news 섹션이 활성화되면 marginTop 추가
-          if (!$newsSection.hasClass('news-margin-active')) {
-            $newsSection.addClass('news-margin-active').css('padding-top', '100px');
-          }
-        } else {
-          // 다른 섹션이 활성화되면 marginTop 제거
-          if ($newsSection.hasClass('news-margin-active')) {
-            $newsSection.removeClass('news-margin-active').css('margin-top', '');
-          }
-        }
-      } else {
-        // 1080px 초과일 때는 항상 marginTop 제거
-        const $newsSection = $('[data-mainnavi="news"]');
-        if ($newsSection.hasClass('news-margin-active')) {
-          $newsSection.removeClass('news-margin-active').css('margin-top', '');
-        }
-      }
-    } else {
-      $indicator.css('opacity', '0');
+    //     if (currentActiveSection === 'news') {
+    //       // news 섹션이 활성화되면 marginTop 추가
+    //       if (!$newsSection.hasClass('news-margin-active')) {
+    //         $newsSection.addClass('news-margin-active').css('padding-top', '100px');
+    //       }
+    //     } else {
+    //       // 다른 섹션이 활성화되면 marginTop 제거
+    //       if ($newsSection.hasClass('news-margin-active')) {
+    //         $newsSection.removeClass('news-margin-active').css('margin-top', '');
+    //       }
+    //     }
+    //   } else {
+    //     // 1080px 초과일 때는 항상 marginTop 제거
+    //     const $newsSection = $('[data-mainnavi="news"]');
+    //     if ($newsSection.hasClass('news-margin-active')) {
+    //       $newsSection.removeClass('news-margin-active').css('margin-top', '');
+    //     }
+    //   }
+    // } else {
+    //   $indicator.css('opacity', '0');
     }
   });
   
   // indicator 클릭 이벤트
   $indicator.find('li').on('click', function() {
     const navType = $(this).data('mainnavi');
-    const $targetSection = $(`[data-mainnavi="${navType}"]`).first();
     
-    if ($targetSection.length) {
-      let clickOffset = 110;
+    // fullpage.js가 활성화된 환경(PC)에서는 fullpage.js의 moveTo 사용
+    if ($(window).width() > 720 && typeof $.fn.fullpage !== 'undefined') {
+      const sectionIndex = {
+        'search': 1,
+        'domain': 2,
+        'news': 3,
+        'certification': 4,
+        'promo': 5,
+        'footer': 6
+      };
       
-      // news 섹션의 경우 1080px 이하에서 h2 타이틀이 보이도록 조정
-      if (navType === 'news' && $(window).width() <= 1080) {
-        clickOffset = 40;
+      const targetIndex = sectionIndex[navType];
+      if (targetIndex) {
+        $.fn.fullpage.moveTo(targetIndex);
       }
+    } else {
+      // 모바일 환경에서는 기존 스크롤 애니메이션 사용
+      const $targetSection = $(`[data-mainnavi="${navType}"]`).first();
       
-      $('html, body').animate({
-        scrollTop: $targetSection.offset().top - clickOffset
-      }, 500);
+      if ($targetSection.length) {
+        let clickOffset = 110;
+        
+        // news 섹션의 경우 1080px 이하에서 h2 타이틀이 보이도록 조정
+        if (navType === 'news' && $(window).width() <= 1080) {
+          clickOffset = 40;
+        }
+        
+        $('html, body').animate({
+          scrollTop: $targetSection.offset().top - clickOffset
+        }, 500);
+      }
     }
   });
   
@@ -1189,10 +1357,22 @@ $(document).ready(function() {
 $(document).ready(function() {
   const $topBtn = $('#topBtn');
   
-  // 스크롤 이벤트 - top 버튼 show/hide (모바일 환경에서만 동작)
+  // 스크롤 이벤트 - top 버튼 show/hide
   $(window).on('scroll', function() {
-    // fullpage.js가 비활성화된 환경(주로 모바일)에서만 동작
-    if ($(window).width() <= 720) {
+    // PC 환경에서는 fullpage.js 섹션 기반으로 체크
+    if ($(window).width() > 720 && $('#fullpage').length > 0) {
+      // fullpage.js 환경에서는 첫 번째 섹션이 아닐 때 TOP 버튼 표시
+      var $activeSection = $('.fp-section.active, .section.active');
+      if ($activeSection.length > 0) {
+        var currentSection = $activeSection.index() + 1;
+        if (currentSection > 1) {
+          $topBtn.addClass('show');
+        } else {
+          $topBtn.removeClass('show');
+        }
+      }
+    } else {
+      // 모바일 환경이나 일반 스크롤 환경에서는 스크롤 위치 기반
       if ($(window).scrollTop() > 300) {
         $topBtn.addClass('show');
       } else {
@@ -1200,6 +1380,8 @@ $(document).ready(function() {
       }
     }
   });
+  
+
   
   // top 버튼 클릭 이벤트 - 페이지 상단으로 부드럽게 이동
   $topBtn.on('click', function() {
@@ -1532,16 +1714,12 @@ $('.tab_box > li > button').on('click', function () {
   $(this).attr('title', '탭 선택됨').closest('li').siblings().find('button').attr('title', '탭');
 });
 
-// 뉴스 탭 메뉴(`.news_tab_menu li`) 클릭 이벤트
-$('.news_tab_menu li').on('click', function(){
-  // 만약 `li` 내에 `a` 태그가 있다면 (링크 기능이 있다면) 함수 실행을 중단합니다.
-  if( $(this).find('a').length ) return;
-  var idx = $(this).index(); // 클릭된 탭의 인덱스 가져오기
-  $(this).addClass('active').siblings().removeClass('active'); // 클릭된 탭 활성화, 형제 탭 비활성화
-  $('.news_tab_content .tab_panel').eq(idx).addClass('active').siblings().removeClass('active'); // 해당 콘텐츠 활성화
-  initNewsSlider(); // 뉴스 슬라이더 초기화 함수 호출
-});
 
+
+/**
+ * 뉴스 슬라이더를 초기화하고 반응형에 따라 아이템 수를 조절합니다.
+ * slick 슬라이더 대신 간단한 페이징 방식을 사용합니다.
+ */
 /**
  * 뉴스 슬라이더를 초기화하고 반응형에 따라 아이템 수를 조절합니다.
  * slick 슬라이더 대신 간단한 페이징 방식을 사용합니다.
@@ -1549,78 +1727,87 @@ $('.news_tab_menu li').on('click', function(){
 function initNewsSlider() {
   // 활성화된 탭 패널 내의 뉴스 슬라이더에 대해 반복합니다.
   $('.tab_panel.active .news_slider').each(function() {
-    var $slider = $(this);
-    var $items = $slider.find('li'); // 슬라이드 아이템들
-    var numItems = $items.length; // 총 아이템 개수
-    
-    // 반응형에 따른 itemsPerPage (한 페이지에 보여줄 아이템 수) 설정
+    var $slider   = $(this);
+    var $items    = $slider.find('li');       // 슬라이드 아이템들
+    var numItems  = $items.length;            // 총 아이템 개수
+    var $controls = $('.news_controls');      // 슬라이더 컨트롤 요소
+
+    // 반응형에 따른 itemsPerPage 설정
     var itemsPerPage;
-    if (window.innerWidth <= 1080) {
-      itemsPerPage = 3;
-    } else {
+    if (window.innerWidth >= 1281) {
+      // 1920px~1281px: 3개씩 2줄 = 6개
       itemsPerPage = 6;
+    } else if (window.innerWidth >= 901) {
+      // 1280px~900px: 2개씩 2줄 = 4개
+      itemsPerPage = 4;
+    } else {
+      // 900px~320px: 1줄에 3개 = 3개
+      itemsPerPage = 3;
     }
-    
-    var $controls = $('.news_controls'); // 슬라이더 컨트롤 요소
-    
-    // 기존 slick 슬라이더가 초기화되어 있다면 해제합니다.
+
+    // 기존 slick 슬라이더 해제 (만약 초기화되어 있다면)
     if ($slider.hasClass('slick-initialized')) {
       $slider.slick('unslick');
     }
-    
-    // 컨트롤 버튼(이전/다음)은 항상 보이도록 설정합니다.
-    $controls.find('.news_prev, .news_next').show();
-    
-    // 총 아이템 개수가 itemsPerPage 이하면 슬라이더를 비활성화하고 버튼만 비활성화합니다.
+
+    // 컨트롤 버튼 항상 보이기
+    $controls.find('.news_prev, .news_next').removeClass('disabled').show();
+
+    // 아이템 수가 페이지당 수 이하이면 슬라이더 비활성화
     if (numItems <= itemsPerPage) {
       $controls.find('.news_prev, .news_next').addClass('disabled');
       $slider.removeClass('news-slider-active');
       return;
     }
-    
-    // 총 아이템 개수가 itemsPerPage 초과이면 슬라이더를 활성화합니다.
+
+    // 페이징 슬라이더 활성화
     $slider.addClass('news-slider-active');
-    
-    // 간단한 페이징 방식 구현을 위한 변수
-    var currentPage = 0; // 현재 페이지
-    var totalPages = Math.ceil(numItems / itemsPerPage); // 전체 페이지 수 계산
-    
-    /**
-     * 지정된 페이지의 아이템들을 보여주고 버튼 상태를 업데이트합니다.
-     * @param {number} pageIndex - 보여줄 페이지의 인덱스 (0부터 시작).
-     */
+    var currentPage = 0;                      
+    var totalPages  = Math.ceil(numItems / itemsPerPage);
+
+    // 특정 페이지를 보여주고 버튼 상태 업데이트
     function showPage(pageIndex) {
-      $items.hide(); // 모든 아이템 숨기기
-      var start = pageIndex * itemsPerPage; // 현재 페이지의 시작 인덱스
-      var end = start + itemsPerPage; // 현재 페이지의 끝 인덱스
-      $items.slice(start, end).show(); // 해당 범위의 아이템만 보여주기
-      
-      // 이전/다음 버튼의 활성화/비활성화 상태 업데이트
-      $('.news_controls .news_prev').toggleClass('disabled', pageIndex === 0); // 첫 페이지면 이전 버튼 비활성화
-      $('.news_controls .news_next').toggleClass('disabled', pageIndex >= totalPages - 1); // 마지막 페이지면 다음 버튼 비활성화
+      $items.hide();
+      var start = pageIndex * itemsPerPage;
+      var end   = start + itemsPerPage;
+      $items.slice(start, end).show();
+
+      $controls
+        .find('.news_prev').toggleClass('disabled', pageIndex === 0);
+      $controls
+        .find('.news_next').toggleClass('disabled', pageIndex >= totalPages - 1);
     }
-    
-    // 초기 페이지 표시
+
+    // 초기 표시
     showPage(0);
-    
-    // 이전/다음 버튼 이벤트 (기존 이벤트 제거 후 새로 바인딩하여 중복 방지)
-    $('.news_controls .news_prev').off('click.newsSlider').on('click.newsSlider', function(e) {
-      e.preventDefault(); // 기본 이벤트 동작 방지
-      if (currentPage > 0) {
-        currentPage--;
-        showPage(currentPage);
-      }
-    });
-    
-    $('.news_controls .news_next').off('click.newsSlider').on('click.newsSlider', function(e) {
-      e.preventDefault(); // 기본 이벤트 동작 방지
-      if (currentPage < totalPages - 1) {
-        currentPage++;
-        showPage(currentPage);
-      }
-    });
+
+    // 이전/다음 클릭 핸들러
+    $controls.find('.news_prev')
+      .off('click.newsSlider')
+      .on('click.newsSlider', function(e) {
+        e.preventDefault();
+        if (currentPage > 0) {
+          currentPage--;
+          showPage(currentPage);
+        }
+      });
+
+    $controls.find('.news_next')
+      .off('click.newsSlider')
+      .on('click.newsSlider', function(e) {
+        e.preventDefault();
+        if (currentPage < totalPages - 1) {
+          currentPage++;
+          showPage(currentPage);
+        }
+      });
   });
 }
+
+// 윈도우 리사이즈와 문서 로드 시 재초기화
+$(window).on('resize', initNewsSlider);
+$(document).ready(initNewsSlider);
+
 
 // 모바일에서 테이블 스타일 변환 함수
 function tableChange() {
@@ -1648,77 +1835,87 @@ function onYouTubeIframeAPIReady() {
 // YouTube API가 함수를 찾을 수 있도록 전역으로 노출
 window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
-/**
- * fullpage.js 초기화 및 설정
- */
 function initFullpage() {
   if ($('#fullpage').length) {
     $('#fullpage').fullpage({
       responsiveWidth: 721,
-      anchors: ["section1", "section2", "section3", "section4", "section5", "footer"],
+      anchors: ["page1", "page2", "page3", "page4", "page5", "page6"],
       menu: '#indicator',
-
+      startingSlide: 0,
       afterLoad: function(anchorLink, index){
         animation_move(index);
-
-        // 현재 섹션의 AOS 요소 수동 트리거
-        const $section = $('#fullpage .section').eq(index - 1);
-        $section.find('[data-aos]').addClass('aos-animate');
-        AOS.refresh();
-
-        // section4(certification 섹션)에서 기술지원 슬라이더 초기화
-        if (index === 4 && typeof initSupportSlider === 'function') {
-          setTimeout(function() {
-            initSupportSlider();
-          }, 300);
-        }
-
-        // section5(promo 섹션)에서 연구인터뷰 슬라이더 초기화
-        if (index === 5 && typeof initInterviewSlider === 'function') {
-          setTimeout(function() {
-            initInterviewSlider();
-          }, 300);
-        }
-
-        // section6(footer 섹션) 처리
-        if (index === 6) {
-          $('.header').addClass('scrolled');
-          $('#indicator').css('opacity', '0'); // 푸터에서는 indicator 숨김
-        }
-
-        // TOP 버튼 표시/숨김 제어 (afterLoad에서도 처리)
-        if(index > 1) {
-          $('#topBtn').addClass('show');
+        
+        // 헤더 scrolled 클래스 관리 (fullpage.js 환경)
+        var $header = $('.header');
+        var isMenuOpen = $header.hasClass('active') || $('.header #gnb > ul > li.active').length > 0;
+        
+        if (index === 1) {
+          // 첫 번째 섹션일 때: 메뉴가 열려있지 않으면 scrolled 클래스 제거
+          if (!isMenuOpen) {
+            $header.removeClass('scrolled');
+          }
         } else {
-          $('#topBtn').removeClass('show');
+          // 첫 번째 섹션이 아닐 때: scrolled 클래스 추가
+          $header.addClass('scrolled');
+        }
+        
+        // TOP 버튼 상태 관리 (fullpage.js 환경)
+        var $topBtn = $('#topBtn');
+        if (index === 1) {
+          // 첫 번째 섹션일 때: TOP 버튼 숨김
+          $topBtn.removeClass('show');
+        } else {
+          // 첫 번째 섹션이 아닐 때: TOP 버튼 표시
+          $topBtn.addClass('show');
+        }
+        
+        // 해당 섹션의 [data-aos] 요소 모두에 aos-animate 클래스 추가
+        const section = $('#fullpage .section').eq(index - 1)[0];
+        if (section) {
+          section.querySelectorAll('[data-aos]').forEach(el => {
+            el.classList.add('aos-animate');
+          });
+        }
+        
+        // indicator active 상태 업데이트
+        const $currentSection = $('#fullpage .section').eq(index - 1);
+        const navType = $currentSection.data('mainnavi');
+        if (navType) {
+          $('#indicator li').removeClass('active');
+          $(`#indicator li[data-mainnavi="${navType}"]`).addClass('active');
+          
+          // footer 섹션에서는 indicator 숨김
+          if (navType === 'footer') {
+            $('#indicator').css('opacity', '0');
+          } else {
+            $('#indicator').css('opacity', '1');
+          }
         }
       },
-
       onLeave: function(index, nextIndex, direction){
-        // 스크롤시 헤더 scrolled 클래스 즉시 적용
-        if(nextIndex > 1) {
-          $('.header').addClass('scrolled');
-        } else {
-          $('.header').removeClass('scrolled');
+        // 이전 섹션의 정보 가져오기
+        const $currentSection = $('#fullpage .section').eq(index - 1);
+        const currentNavType = $currentSection.data('mainnavi');
+        
+        // promo 섹션에서 footer로 넘어갈 때는 애니메이션 클래스를 제거하지 않음
+        const isPromoToFooter = (currentNavType === 'promo' && nextIndex === 6);
+        
+        // 이전 섹션의 aos-animate 클래스 제거 (애니메이션 초기화)
+        // 단, promo에서 footer로 넘어갈 때는 제외
+        if (!isPromoToFooter) {
+          const prevSection = $('#fullpage .section').eq(index - 1)[0];
+          if (prevSection) {
+            prevSection.querySelectorAll('[data-aos]').forEach(el => {
+              el.classList.remove('aos-animate');
+            });
+          }
         }
-
-        // TOP 버튼 표시/숨김 제어
-        if(nextIndex > 1) {
-          $('#topBtn').addClass('show');
-        } else {
-          $('#topBtn').removeClass('show');
-        }
-
-        // 푸터에서 나갈 때 indicator 다시 표시
-        if (index === 6 && nextIndex !== 6) {
+        
+        // footer에서 나갈 때 indicator 다시 표시
+        if (currentNavType === 'footer' && nextIndex !== 6) {
           $('#indicator').css('opacity', '1');
         }
-
-        // 이전 섹션의 AOS 초기화 (선택적)
-        const $section = $('#fullpage .section').eq(index - 1);
-        $section.find('[data-aos]').removeClass('aos-animate');
-
-        // YouTube 재생 제어
+        
         setTimeout(function() {
           if (player && typeof player.playVideo === 'function') {
             player.mute();
@@ -1742,4 +1939,22 @@ function animation_move(index){
 // 문서 준비 완료 시 fullpage.js 초기화
 $(document).ready(function() {
   initFullpage();
+  
+  // AOS 초기화 (once: true로 설정)
+  AOS.init({ once: true,  mirror: false, });
+  
+  // 첫 번째 섹션의 AOS 애니메이션 초기 트리거
+  setTimeout(function() {
+    const firstSection = $('#fullpage .section').first()[0];
+    if (firstSection) {
+      firstSection.querySelectorAll('[data-aos]').forEach(el => {
+        el.classList.add('aos-animate');
+      });
+    }
+    
+    // PC 환경에서 indicator 표시
+    if ($(window).width() > 1080) {
+      $('#indicator').css('opacity', '1');
+    }
+  }, 500);
 });
