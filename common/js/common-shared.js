@@ -3,6 +3,7 @@
  * common.js와 publish.js에서 공통으로 사용되는 함수들
  */
 
+
 // 전역 변수
 var elFocus; // 포커스 요소 저장하는 전역변수
 

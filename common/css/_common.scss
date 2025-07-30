@@ -136,12 +136,8 @@
   }
 
   // 반응형 - 모바일 (720px 이하)
-  @media screen and (max-width: 720px) {
-    bottom: 30px;
-    right: 30px;
-    width: 45px;
-    height: 45px;
-    background-size: 18px 18px;
+  @media screen and (max-width: 900px) {
+    display: none;
   }
 }
 
@@ -1540,49 +1536,6 @@ body.sitemap-open {
   }
 
 
-  @media screen and (max-width: 900px) {
-    padding: 0;
-    .container {
-      padding: 0 15px;
-    }
-    .fnb {
-      position: relative;
-      background-position: left top 65px;
-      background-size: 92px auto;
-      padding: 0;
-  
-      > ol {
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        flex-direction: column;
-
-        > li {
-          margin-left: 0;
-          button {
-            height: 42px;
-            line-height: 42px;
-            padding: 0 15px;
-            width: 100%;
-            background-position: right 15px center;
-            border-bottom: 1px solid #e3e2e7;
-          }
-          ul {
-            padding: 10px;
-            > li {
-              font-size: 14px;
-              margin: 2px 0;
-            }
-          }
-          &.active {
-            button {
-              background-image: url(../images/common/icon_fb_select_on.png);
-            }
-          }
-        }
-      }
-    }
-  }
 
 
   @include maxWidth(1320px) {
@@ -1592,18 +1545,131 @@ body.sitemap-open {
     .footer_con .footer_info{
       display: block; padding-bottom:0; border-bottom: none;
     }
-    .footer_con .footer_info .footer_right{
-      display: block; padding: 20px 0; border-top: 1px solid #e3e2e7; border-width: 1px 0; margin-top: 30px; position: relative;
-      >div a{width: 120px;}
-      >ul{position: absolute; left: 0; bottom: -155px; width: 100%; padding-top: 20px; }
-    }
+    .footer_con 
+    {
+      .footer_info{
+        .footer_right{
+          display: block; padding: 20px 0; border-top: 1px solid #e3e2e7;
+          border-width: 1px 0; margin-top: 30px; position: relative;
+         >div a{width: 120px;}
+         >ul{position: absolute; left: 20px; bottom: -135px; 
+          width: 100%; }
+        }
+      } 
+
     .footer_con .footer_menu{padding: 20px 0 110px;  display: block;border-top: 1px solid #e3e2e7; margin: 0 20px;
       a{margin-right: 15px;}
       .copyright{margin-left: 0; margin-top: 10px;}
     }
   }
 }
+@media screen and (max-width: 900px) {
+  margin-top: 45px;
+  padding: 0;
+  background: #f8f8f8;
+  .fp-tableCell{
+    padding: 0 !important;
+  }
+  .container {
+    padding: 0 15px;
+  }
+  .fnb {
+    background: #fff;
+    position: relative;
+    background-position: left top 65px;
+    background-size: 92px auto;
+    padding: 0;
 
+    > ol {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      flex-direction: column;
+
+      > li {
+        margin-left: 0;
+        button {
+          height: 50px;
+          line-height: 50px;
+          padding: 0 15px;
+          width: 100%;
+          background-position: right 15px center;
+          border-bottom: 1px solid #e3e2e7;
+          font-size: $fs-15;
+          font-weight: 500;
+        }
+        ul {
+          padding: 10px;
+          > li {
+            font-size: 14px;
+            margin: 2px 0;
+          }
+        }
+        &.active {
+          button {
+            background-image: url(../images/common/icon_fb_select_on.png);
+          }
+        }
+      }
+    }
+  }
+  .footer_con{
+    .footer_info{
+      padding: 30px 20px 0;
+      .footer_left{
+        >ul{
+        li{ flex-wrap: wrap;
+          span{
+            &:first-of-type {
+              flex: 1 1 80%;
+            }
+            &:nth-of-type(2){
+              margin-left: 58px;
+            }
+          }
+          &:nth-child(4){
+            span{
+              &:nth-of-type(2){
+                margin-left: 135px;
+              }
+            }
+       
+          }
+          &:last-child{
+            span{
+              &:first-of-type {
+                flex: none
+              }
+              &:nth-of-type(2){
+                margin-left: 0;
+              }
+            }
+          }
+        }
+        }
+      }
+      .footer_right{
+        >div{
+          border-bottom: 1px solid #e3e2e7;
+          padding-bottom: 20px;
+        }
+        ul{
+          //position: unset;
+        }
+      }
+    }
+    .footer_menu{
+      padding-top: 0;
+      padding: 0 20px 20px;
+      flex-wrap: wrap;
+      .copyright{
+        width: 100%;
+      }
+    }
+  }
+}
+
+}
 // 2. 모달 팝업
 .modal_wrap {
   display: none;
@@ -1975,9 +2041,23 @@ body.modal-open {
       gap: 12px 15px;
     }
 
-    @include maxWidth($m720) {
+    @include maxWidth(900px) {
       grid-template-columns: 1fr;
       gap: 8px;
     }
   }
+@include maxWidth(900px){
+  
+    flex-direction: column;
+    h4{
+      margin-bottom: 20px;
+    }
+    .modal_list{
+      width: 100%;
+      li{
+        width: 100%;
+      }
+    }
+  }
 }
+

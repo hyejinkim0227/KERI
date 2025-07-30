@@ -31,127 +31,12 @@
   <script src="../common/js/common-shared.js"></script>
   <!-- 사이트별 스크립트 -->
   <script src="../common/js/common.js"></script>
+  <!-- 반응형 AOS/fullPage.js 관리 -->
+  <script src="../common/js/common-responsive.js"></script>
   <!-- //공통 js -->
+   
 </head>
-<script>
-  $(function(e) {
 
-      let currentIndex = 0;
-      let count = 0;
-
-      AOS.init({ once: true });
-
-
-
-      // $('section.section2 .tab_sp .tab > li').on('click', function(){
-      //     var i = $(this).index();
-      //     $(this).addClass('on').siblings().removeClass('on');
-      //     $('section.section2 .content_sp .content_lst > li').eq(i).addClass('on').siblings().removeClass('on');
-      // });
-
-      $('.drop_menu .link3').on({
-          mouseenter: function () {
-              $('.pc').addClass('on');
-              $('.drop_menu').addClass('on');
-              console.log('link3 in');
-          },
-          mouseleave: function () {
-              $('.pc').removeClass('on');
-              $('.drop_menu').removeClass('on');
-               console.log('link3 out');
-          }
-      });
-
-
-
-      setInterval(function () {
-          count++;
-
-          const $list = $('section.section2 .tab_sp .tab');
-          // $('section.section2 .tab_sp .tab li').removeClass('on');
-
-          if (count % 2 === 0) {
-              $list.children('li').css('transform','translateY('+0+'px)');
-              $list.children('li').eq(4).addClass('on').siblings('li').removeClass('on');
-          } else {
-              $list.children('li').css('transform','translateY('+80+'px)');
-              $list.children('li').eq(8).css('transform','translateY(-'+722+'px)');
-              $list.children('li').eq(3).addClass('on').siblings('li').removeClass('on');
-          }
-
-          const $items = $('section.section2 .content_sp .content_lst > li');
-
-
-          $items.removeClass('on');
-
-          currentIndex = (currentIndex + 1) % 2;
-
-          $items.eq(currentIndex).addClass('on');
-      }, 2000);
-
-      $(window).on('scroll', function () {
-
-          var scrollTop = $(this).scrollTop();
-
-          if ($(window).width() > 721) {
-              var pc_inner_sp = $('.pc section > .inner_sp');
-
-              pc_inner_sp.each(function (i) {
-
-                  if (scrollTop >= $(this).offset().top - $(window).innerHeight()*0.5 ) {
-
-                      $(this).addClass("on");
-                  } else {
-                      $(this).removeClass("on");
-
-                  }
-              });
-          } else {
-
-              var m_inner_sp = $('.m section > .inner_sp');
-
-              m_inner_sp.each(function (i) {
-
-                  if (scrollTop >= $(this).offset().top - $(window).innerHeight()*0.5 ) {
-
-                      $(this).addClass("on");
-
-                  } else {
-                      $(this).removeClass("on");
-
-                  }
-              });
-
-
-          }
-      });
-
-  });
-
-  function moveToCenter($target) {
-      const $container = $('.section2 .tab');
-
-      const $li4 = $container.children('li').eq(3);
-      const $li4_top = $container.children('li').eq(4).offset().top;
-
-      const $li5 = $container.children('li').eq(4);
-      const $li5_top = $container.children('li').eq(4).offset().top;
-
-
-      const containerHeight = $container.height();
-      const containerTop = $container.offset().top;
-
-      const targetTop = $target.offset().top;
-      const scrollTop = $container.scrollTop();
-
-      const offset = targetTop - containerTop;
-
-      const scrollTo = scrollTop + offset - (containerHeight / 2) + ($target.outerHeight() / 2);
-
-      $container.animate({ scrollTop: scrollTo }, 300);
-  }
-
-</script>
 <body class="fp-responsive">
   <div id="wrapper" class="main">
     <!-- 스킵내비게이션 -->
@@ -1398,6 +1283,7 @@
                 <div class="video_box">
                   <div class="video_wrap">
                     <iframe 
+
                         src="https://www.youtube.com/embed/lheN8ChGU04?autoplay=1&mute=1" 
                         title="YouTube video player" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -1423,7 +1309,7 @@
                 </div>
                 <div class="history_box">
                   <h4>역사기록관</h4>
-                  <p>전기기술의 내일, KERI에서<br>시작됩니다</p>
+                  <p>전기기술의 내일, KERI에서 시작됩니다</p>
                   <a href="#">바로가기</a>
                 </div>
               </div>
@@ -1577,12 +1463,6 @@
                         <a href="#">Contact Us</a>
                       </div>
                       <ul>
-                        <li>
-                          <a href="#" target="_blank" title="새창열기">
-                            <img
-                              src="../common/images/common/logo_mark_wa.png" alt="심사기관에서 제시한 alt값 넣어주세요.">
-                          </a>
-                        </li>
                         <li>
                           <a href="#" target="_blank" title="새창열기">
                             <img

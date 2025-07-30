@@ -220,10 +220,19 @@ section{
   @media screen and (max-width: 1080px) {
     margin:0 auto;
     width: 100%;
-    height: auto; // 모바일에서 자동 높이
-    min-height: 100vh; // 최소 높이는 유지
+    height: 100%; // 모바일에서 자동 높이
     overflow-y: auto; // 세로 스크롤 허용
+
   }
+    @media screen and (max-width: 900px) {
+      table-layout: unset !important;
+      padding-top: 0 !important;
+      display: block !important;
+      .fp-tableCell {
+        padding: 0 20px !important;
+        width: 100% !important;
+      }
+    }
 }
 
 .main {
@@ -502,7 +511,6 @@ section{
               &::placeholder {
                 color: #000;
                 font-family: $ff-sbaggro; 
-
               }
 
               &:focus {
@@ -711,6 +719,7 @@ section{
 
     @media screen and (max-width: 1380px){
       .main_banner{
+      
         .fp-tableCell{
           margin-left: 100px;
           width: calc(100% - 150px);
@@ -750,6 +759,9 @@ section{
     @media screen and (max-width: 1080px) {
       min-height: 700px;
 
+      &::after{
+        display: none;
+      }
       .main_banner_wrap {
         padding: 0 30px;
         gap: 40px;
@@ -795,172 +807,30 @@ section{
         }
       }
 
-      .main_banner_right {
-        width: 350px;
+      // .main_banner_right {
+      //   width: 350px;
 
-        > div:first-child {
-          padding: 25px;
+      //   > div:first-child {
+      //     padding: 25px;
 
-          h2 {
-            font-size: 20px;
-          }
+      //     h2 {
+      //       font-size: 20px;
+      //     }
 
-          ul li a {
-            span {
-              width: 20px;
-              height: 20px;
-              font-size: 11px;
-              margin-right: 12px;
-            }
+      //     ul li a {
+      //       span {
+      //         width: 20px;
+      //         height: 20px;
+      //         font-size: 11px;
+      //         margin-right: 12px;
+      //       }
 
-            div {
-              font-size: 14px;
-            }
-          }
-        }
-      }
-    }
-
-    // 반응형 스타일 - 모바일 (900px 이하)
-    @media screen and (max-width: 900px) {
-      background: url(../images/main/m_main_bg.png) no-repeat top center/cover;
-      margin-top: 55px;
-      height: auto; // 자동 높이로 변경
-      min-height: 100vh;
-      padding: 0 0 20px; // 하단 여백 추가
-      display: flex;
-      flex-direction: column;
-      align-items: stretch; // 전체 너비 활용
-      overflow-y: auto; // 세로 스크롤 허용
-      &:after{
-        display: none;
-      }
-
-      .main_banner_left {
-        margin: 80px 0 0 0; // 상단 여백 줄임
-        padding: 0 20px 20px; // 하단 패딩 추가
-        width: 100%;
-        max-width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        height: auto; // 자동 높이로 변경
-        flex: 1; // 남는 공간 활용
-
-        h3 {
-          font-size: $fs-18;
-          margin-bottom: 21px;
-          line-height: 1.4;
-          
-          b {
-            font-size: $fs-25;
-            margin-top: 6px;
-            line-height: 1.3;
-          }
-        }
-
-        .search {
-          margin-bottom: 40px;
-          width: 100%;
-          max-width: 350px;
-
-          form {
-            margin-bottom: 0px;
-            
-            .search_input {
-              flex-direction: column;
-              gap: 15px;
-              
-              &::after {
-               right: 10px;
-               width: 42.5px;
-               height: 42.5px;
-               background-size: 13px auto;
-               
-              }
-
-              input {
-                width: 100%;
-                max-width: 100%;
-                height: 50px;
-                padding: 0 20px;
-                font-size: $fs-14;
-              
-              }
-
-              button {
-                line-height: 43px;
-                height: 43px;
-                font-size: $fs-12;
-                width: 140px;
-                font-weight: 400;
-                padding-left: 39px;
-                &::after{
-                  background-size: 5px auto;
-                }
-              }
-            }
-          }
-
-          > div {
-            display: none;
-          }
-        }
-
-        > ul {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
-          width: 100%;
-          max-width: 350px;
-
-          li {
-            a {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              gap: 10px;
-              padding: 15px 8px;
-              text-decoration: none;
-              transition: all 0.3s ease;
-
-              span {
-                 width: 65px;
-                 height: 65px;
-                 background: rgba(0, 0, 0, 0.7);
-
-                
-                img {
-                  width: 30px;
-                  height: 30px;
-                  object-fit: contain;
-                }
-              }
-
-              b {
-                color: #fff;
-                font-family: $ff-suit;
-                font-weight: 400;
-                font-size: $fs-14;
-             
-                line-height: 1.5;
-                letter-spacing: -0.73px;
-              }
-
-              &:hover {
-                transform: translateY(-2px);
-                
-                span {
-                  background: rgba(0, 0, 0, 0.95);
-                  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-                }
-              }
-            }
-          }
-        }
-      }
-
+      //       div {
+      //         font-size: 14px;
+      //       }
+      //     }
+      //   }
+      // }
       .main_banner_right {
         position: relative;
         width: 100%;
@@ -1077,6 +947,144 @@ section{
       }
     }
 
+    // 반응형 스타일 - 모바일 (900px 이하)
+    @media screen and (max-width: 900px) {
+      background: url(../images/main/m_main_bg.png) no-repeat top center/cover;
+      margin-top: 55px;
+      height: auto; // 자동 높이로 변경
+      min-height: 100vh;
+      padding: 0 0 20px; // 하단 여백 추가
+      display: flex;
+      flex-direction: column;
+      align-items: stretch; // 전체 너비 활용
+      overflow-y: auto; // 세로 스크롤 허용
+      &:after{
+        display: none;
+      }
+
+      .main_banner_left {
+        margin: 80px 0 0 0; // 상단 여백 줄임
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: auto; // 자동 높이로 변경
+        flex: 1; // 남는 공간 활용
+
+        h3 {
+          font-size: $fs-18;
+          margin-bottom: 21px;
+          line-height: 1.4;
+          
+          b {
+            font-size: $fs-25;
+            margin-top: 6px;
+            line-height: 1.3;
+          }
+        }
+
+        .search {
+          margin-bottom: 40px;
+          width: 100%;
+
+          form {
+            margin-bottom: 0px;
+            
+            .search_input {
+              flex-direction: column;
+              gap: 15px;
+              
+              &::after {
+               right: 10px;
+               width: 42.5px;
+               height: 42.5px;
+               background-size: 13px auto;
+               
+              }
+
+              input {
+                width: 100%;
+                max-width: 100%;
+                height: 50px;
+                padding: 0 20px;
+                font-size: $fs-14;
+              
+              }
+
+              button {
+                line-height: 43px;
+                height: 43px;
+                font-size: $fs-12;
+                width: 140px;
+                font-weight: 400;
+                padding-left: 39px;
+                &::after{
+                  background-size: 5px auto;
+                }
+              }
+            }
+          }
+
+          > div {
+            display: none;
+          }
+        }
+
+        > ul {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+          width: 100%;
+
+          li {
+            a {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 10px;
+              padding: 15px 8px;
+              text-decoration: none;
+              transition: all 0.3s ease;
+
+              span {
+                 width: 65px;
+                 height: 65px;
+                 background: rgba(0, 0, 0, 0.7);
+
+                
+                img {
+                  width: 30px;
+                  height: 30px;
+                  object-fit: contain;
+                }
+              }
+
+              b {
+                color: #fff;
+                font-family: $ff-suit;
+                font-weight: 400;
+                font-size: $fs-14;
+             
+                line-height: 1.5;
+                letter-spacing: -0.73px;
+              }
+
+              &:hover {
+                transform: translateY(-2px);
+                
+                span {
+                  background: rgba(0, 0, 0, 0.95);
+                  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
     .control {
       position:absolute;
       left:50%;
@@ -1166,7 +1174,8 @@ section{
         box-shadow:0 13px 25px rgba(0,0,0,0.25);
       }  
     }
-    @media screen and (max-width: 720px) {
+    @media screen and (max-width: 900px) {
+    
       .slide {
         padding:0 15px;
         .item {
@@ -1394,9 +1403,7 @@ section{
             letter-spacing: -0.51px;
             font-weight: 300;
             margin-bottom: 0;
-           
           }
-
         }
 
         .visual{ 
@@ -1508,8 +1515,7 @@ section{
     @media (max-width: 1080px) {
       padding: 44px 0 40px;
       background: 
-                  url(../images/main/m_domain_bg.png) no-repeat bottom center;
-     background-size: cover;
+                  url(../images/main/m_domain_bg.png) no-repeat bottom center/cover;
       border-radius: 0;
       
       .container {
@@ -1643,6 +1649,11 @@ section{
         margin-top: 50px;
       }
     }
+    @media (max-width: 900px){
+      .container{
+        height: auto !important;
+      }
+    }
   }
 
   /*KERI 소식*/
@@ -1707,7 +1718,6 @@ section{
 
 
       @media screen and (max-width: 900px) {
-        padding: 40px 30px;
         
         .container {
           flex-direction: column;
@@ -1867,7 +1877,7 @@ section{
               background: #fff;
               box-shadow: 8.9px 4.5px 21px 0 rgba(0, 0, 0, 0.16);
               transition: all 0.3s ease;
-              padding: 33px 25px 33px 30px;
+              padding: 33px 25px ;
 
               &:hover {
                 transform: translateY(-2px);
@@ -1877,6 +1887,7 @@ section{
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                gap: 7px;
                 margin-bottom: 28px;
               }
 
@@ -2391,6 +2402,8 @@ section{
       position: absolute;
       top: 0;
       left: 0;
+      width: 380px;
+      height: 250px;
     }
   }
 
@@ -3040,8 +3053,6 @@ section{
         }
       
         > div {
-       
-         
           a {
             display: block;
             height: 345px;
@@ -3178,19 +3189,24 @@ section{
         background: #f6f6f6 ;
         position: relative;
 
+
         .video_wrap {
           width: 320px;
           height: 210px;
           border-radius: 30px;
           overflow: hidden;
+          iframe{
+            width: 100%;
+            height: 290px;
+          }
         }
         .video_text {
           b {
             display: block;
             margin: 48px 0 17px;
             padding-left: 48px;
+            font-family: $ff-pretendardgov;
             font-weight: 500;
-            font-family: $ff-sbaggro;
             font-size: $fs-15;
             line-height: 40px;
             color: #df2416;
@@ -3198,7 +3214,8 @@ section{
           }
           span {
             font-size: $fs-19;
-            font-family: $ff-sbaggro;
+           font-family: $ff-suit;
+           font-weight: 600;
             line-height: 1.54;
             letter-spacing: -0.49px;
           }
@@ -3251,6 +3268,7 @@ section{
         border: 1px solid #d1d1d1;
         padding: 40px 30px 30px;
         p {
+          width: 168px;
           font-weight: 600;
           line-height: 1.52;
           color: rgba(74, 77, 84, 0.9);
@@ -3278,9 +3296,9 @@ section{
     }
 
     // 반응형 - 태블릿 (1080px 이하)
-    @media screen and (max-width: 1080px) {
+    @media screen and (max-width: 900px) {
       margin-top: 50px;
-      padding: 50px 0;
+      padding: 50px 20px 0;
 
       &::before {
         width: 100%;
@@ -3288,9 +3306,7 @@ section{
         border-radius: 50px 50px 0 0;
       }
 
-      .container {
-        padding: 0 20px;
-        
+
         h2 {
           margin-bottom: 25px;
         }
@@ -3298,7 +3314,7 @@ section{
         h3 {
           margin-bottom: 15px;
         }
-      }
+      
 
       &_top {
         flex-direction: column;
@@ -3489,7 +3505,9 @@ section{
           }
 
           .video_text {
-
+            b{
+              margin-top: 20px;
+            }
             span {
               font-size: $fs-17;
               line-height: 1.4;
@@ -3504,18 +3522,18 @@ section{
           width: 100%;
           height: auto;
           padding: 30px;
-          background-size: 120px;
-          background-position: right bottom;
+          background-size: 250px;
+          background-position: right 18px bottom -49px;
+          background-image: url(../images/main/m_promotional_character.png);
 
           h4 {
             margin-bottom: 20px;
           }
 
           ul {
-            width: 150px;
+            width: 175px;
             justify-content: flex-start;
             gap: 10px;
-gap
             li a {
               width: 50px;
               height: 50px;
@@ -3535,6 +3553,7 @@ gap
           }
 
           p {
+            width: 100%;
             font-size: $fs-16;
             margin-bottom: 20px;
           }

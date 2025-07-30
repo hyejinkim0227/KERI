@@ -1835,96 +1835,107 @@ function onYouTubeIframeAPIReady() {
 // YouTube API가 함수를 찾을 수 있도록 전역으로 노출
 window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
-function initFullpage() {
-  if ($('#fullpage').length) {
-    $('#fullpage').fullpage({
-      responsiveWidth: 721,
-      anchors: ["page1", "page2", "page3", "page4", "page5", "page6"],
-      menu: '#indicator',
-      startingSlide: 0,
-      afterLoad: function(anchorLink, index){
-        animation_move(index);
-        
-        // 헤더 scrolled 클래스 관리 (fullpage.js 환경)
-        var $header = $('.header');
-        var isMenuOpen = $header.hasClass('active') || $('.header #gnb > ul > li.active').length > 0;
-        
-        if (index === 1) {
-          // 첫 번째 섹션일 때: 메뉴가 열려있지 않으면 scrolled 클래스 제거
-          if (!isMenuOpen) {
-            $header.removeClass('scrolled');
-          }
+function managePageLayout() {
+    if ($('#fullpage').length) {
+        var windowWidth = $(window).width();
+
+        if (windowWidth > 900) {
+            // --- DESKTOP MODE ---
+            $('body').removeClass('is-mobile');
+
+            // Initialize fullpage.js if not already active
+            if (!$('html').hasClass('fp-enabled')) {
+                $('#fullpage').fullpage({
+                    // Using a high responsiveWidth to ensure our logic takes precedence
+                    responsiveWidth: 900,
+                    anchors: ["page1", "page2", "page3", "page4", "page5", "page6"],
+                    menu: '#indicator',
+                    afterLoad: function(anchorLink, index) {
+                        animation_move(index);
+                        var $header = $('.header');
+                        var isMenuOpen = $header.hasClass('active') || $('.header #gnb > ul > li.active').length > 0;
+                        if (index === 1) {
+                            if (!isMenuOpen) { $header.removeClass('scrolled'); }
+                        } else {
+                            $header.addClass('scrolled');
+                        }
+                        var $topBtn = $('#topBtn');
+                        if (index === 1) {
+                            $topBtn.removeClass('show');
+                        } else {
+                            $topBtn.addClass('show');
+                        }
+                        const section = $('#fullpage .section').eq(index - 1)[0];
+                        if (section) {
+                            section.querySelectorAll('[data-aos]').forEach(el => {
+                                el.classList.add('aos-animate');
+                            });
+                        }
+                        const $currentSection = $('#fullpage .section').eq(index - 1);
+                        const navType = $currentSection.data('mainnavi');
+                        if (navType) {
+                            $('#indicator li').removeClass('active');
+                            $(`#indicator li[data-mainnavi="${navType}"]`).addClass('active');
+                            if (navType === 'footer') {
+                                $('#indicator').css('opacity', '0');
+                            } else {
+                                $('#indicator').css('opacity', '1');
+                            }
+                        }
+                    },
+                    onLeave: function(index, nextIndex, direction) {
+                        const prevSection = $('#fullpage .section').eq(index - 1)[0];
+                        if (prevSection) {
+                            prevSection.querySelectorAll('[data-aos]').forEach(el => {
+                                el.classList.remove('aos-animate');
+                            });
+                        }
+                    }
+                });
+            }
+
+            // Initialize AOS
+            if (typeof AOS !== 'undefined') {
+                $('body').removeClass('aos-disabled');
+                AOS.init({ once: true, mirror: false });
+                 // Manually trigger animation for the first section on load
+                setTimeout(function() {
+                    const firstSection = $('#fullpage .section').first()[0];
+                    if (firstSection) {
+                        firstSection.querySelectorAll('[data-aos]').forEach(el => {
+                            el.classList.add('aos-animate');
+                        });
+                    }
+                }, 500);
+            }
+
         } else {
-          // 첫 번째 섹션이 아닐 때: scrolled 클래스 추가
-          $header.addClass('scrolled');
+            // --- MOBILE MODE ---
+            $('body').addClass('is-mobile');
+
+            // Destroy fullpage.js if it's active
+            if ($('html').hasClass('fp-enabled')) {
+                $.fn.fullpage.destroy('all');
+            }
+            
+            // Ensure all sections have auto height for normal scrolling
+            $('.section').css('height', 'auto');
+
+            // Disable AOS and make elements visible
+            if (typeof AOS !== 'undefined') {
+                 $('body').addClass('aos-disabled');
+                 $('[data-aos]').removeClass('aos-init aos-animate').css({
+                    'opacity': 1,
+                    'transform': 'none'
+                 });
+            }
         }
         
-        // TOP 버튼 상태 관리 (fullpage.js 환경)
-        var $topBtn = $('#topBtn');
-        if (index === 1) {
-          // 첫 번째 섹션일 때: TOP 버튼 숨김
-          $topBtn.removeClass('show');
-        } else {
-          // 첫 번째 섹션이 아닐 때: TOP 버튼 표시
-          $topBtn.addClass('show');
+        // Refresh sliders on layout change
+        if ($('.slick-initialized').length > 0) {
+            $('.slick-initialized').slick('refresh');
         }
-        
-        // 해당 섹션의 [data-aos] 요소 모두에 aos-animate 클래스 추가
-        const section = $('#fullpage .section').eq(index - 1)[0];
-        if (section) {
-          section.querySelectorAll('[data-aos]').forEach(el => {
-            el.classList.add('aos-animate');
-          });
-        }
-        
-        // indicator active 상태 업데이트
-        const $currentSection = $('#fullpage .section').eq(index - 1);
-        const navType = $currentSection.data('mainnavi');
-        if (navType) {
-          $('#indicator li').removeClass('active');
-          $(`#indicator li[data-mainnavi="${navType}"]`).addClass('active');
-          
-          // footer 섹션에서는 indicator 숨김
-          if (navType === 'footer') {
-            $('#indicator').css('opacity', '0');
-          } else {
-            $('#indicator').css('opacity', '1');
-          }
-        }
-      },
-      onLeave: function(index, nextIndex, direction){
-        // 이전 섹션의 정보 가져오기
-        const $currentSection = $('#fullpage .section').eq(index - 1);
-        const currentNavType = $currentSection.data('mainnavi');
-        
-        // promo 섹션에서 footer로 넘어갈 때는 애니메이션 클래스를 제거하지 않음
-        const isPromoToFooter = (currentNavType === 'promo' && nextIndex === 6);
-        
-        // 이전 섹션의 aos-animate 클래스 제거 (애니메이션 초기화)
-        // 단, promo에서 footer로 넘어갈 때는 제외
-        if (!isPromoToFooter) {
-          const prevSection = $('#fullpage .section').eq(index - 1)[0];
-          if (prevSection) {
-            prevSection.querySelectorAll('[data-aos]').forEach(el => {
-              el.classList.remove('aos-animate');
-            });
-          }
-        }
-        
-        // footer에서 나갈 때 indicator 다시 표시
-        if (currentNavType === 'footer' && nextIndex !== 6) {
-          $('#indicator').css('opacity', '1');
-        }
-        
-        setTimeout(function() {
-          if (player && typeof player.playVideo === 'function') {
-            player.mute();
-            player.playVideo();
-          }
-        }, 10);
-      }
-    });
-  }
+    }
 }
 
 /**
@@ -1932,29 +1943,19 @@ function initFullpage() {
  * @param {number} index - 현재 섹션 인덱스
  */
 function animation_move(index){
-    //console.log(index);
     $('#fullpage .section').eq(index-1).find('.inner_sp').addClass('on');
 }
 
-// 문서 준비 완료 시 fullpage.js 초기화
+// Initial setup on document ready
 $(document).ready(function() {
-  initFullpage();
-  
-  // AOS 초기화 (once: true로 설정)
-  AOS.init({ once: true,  mirror: false, });
-  
-  // 첫 번째 섹션의 AOS 애니메이션 초기 트리거
-  setTimeout(function() {
-    const firstSection = $('#fullpage .section').first()[0];
-    if (firstSection) {
-      firstSection.querySelectorAll('[data-aos]').forEach(el => {
-        el.classList.add('aos-animate');
-      });
-    }
-    
-    // PC 환경에서 indicator 표시
-    if ($(window).width() > 1080) {
-      $('#indicator').css('opacity', '1');
-    }
-  }, 500);
+    managePageLayout();
+});
+
+// Handle layout changes on window resize
+var resizeTimer;
+$(window).on('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+        managePageLayout();
+    }, 250); // Debounce resize event
 });
