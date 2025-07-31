@@ -357,6 +357,23 @@ iframe {
 
 /*요소중앙정렬*/
 /*아이템 정렬*/
+#wrapper.main {
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  transform-origin: left top;
+}
+#wrapper.main.pc-mode {
+  min-width: 1920px;
+  transform: scale(var(--scale));
+  transform-origin: left top;
+}
+#wrapper.main:not(.pc-mode) {
+  min-width: unset;
+  width: 100%;
+  transform: none;
+}
+
 #wrapper {
   width: 100%;
   overflow: hidden;
@@ -486,7 +503,7 @@ iframe {
     background-size: 20px 20px;
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1080px) {
   .top_btn {
     display: none;
   }
@@ -500,6 +517,7 @@ iframe {
   right: 0;
   overflow: visible;
   z-index: 100;
+  width: 100%;
 }
 .header .top_menu {
   display: flex;
@@ -521,6 +539,8 @@ iframe {
   margin-left: 15px;
 }
 .header .head {
+  padding-left: 40px;
+  margin-left: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -720,16 +740,15 @@ iframe {
 .header .util {
   display: flex;
   align-items: center;
-  width: 380px;
+  width: 350px;
   justify-content: space-between;
   padding-left: 38px;
-  gap: 26px;
 }
 .header .util .lang {
-  height: 40px;
+  height: 85px;
+  line-height: 85px;
+  vertical-align: middle;
   padding-left: 30px;
-  line-height: 41px;
-  line-height: 41px;
   font-family: "SBAggro", "Pretendard";
   font-weight: 300;
   font-size: 0.8125rem;
@@ -737,7 +756,9 @@ iframe {
   background: url(../images/common/icon_globel.png) no-repeat left center/20px 21px;
 }
 .header .util .popup_zone {
-  line-height: 40px;
+  height: 85px;
+  line-height: 85px;
+  vertical-align: middle;
   width: 140px;
   padding-left: 27px;
   background: url(../images/common/icon_popup_zone.png) no-repeat left center/20px;
@@ -748,6 +769,9 @@ iframe {
   font-size: 0.8125rem;
 }
 .header .util .search_box {
+  height: 85px;
+  line-height: 85px;
+  vertical-align: middle;
   display: none;
   position: absolute;
   left: 0;
@@ -837,8 +861,8 @@ iframe {
   }
 }
 .header .util .search_open {
-  padding: 10px 16px 10px 13px;
-  height: 40px;
+  padding: 10px;
+  height: 50px;
   width: 40px;
   background: url(../images/common/icon_head_search.png) no-repeat center;
   vertical-align: middle;
@@ -847,7 +871,8 @@ iframe {
   background-image: url(../images/common/btn_close.png);
 }
 .header .util .sitemap_open {
-  width: 40px;
+  padding-right: 10px;
+  width: 50px;
   height: 40px;
   background: url(../images/common/icon_sitemap_open.png) no-repeat center;
   vertical-align: middle;
@@ -1880,7 +1905,7 @@ body.sitemap-open {
     margin-top: 10px;
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1080px) {
   .footer {
     margin-top: 45px;
     padding: 0;
@@ -2411,24 +2436,6 @@ body.modal-open {
     transform: translateX(0);
   }
 }
-.main_banner .main_banner_left.on {
-  animation: fadeUp 1.5s 0.3s both;
-}
-.main_banner .main_banner_right {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 379px;
-  overflow: hidden;
-}
-.main_banner .main_banner_right img {
-  transform: translateX(100%);
-  transition: transform 1.5s 0.3s;
-}
-.main_banner .main_banner_right.on img {
-  transform: translateX(0);
-}
-
 .section1 .img.img1.on {
   animation: fadeUp 1.5s 0.3s both;
 }
@@ -2488,8 +2495,9 @@ body.modal-open {
 }
 
 section {
+  border: 1px solid red;
   margin-left: 116px;
-  width: calc(100% - 116px);
+  width: calc(100% - 80px) !important;
   height: 100vh;
   overflow: visible;
   padding-top: 90px !important;
@@ -2502,11 +2510,8 @@ section.footer {
 }
 section .fp-tableCell {
   position: relative;
-  width: 100%;
-  max-width: 1920px;
-  margin: 0 auto;
+  margin: 0;
   overflow: visible;
-  width: calc(100% - 116px);
   min-width: 320px;
 }
 @media screen and (max-width: 1080px) {
@@ -2517,7 +2522,7 @@ section .fp-tableCell {
     overflow-y: auto;
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1080px) {
   section {
     table-layout: unset !important;
     padding-top: 0 !important;
@@ -2602,7 +2607,7 @@ section .fp-tableCell {
 }
 .main #indicator {
   position: fixed;
-  left: 41px;
+  left: 30px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 99;
@@ -2611,18 +2616,26 @@ section .fp-tableCell {
   flex-direction: column;
   transition: opacity 0.3s ease;
 }
-.main #indicator li {
-  margin-bottom: 26px;
-}
 .main #indicator li a {
+  position: relative;
+  padding: 8px 10px;
   display: block;
+  cursor: pointer;
+  background: none;
+  width: auto;
+  height: auto;
+  margin-bottom: 10px;
+}
+.main #indicator li a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 6px;
   height: 6px;
   background: #787777;
   border-radius: 50%;
-  position: relative;
-  text-align: center;
-  cursor: pointer;
+  transform: translate(-50%, -50%);
 }
 .main #indicator li a .section-name {
   display: none;
@@ -2630,21 +2643,21 @@ section .fp-tableCell {
   transition: opacity 0.3s ease;
 }
 .main #indicator li.active a {
-  width: 40px;
-  height: 40px;
+  padding: 5px 10px;
+  width: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: unset;
-  border-radius: unset;
+}
+.main #indicator li.active a::before {
+  display: none;
 }
 .main #indicator li.active a .section-name {
   display: block;
   opacity: 1;
   position: static;
   transform: none;
-  color: #000;
   font-size: 0.8125rem;
   font-family: "SBAggro", "Pretendard";
   padding-top: 29px;
@@ -2695,7 +2708,8 @@ section .fp-tableCell {
   background-attachment: scroll, fixed;
 }
 .main .main_banner .fp-tableCell {
-  width: calc(100% - 230px);
+  display: flex;
+  justify-content: center;
 }
 .main .main_banner::after {
   content: "";
@@ -2723,10 +2737,11 @@ section .fp-tableCell {
   z-index: 2;
   height: 100%;
   width: 100%;
-  max-width: 750px;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: self-start;
 }
 .main .main_banner .main_banner_left h3 {
   color: #fff;
@@ -2883,10 +2898,14 @@ section .fp-tableCell {
   font-weight: 600;
   word-break: keep-all;
 }
+.main .main_banner .main_banner .main_banner_left.on {
+  animation: fadeUp 1.5s 0.3s both;
+}
 .main .main_banner .main_banner_right {
+  height: calc(100% + 106px);
   position: absolute;
   right: 0;
-  top: -90px;
+  top: -85px;
   width: 380px;
   max-width: 35vw;
   z-index: 2;
@@ -2895,16 +2914,25 @@ section .fp-tableCell {
   display: none;
 }
 .main .main_banner .main_banner_right .main_banner_right_con {
+  padding-bottom: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   background: rgba(0, 0, 0, 0.45);
   border-radius: 20px;
-  padding: 143px 38px 34px 41px;
-  height: 661px;
+  height: 70%;
   border-radius: 0 0 0 60px;
   overflow: hidden;
 }
 .main .main_banner .main_banner_right .main_banner_right_con h3 {
+  padding: 0 40px;
   color: #fff;
+  margin-top: 50px;
+  margin-top: 100px;
   margin-bottom: 40px;
+}
+.main .main_banner .main_banner_right .main_banner_right_con ul {
+  padding: 0 40px;
 }
 .main .main_banner .main_banner_right .main_banner_right_con ul li {
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -2937,6 +2965,7 @@ section .fp-tableCell {
   color: #000;
 }
 .main .main_banner .main_banner_right .main_banner_right_con > a {
+  margin: 0 40px;
   display: block;
   text-align: center;
   margin-top: 26px;
@@ -2951,11 +2980,21 @@ section .fp-tableCell {
   font-family: "SUIT", "Pretendard";
 }
 .main .main_banner .main_banner_right .video-container {
-  width: 378px;
-  height: 250px;
-  border-radius: 60px 0 0 0;
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 비율 */
+  height: 30%;
   overflow: hidden;
-  opacity: 0.8;
+  max-width: 100%;
+  border-radius: 60px 0 0 0;
+  min-height: 250px;
+}
+.main .main_banner .main_banner_right .video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 380px;
+  height: 250px;
 }
 @media screen and (max-width: 1380px) {
   .main .main_banner .main_banner .fp-tableCell {
@@ -2964,9 +3003,6 @@ section .fp-tableCell {
   }
   .main .main_banner .main_banner_right {
     width: 320px;
-  }
-  .main .main_banner .main_banner_right .main_banner_right_con {
-    padding: 140px 20px 30px 35px;
   }
   .main .main_banner .main_banner_left {
     max-width: 650px;
@@ -3124,7 +3160,7 @@ section .fp-tableCell {
     display: none;
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1080px) {
   .main .main_banner {
     background: url(../images/main/m_main_bg.png) no-repeat top center/cover;
     margin-top: 55px;
@@ -3360,7 +3396,7 @@ section .fp-tableCell {
     box-shadow: 0 13px 25px rgba(0, 0, 0, 0.25);
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1080px) {
   .main .main_banner .slide {
     padding: 0 15px;
   }
@@ -3430,6 +3466,7 @@ section .fp-tableCell {
   height: 100%;
   overflow: hidden;
   padding: 81px 0 !important;
+  width: 320px;
 }
 .main .domain .domain-nav .slick-track {
   height: 100%;
@@ -3759,7 +3796,7 @@ section .fp-tableCell {
     margin-top: 50px;
   }
 }
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
   .main .domain .container {
     height: auto !important;
   }
@@ -3818,7 +3855,7 @@ section .fp-tableCell {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1080px) {
   .main .news .news_tab .container {
     flex-direction: column;
     gap: 30px;
@@ -4137,7 +4174,7 @@ section .fp-tableCell {
     padding: 10px 20px;
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1080px) {
   .main .news {
     margin-top: 0px;
     padding-top: 140px;
@@ -4299,21 +4336,6 @@ section .fp-tableCell {
   .main .news .news_bottom a::after {
     display: none;
   }
-}
-.main .video-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 비율 */
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-}
-.main .video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 380px;
-  height: 250px;
 }
 .main .certification {
   padding-bottom: 60px;
@@ -4595,7 +4617,7 @@ section .fp-tableCell {
 .main .certification .certifin .certification_inquiry > div a:nth-child(3) {
   width: 100%;
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1080px) {
   .main .certification {
     margin-top: 80px;
   }
@@ -4784,7 +4806,6 @@ section .fp-tableCell {
   padding: 74px 0;
   position: relative;
   z-index: 1;
-  scroll-margin-top: 150px;
 }
 .main .promo::before {
   content: "";
@@ -4801,6 +4822,7 @@ section .fp-tableCell {
 }
 .main .promo .container {
   display: block;
+  margin: 0 auto;
 }
 .main .promo .container h2 {
   text-align: center;
@@ -4810,12 +4832,13 @@ section .fp-tableCell {
 }
 .main .promo_top {
   display: flex;
-  justify-content: space-between;
   margin: 40px 0;
   gap: 38px;
 }
 .main .promo_top .interview_wrap {
-  width: calc(100% - 311px);
+  flex: 1;
+  min-width: 300px;
+  max-width: 100%;
 }
 .main .promo_top .interview_wrap h3 {
   margin-bottom: 20px;
@@ -4834,8 +4857,7 @@ section .fp-tableCell {
   align-items: center;
 }
 .main .promo_top .interview.slick-initialized .slick-slide {
-  padding: 0 10px;
-  margin-right: 20px;
+  margin: 0 20px;
 }
 .main .promo_top .interview > div a {
   display: block;
@@ -4843,7 +4865,7 @@ section .fp-tableCell {
   width: 290px;
   background-color: #fff;
   border-radius: 30px;
-  box-shadow: 8.9px 4.5px 21px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 8.9px 4.5px 21px 0 rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 .main .promo_top .interview > div a b {
@@ -4869,6 +4891,10 @@ section .fp-tableCell {
   display: block;
   width: 100%;
   border-radius: 0 0 30px 30px;
+}
+.main .promo_top .publications_wrap {
+  flex-shrink: 0;
+  width: 311px;
 }
 .main .promo_top .publications_wrap .inner {
   width: 311px;
@@ -4990,7 +5016,8 @@ section .fp-tableCell {
   letter-spacing: -0.49px;
 }
 .main .promo_bottom .sns_box {
-  width: 371px;
+  width: 100%;
+  max-width: 371px;
   height: 210px;
   background: #a7c4ff url(../images/main/promotional_character.png) no-repeat right bottom -13px/150px;
   padding: 40px 30px 30px;
@@ -5025,7 +5052,8 @@ section .fp-tableCell {
   background-image: url(../images/main/icon_navertv.png);
 }
 .main .promo_bottom .history_box {
-  width: 312px;
+  width: 100%;
+  max-width: 312px;
   height: 210px;
   position: relative;
   background: url(../images/main/history_50.png) no-repeat right 34px bottom 24px/60px auto;
@@ -5056,7 +5084,19 @@ section .fp-tableCell {
   height: 31px;
   background: url(../images/main/history_quicklink.png) no-repeat center right/100%;
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1540px) {
+  .main .promo_top .publications_wrap {
+    width: 280px;
+    flex-shrink: 0;
+  }
+  .main .promo_top .publications_wrap .inner {
+    width: 280px;
+  }
+  .main .promo_top .publications_wrap .inner:after {
+    right: -39px;
+  }
+}
+@media screen and (max-width: 1080px) {
   .main .promo {
     margin-top: 50px;
     padding: 50px 20px 0;
@@ -5127,6 +5167,9 @@ section .fp-tableCell {
   .main .promo_top .interview_wrap .interview_header .interview_controls button.interview_next::after {
     background: url(../images/main/support_btn_next.png) no-repeat center/contain;
   }
+  .main .promo_top .interview_wrap .interview .slick-slide {
+    width: calc(100% - 310px);
+  }
   .main .promo_top .interview_wrap .interview:not(.slick-initialized) {
     display: block;
   }
@@ -5151,7 +5194,7 @@ section .fp-tableCell {
     padding: 0 8px;
   }
   .main .promo_top .interview_wrap .interview.slick-initialized .slick-slide > div {
-    width: 250px;
+    max-width: 250px;
     margin: 0 auto;
   }
   .main .promo_top .interview_wrap .interview.slick-initialized .slick-slide > div a {
@@ -5225,7 +5268,7 @@ section .fp-tableCell {
     border-radius: 20px;
   }
   .main .promo_bottom .video_box .video_text b {
-    margin-top: 20px;
+    margin-top: 20p;
   }
   .main .promo_bottom .video_box .video_text span {
     font-size: 1.0625rem;
@@ -5237,6 +5280,7 @@ section .fp-tableCell {
   .main .promo_bottom .sns_box {
     width: 100%;
     height: auto;
+    max-width: 100%;
     padding: 30px;
     background-size: 250px;
     background-position: right 18px bottom -49px;
@@ -5256,6 +5300,7 @@ section .fp-tableCell {
   }
   .main .promo_bottom .history_box {
     width: 100%;
+    max-width: 100%;
     height: auto;
     padding: 30px;
     background-size: 50px;

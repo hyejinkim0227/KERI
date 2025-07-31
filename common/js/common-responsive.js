@@ -69,10 +69,13 @@ function initFullpage() {
   
   try {
     $('#fullpage').fullpage({
-      responsiveWidth: 901,
+      responsiveWidth: 0, // 반응형 모드 비활성화
       anchors: ["page1", "page2", "page3", "page4", "page5", "page6"],
       menu: '#indicator',
       startingSlide: 0,
+      autoScrolling: true,
+      fitToSection: true,
+      scrollOverflow: false,
       afterLoad: function(anchorLink, index){
         animation_move(index);
         
@@ -174,11 +177,50 @@ function destroyFullpage() {
   }
 }
 
+
+/**
+ * PC 모드 초기화 함수
+ */
+function initPcMode() {
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+  var wrapper = document.getElementById('wrapper');
+  
+  if (!wrapper) return;
+  
+  if (windowWidth >= 1080) {
+    // 1080px 이상: PC 모드 활성화
+    wrapper.classList.add('pc-mode');
+    
+    // 콘텐츠가 화면에 꽉 맞도록 scale 계산
+    var minWidth = 1920; // CSS에서 설정한 min-width
+    var scale = windowWidth / minWidth; // 창 크기에 따라 비율 계산
+    
+    // 최소 스케일 제한 (너무 작아지지 않도록)
+    scale = Math.max(scale, 0.5);
+    
+    // CSS 변수로 scale 값 설정
+    wrapper.style.setProperty('--scale', scale);
+    
+    console.log(`PC Mode activated - Window: ${windowWidth}x${windowHeight}px, Scale: ${scale.toFixed(3)}`);
+    
+  } else {
+    // 1080px 미만: PC 모드 비활성화
+    wrapper.classList.remove('pc-mode');
+    wrapper.style.removeProperty('--scale');
+    
+    console.log('PC Mode deactivated');
+  }
+}
+
 /**
  * 반응형 기능 초기화
  */
 function initResponsiveFeatures() {
   var windowWidth = window.innerWidth;
+  
+  // PC 모드 임시 비활성화 (디버깅용)
+  // initPcMode();
   
   if (windowWidth > 900) {
     // 900px 초과: AOS와 fullPage.js 활성화

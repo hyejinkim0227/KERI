@@ -499,3 +499,27 @@ $m720: 720px;
 }
 
 
+
+#wrapper.main {
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  transform-origin: left top;
+
+  &.pc-mode {
+    min-width: 1920px;
+    transform: scale(var(--scale));
+    transform-origin: left top;
+    
+    // PC 모드에서도 fullPage.js가 정상 동작하도록
+    #fullpage {
+      // 기본 fullPage.js 동작 유지
+    }
+  }
+
+  &:not(.pc-mode) {
+    min-width: unset;
+    width: 100%;
+    transform: none;
+  }
+}

@@ -1839,7 +1839,7 @@ function managePageLayout() {
     if ($('#fullpage').length) {
         var windowWidth = $(window).width();
 
-        if (windowWidth > 900) {
+        if (windowWidth > 1080) {
             // --- DESKTOP MODE ---
             $('body').removeClass('is-mobile');
 
@@ -1847,7 +1847,7 @@ function managePageLayout() {
             if (!$('html').hasClass('fp-enabled')) {
                 $('#fullpage').fullpage({
                     // Using a high responsiveWidth to ensure our logic takes precedence
-                    responsiveWidth: 900,
+                    responsiveWidth: 1080,
                     anchors: ["page1", "page2", "page3", "page4", "page5", "page6"],
                     menu: '#indicator',
                     afterLoad: function(anchorLink, index) {

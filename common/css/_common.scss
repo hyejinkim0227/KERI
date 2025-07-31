@@ -136,7 +136,7 @@
   }
 
   // 반응형 - 모바일 (720px 이하)
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1080px) {
     display: none;
   }
 }
@@ -149,6 +149,7 @@
   right: 0;
   overflow: visible;
   z-index: 100;
+  width: 100%;
 
   .top_menu {
     display: flex;
@@ -170,6 +171,8 @@
     }
   }
   .head {
+    padding-left: 40px;
+    margin-left: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -369,15 +372,15 @@
   .util {
     display: flex;
     align-items: center;
-    width: 380px;
+    width: 350px;
     justify-content: space-between;
     padding-left: 38px;
-    gap: 26px;
+
     .lang {
-      height: 40px;
+      height: 85px;
+      line-height: 85px;
+      vertical-align: middle;
       padding-left: 30px;
-      line-height: 41px;
-      line-height: 41px;
       font-family: $ff-sbaggro;
       font-weight: 300;
       font-size: $fs-13;
@@ -386,7 +389,9 @@
         20px 21px;
     }
     .popup_zone {
-      line-height: 40px;
+      height: 85px;
+      line-height: 85px;
+      vertical-align: middle;
       width: 140px;
       padding-left: 27px;
       background: url(../images/common/icon_popup_zone.png) no-repeat left center/20px;
@@ -397,6 +402,9 @@
       font-size: $fs-13;
     }
     .search_box {
+      height: 85px;
+      line-height: 85px;
+      vertical-align: middle;
       display: none;
       position: absolute;
       left: 0;
@@ -483,8 +491,8 @@
     }
 
     .search_open {
-      padding: 10px 16px 10px 13px;
-      height: 40px;
+      padding: 10px;
+      height:50px;
       width: 40px;
       background: url(../images/common/icon_head_search.png) no-repeat center;
       vertical-align: middle;
@@ -494,7 +502,8 @@
     }
 
     .sitemap_open {
-      width: 40px;
+      padding-right: 10px;
+      width: 50px;
       height: 40px;
       background: url(../images/common/icon_sitemap_open.png) no-repeat center;
       vertical-align: middle;
@@ -1563,7 +1572,7 @@ body.sitemap-open {
     }
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1080px) {
   margin-top: 45px;
   padding: 0;
   background: #f8f8f8;
