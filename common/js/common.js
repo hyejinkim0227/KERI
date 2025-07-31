@@ -1315,7 +1315,7 @@ $(document).ready(function() {
       
       const targetIndex = sectionIndex[navType];
       if (targetIndex) {
-        $.fn.fullpage.moveTo(targetIndex);
+        $.fn.fullpage.moveTo(1);
       }
     } else {
       // 모바일 환경에서는 기존 스크롤 애니메이션 사용
@@ -1836,107 +1836,83 @@ function onYouTubeIframeAPIReady() {
 window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
 function managePageLayout() {
-    if ($('#fullpage').length) {
-        var windowWidth = $(window).width();
+  if ($('#fullpage').length) {
+      var windowWidth = $(window).width();
 
-        if (windowWidth > 1080) {
-            // --- DESKTOP MODE ---
-            $('body').removeClass('is-mobile');
+      if (windowWidth > 1080) {
+          // --- DESKTOP MODE ---
+          $('body').removeClass('is-mobile');
 
-            // Initialize fullpage.js if not already active
-            if (!$('html').hasClass('fp-enabled')) {
-                $('#fullpage').fullpage({
-                    // Using a high responsiveWidth to ensure our logic takes precedence
-                    responsiveWidth: 1080,
-                    anchors: ["page1", "page2", "page3", "page4", "page5", "page6"],
-                    menu: '#indicator',
-                    afterLoad: function(anchorLink, index) {
-                        animation_move(index);
-                        var $header = $('.header');
-                        var isMenuOpen = $header.hasClass('active') || $('.header #gnb > ul > li.active').length > 0;
-                        if (index === 1) {
-                            if (!isMenuOpen) { $header.removeClass('scrolled'); }
-                        } else {
-                            $header.addClass('scrolled');
-                        }
-                        var $topBtn = $('#topBtn');
-                        if (index === 1) {
-                            $topBtn.removeClass('show');
-                        } else {
-                            $topBtn.addClass('show');
-                        }
-                        const section = $('#fullpage .section').eq(index - 1)[0];
-                        if (section) {
-                            section.querySelectorAll('[data-aos]').forEach(el => {
-                                el.classList.add('aos-animate');
-                            });
-                        }
-                        const $currentSection = $('#fullpage .section').eq(index - 1);
-                        const navType = $currentSection.data('mainnavi');
-                        if (navType) {
-                            $('#indicator li').removeClass('active');
-                            $(`#indicator li[data-mainnavi="${navType}"]`).addClass('active');
-                            if (navType === 'footer') {
-                                $('#indicator').css('opacity', '0');
-                            } else {
-                                $('#indicator').css('opacity', '1');
-                            }
-                        }
-                    },
-                    onLeave: function(index, nextIndex, direction) {
-                        const prevSection = $('#fullpage .section').eq(index - 1)[0];
-                        if (prevSection) {
-                            prevSection.querySelectorAll('[data-aos]').forEach(el => {
-                                el.classList.remove('aos-animate');
-                            });
-                        }
-                    }
-                });
-            }
+          // Initialize fullpage.js if not already active
+          if (!$('html').hasClass('fp-enabled')) {
+              $('#fullpage').fullpage({
+                  responsiveWidth: 1080, // fullpage.js는 1080px 이하에서 비활성화
+                  anchors: ["page1", "page2", "page3", "page4", "page5", "page6"],
+                  menu: '#indicator',
+                  afterLoad: function(anchorLink, index) {
+                      animation_move(index);
+                      var $header = $('.header');
+                      var isMenuOpen = $header.hasClass('active') || $('.header #gnb > ul > li.active').length > 0;
+                      if (index === 1) {
+                          if (!isMenuOpen) { $header.removeClass('scrolled'); }
+                      } else {
+                          $header.addClass('scrolled');
+                      }
+                      var $topBtn = $('#topBtn');
+                      if (index === 1) {
+                          $topBtn.removeClass('show');
+                      } else {
+                          $topBtn.addClass('show');
+                      }
+                      const section = $('#fullpage .section').eq(index - 1)[0];
+                      if (section) {
+                          section.querySelectorAll('[data-aos]').forEach(el => {
+                              el.classList.add('aos-animate');
+                          });
+                      }
+                  },
+                  onLeave: function(index, nextIndex, direction) {
+                      const prevSection = $('#fullpage .section').eq(index - 1)[0];
+                      if (prevSection) {
+                          prevSection.querySelectorAll('[data-aos]').forEach(el => {
+                              el.classList.remove('aos-animate');
+                          });
+                      }
+                  }
+              });
+          }
+          // AOS 초기화
+          if (typeof AOS !== 'undefined') {
+              $('body').removeClass('aos-disabled');
+              AOS.init({ once: true, mirror: false });
+          }
+      } else {
+          // --- MOBILE MODE ---
+          $('body').addClass('is-mobile');
+          // fullpage.js 비활성화
+          if ($('html').hasClass('fp-enabled')) {
+              $.fn.fullpage.destroy('all');
+          }
+          // 모든 섹션에 자동 높이 설정
+          $('.section').css('height', 'auto');
 
-            // Initialize AOS
-            if (typeof AOS !== 'undefined') {
-                $('body').removeClass('aos-disabled');
-                AOS.init({ once: true, mirror: false });
-                 // Manually trigger animation for the first section on load
-                setTimeout(function() {
-                    const firstSection = $('#fullpage .section').first()[0];
-                    if (firstSection) {
-                        firstSection.querySelectorAll('[data-aos]').forEach(el => {
-                            el.classList.add('aos-animate');
-                        });
-                    }
-                }, 500);
-            }
-
-        } else {
-            // --- MOBILE MODE ---
-            $('body').addClass('is-mobile');
-
-            // Destroy fullpage.js if it's active
-            if ($('html').hasClass('fp-enabled')) {
-                $.fn.fullpage.destroy('all');
-            }
-            
-            // Ensure all sections have auto height for normal scrolling
-            $('.section').css('height', 'auto');
-
-            // Disable AOS and make elements visible
-            if (typeof AOS !== 'undefined') {
-                 $('body').addClass('aos-disabled');
-                 $('[data-aos]').removeClass('aos-init aos-animate').css({
-                    'opacity': 1,
-                    'transform': 'none'
-                 });
-            }
-        }
-        
-        // Refresh sliders on layout change
-        if ($('.slick-initialized').length > 0) {
-            $('.slick-initialized').slick('refresh');
-        }
-    }
+          // AOS 비활성화
+          if (typeof AOS !== 'undefined') {
+              $('body').addClass('aos-disabled');
+              $('[data-aos]').removeClass('aos-init aos-animate').css({
+                  'opacity': 1,
+                  'transform': 'none'
+              });
+          }
+      }
+      
+      // 슬라이더 새로고침
+      if ($('.slick-initialized').length > 0) {
+          $('.slick-initialized').slick('refresh');
+      }
+  }
 }
+
 
 /**
  * 섹션 애니메이션 함수
@@ -1946,16 +1922,26 @@ function animation_move(index){
     $('#fullpage .section').eq(index-1).find('.inner_sp').addClass('on');
 }
 
-// Initial setup on document ready
+// 문서 로드 시 managePageLayout 호출
 $(document).ready(function() {
-    managePageLayout();
+  // 새로고침 시 URL에 해시(#)가 있으면 첫 페이지로 리셋
+  if (window.location.hash) {
+    // fullpage.js에서 사용하는 앵커인지 확인
+    var fullpageAnchors = ["page1", "page2", "page3", "page4", "page5", "page6"];
+    var currentAnchor = window.location.hash.substring(1);
+    if (fullpageAnchors.indexOf(currentAnchor) > -1) {
+      // 브라우저 히스토리에 새 항목을 추가하지 않고 URL에서 해시를 제거
+      history.replaceState(null, document.title, window.location.pathname + window.location.search);
+    }
+  }
+  managePageLayout();
 });
 
-// Handle layout changes on window resize
+// 창 크기 변경 시 managePageLayout을 새로 고침 (디바운싱 적용)
 var resizeTimer;
 $(window).on('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-        managePageLayout();
-    }, 250); // Debounce resize event
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+      managePageLayout();  // 페이지 레이아웃 새로 고침
+  }, 250); // Debounce 적용
 });

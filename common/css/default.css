@@ -641,8 +641,9 @@ iframe {
   gap: 25px 34px;
   background: #fff;
   padding: 32px 0 40px 50px;
-  overflow-y: scroll;
-  max-height: 700px;
+  overflow-y: auto;
+  max-height: 90vh;
+  height: auto;
 }
 .header #gnb .dep2_wrap > ul > li {
   max-width: 280px;
