@@ -573,385 +573,6 @@ $(function () {
     }
   });
 
-  // 메인배너 슬라이드 초기화 (.main_banner .slide)
-  var mbSlide = $('.main_banner .slide');
-  mbSlide.slick({
-    centerMode: true, // 중앙 모드 활성화
-    variableWidth: true, // 가변 너비 활성화
-    autoplay: true, // 자동 재생 활성화
-    cssEase: 'ease-in', // CSS 이징 효과
-    dots: false, // 페이지네이션 점 비활성화
-    adaptiveHeight: true, // 슬라이드 높이에 따라 동적으로 높이 조절
-    prevArrow: $('.main_banner .prev'), // 이전 버튼 사용자 정의
-    nextArrow: $('.main_banner .next'), // 다음 버튼 사용자 정의
-    autoplaySpeed: 12000, // 자동 재생 간격 (밀리초)
-    responsive: [ // 반응형 설정
-      {
-        breakpoint: 1300, // 1300px 이하 화면 크기에서
-        settings: { // 다음 설정 적용
-          variableWidth: false, // 가변 너비 비활성화
-          centerMode: false, // 중앙 모드 비활성화
-          slidesToShow: 1, // 한 번에 하나의 슬라이드만 표시
-        },
-      },
-    ],
-  });
-
-  // 메인배너 슬라이드 정지/재생 버튼 클릭 이벤트
-  $('.main_banner .pause').click(function () {
-    if ($(this).hasClass('play')) {
-      $(this).removeClass('play').text('자동재생 정지');
-      $('.main_banner .slide').slick('slickPlay'); // 슬라이드 재생
-    } else {
-      $(this).addClass('play').text('자동재생 시작');
-      $('.main_banner .slide').slick('slickPause'); // 슬라이드 정지
-    }
-  });
-
-  // 사이드 배너 슬라이드 초기화 (.side_banner .slide)
-  var sideBanner = $('.side_banner .slide');
-  sideBanner.slick({
-    autoplay: true, // 자동 재생 활성화
-    cssEase: 'ease-in', // CSS 이징 효과
-    dots: true, // 페이지네이션 점 활성화
-    fade: true, // 페이드 효과 활성화
-    appendDots: $('.side_banner .pagination_dot'), // 페이지네이션 점을 추가할 요소 지정
-    customPaging: function (slide, i) { // 사용자 정의 페이지네이션 점 HTML
-      return '<button type="button">' + (i + 1) + '번째 슬라이드로 이동</button>';
-    },
-    arrows: false, // 화살표 버튼 비활성화
-  });
-
-  // 사이드 배너 슬라이드 정지/재생 버튼 클릭 이벤트
-  $('.side_banner .pause').click(function () {
-    if ($(this).hasClass('play')) {
-      $(this).removeClass('play').text('자동재생 정지');
-      sideBanner.slick('slickPlay'); // 슬라이드 재생
-    } else {
-      $(this).addClass('play').text('자동재생 시작');
-      sideBanner.slick('slickPause'); // 슬라이드 정지
-    }
-  });
-
-  // 홍보영상 슬라이드 초기화 (.promotion .slide)
-  var proSlide = $('.promotion .slide');
-  proSlide.slick({
-    autoplay: true, // 자동 재생 활성화
-    cssEase: 'ease-in', // CSS 이징 효과
-    dots: true, // 페이지네이션 점 활성화
-    appendDots: $('.promotion .pagination_dot'), // 페이지네이션 점을 추가할 요소 지정
-    customPaging: function (slide, i) { // 사용자 정의 페이지네이션 점 HTML
-      return '<button type="button">' + (i + 1) + '번째 슬라이드로 이동</button>';
-    },
-    arrows: false, // 화살표 버튼 비활성화
-  });
-
-  // 홍보영상 슬라이드 정지/재생 버튼 클릭 이벤트
-  $('.promotion .pause').click(function () {
-    if ($(this).hasClass('play')) {
-      $(this).removeClass('play').text('자동재생 정지');
-      proSlide.slick('slickPlay'); // 슬라이드 재생
-    } else {
-      $(this).addClass('play').text('자동재생 시작');
-      proSlide.slick('slickPause'); // 슬라이드 정지
-    }
-  });
-
-  // 푸터 배너 슬라이드 초기화 (.f_banner .slide)
-  var f_banner = $('.f_banner .slide');
-  // 슬라이드 초기화, 재초기화, 슬라이드 변경 후 이벤트 시 페이지네이션 번호 업데이트
-  f_banner.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
-    var i = (currentSlide ? currentSlide : 0) + 1;
-    $('.f_banner .pagination_num').html('<span class="current">' + i + '</span> / ' + slick.slideCount);
-  });
-  f_banner.slick({
-    variableWidth: true, // 가변 너비 활성화
-    autoplay: true, // 자동 재생 활성화
-    cssEase: 'ease-in', // CSS 이징 효과
-    arrows: false, // 화살표 버튼 비활성화
-    slidesToShow: 8, // 한 번에 8개의 슬라이드 표시
-    infinite: true, // 무한 루프 활성화
-    dots: true, // 페이지네이션 점 활성화
-    appendDots: $('.f_banner .pagination_dot'), // 페이지네이션 점을 추가할 요소 지정
-    customPaging: function (slide, i) { // 사용자 정의 페이지네이션 점 HTML
-      return '<button type="button">' + (i + 1) + '번째 슬라이드로 이동</button>';
-    },
-    accessibility: true, // 접근성 기능 활성화
-    autoplaySpeed: 2000, // 자동 재생 간격 (밀리초)
-    responsive: [ // 반응형 설정
-      {
-        breakpoint: 1400,
-        settings: {
-          slidesToShow: 7,
-        }
-      },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 6,
-        }
-      },
-      {
-        breakpoint: 1000,
-        settings: {
-          slidesToShow: 5,
-        }
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 4,
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 3,
-        }
-      },
-      {
-        breakpoint: 400,
-        settings: {
-          slidesToShow: 2,
-        }
-      },
-    ]
-  });
-
-  // 푸터 배너 슬라이드 정지/재생 버튼 클릭 이벤트
-  $('.f_banner .pause').click(function () {
-    if ($(this).hasClass('play')) {
-      $(this).removeClass('play').text('자동재생 정지');
-      f_banner.slick('slickPlay'); // 슬라이드 재생
-    } else {
-      $(this).addClass('play').text('자동재생 시작');
-      f_banner.slick('slickPause'); // 슬라이드 정지
-    }
-  });
-
-  // 팝업 슬라이드 초기화 (.pop_banner .slide)
-  var popSlide = $('.pop_banner .slide');
-  // 슬라이드 초기화, 재초기화, 슬라이드 변경 후 이벤트 시 페이지네이션 번호 업데이트
-  popSlide.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
-    var i = (currentSlide ? currentSlide : 0) + 1;
-    $('.pop_banner .pagination_num').html('<span class="current">' + i + '</span> / ' + slick.slideCount);
-  });
-
-  popSlide.slick({
-    autoplay: true, // 자동 재생 활성화
-    cssEase: 'ease-in', // CSS 이징 효과
-    dots: false, // 페이지네이션 점 비활성화
-    variableWidth: true, // 가변 너비 활성화
-    infinite: true, // 무한 루프 활성화
-    slidesToShow: 3, // 한 번에 3개의 슬라이드 표시
-    prevArrow: $('.pop_banner .prev'), // 이전 버튼 사용자 정의
-    nextArrow: $('.pop_banner .next'), // 다음 버튼 사용자 정의
-    responsive: [ // 반응형 설정
-      {
-        breakpoint: 1080, // 1080px 이하 화면 크기에서
-        settings: { // 다음 설정 적용
-          centerMode: true, // 중앙 모드 활성화
-        }
-      },
-    ]
-  });
-
-  // 팝업 슬라이드 정지/재생 버튼 클릭 이벤트
-  $('.pop_banner .pause').click(function () {
-    if ($(this).hasClass('play')) {
-      $(this).removeClass('play').text('자동재생 정지');
-      popSlide.slick('slickPlay'); // 슬라이드 재생
-    } else {
-      $(this).addClass('play').text('자동재생 시작');
-      popSlide.slick('slickPause'); // 슬라이드 정지
-    }
-  });
-
-  // 일반 배너 슬라이드 초기화 (.banner .slide)
-  var Slider = $('.banner .slide');
-  // 슬라이드 초기화, 재초기화, 슬라이드 변경 후 이벤트 시 페이지네이션 번호 업데이트
-  Slider.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
-    var i = (currentSlide ? currentSlide : 0) + 1;
-    $('.banner .pagination_num').html('<span class="current">' + i + '</span>/' + slick.slideCount);
-  });
-  // 슬라이더 요소가 존재할 경우 초기화
-  if (Slider.length > 0) {
-    Slider.slick({
-      centerPadding: 0, // 중앙 모드에서 좌우 패딩
-      fade: true, // 페이드 효과 활성화
-      dots: false, // 페이지네이션 점 비활성화
-      speed: 800, // 애니메이션 속도
-      autoplay: true, // 자동 재생 활성화
-      cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)', // CSS 이징 효과
-      infinite: true, // 무한 루프 활성화
-      autoplaySpeed: 12000, // 자동 재생 간격
-      prevArrow: $('.banner .prev'), // 이전 버튼 사용자 정의
-      nextArrow: $('.banner .next'), // 다음 버튼 사용자 정의
-    });
-  }
-
-  // 일반 배너 슬라이드 2 초기화 (.banner2 .slide)
-  var Slider2 = $('.banner2 .slide');
-  // 슬라이드 초기화, 재초기화, 슬라이드 변경 후 이벤트 시 페이지네이션 번호 업데이트 (01/0N 형식)
-  Slider2.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
-    var i = (currentSlide ? currentSlide : 0) + 1;
-    $('.banner2 .pagination_num').html('<span class="current">0' + i + '</span>/0' + slick.slideCount);
-  });
-  // 슬라이더 요소가 존재할 경우 초기화
-  if (Slider2.length > 0) {
-    Slider2.slick({
-      centerPadding: 0, // 중앙 모드에서 좌우 패딩
-      dots: false, // 페이지네이션 점 비활성화
-      speed: 800, // 애니메이션 속도
-      autoplay: true, // 자동 재생 활성화
-      cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)', // CSS 이징 효과
-      infinite: true, // 무한 루프 활성화
-      autoplaySpeed: 4000, // 자동 재생 간격
-      prevArrow: $('.banner2 .prev'), // 이전 버튼 사용자 정의
-      nextArrow: $('.banner2 .next'), // 다음 버튼 사용자 정의
-    });
-  }
-
-  // 일반 슬라이더 제어 버튼(`.btn.pause`) 클릭 이벤트
-  $('.btn.pause').click(function () {
-    if ($(this).hasClass('play')) {
-      $(this).removeClass('play').children('.hide').text('일시정지');
-      $(this).parent().prev().slick('slickPlay'); // 이전 형제 슬라이더 재생
-    } else {
-      $(this).addClass('play').children('.hide').text('자동시작');
-      $(this).parent().prev().slick('slickPause'); // 이전 형제 슬라이더 정지
-    }
-  });
-  // 슬라이더 내 iframe에 마우스 진입 시 슬라이더 정지
-  Slider.find('iframe').on('mouseenter', function () {
-    $('.btn.pause').addClass('play').children('.hide').text('자동시작');
-    $('.btn.pause').parent().prev().slick('slickPause');
-  });
-
- 
-
-  // LNB(로컬 내비게이션 바) 1단계 메뉴 링크 클릭 이벤트
-  $('.lnb > li > a').click(function (e) {
-    // 현재 LNB 항목이 'active' 상태일 경우 (열려있는 상태)
-    if ($(this).parent().hasClass('active')) {
-      closeLnb(); // LNB 닫기 함수 호출
-      e.preventDefault(); // 기본 링크 동작 방지
-    // 현재 LNB 항목이 'selected' 상태일 경우
-    } else if ($(this).parent().hasClass('selected')) {
-      e.preventDefault(); // 기본 링크 동작 방지
-    // 현재 LNB 항목이 'menu_btn' 클래스를 가지고 있을 경우 (하위 메뉴가 있는 경우)
-    } else if ($(this).hasClass('menu_btn')) {
-      closeLnb(); // 다른 LNB 항목 닫기
-      // 현재 링크의 타이틀을 '하위메뉴 열림'으로 변경하고 하위 메뉴를 슬라이드 다운하여 엽니다.
-      $(this).attr('title', '하위메뉴 열림').next().stop().slideDown(
-        function () {
-          resizeContentHeight(); // 콘텐츠 높이 조절 함수 호출
-        }
-      );
-      $(this).parent().addClass('active'); // 현재 항목에 'active' 클래스 추가
-      e.preventDefault(); // 기본 링크 동작 방지
-    } else {
-      // 그 외의 경우 (하위 메뉴가 없는 일반 링크)
-      closeLnb(); // 다른 LNB 항목 닫기
-      resetLnb(); // 선택된 LNB 상태 초기화
-      $(this).parent().addClass('active'); // 현재 항목에 'active' 클래스 추가
-    }
-  });
-
-  // LNB 2단계 메뉴 링크 클릭 이벤트
-  $('.lnb ol > li > a').click(function () {
-    resetLnb(); // 선택된 LNB 상태 초기화
-    $(this).parent().addClass('active').siblings('li').removeClass('active'); // 클릭된 항목 활성화, 형제 항목 비활성화
-  });
-
-  // 아코디언(`.acodian2`) 외부 클릭 이벤트: 아코디언 닫기
-  $(document).on('click', function (event) {
-    // 클릭된 요소가 `.acodian2 button`의 자손이 아닐 경우
-    if (!$(event.target).closest('.acodian2 button').length) {
-      // 모든 `.acodian2 ul`을 슬라이드 업하여 닫고, 부모 'li'에서 'active' 클래스를 제거합니다.
-      // 버튼의 타이틀과 숨김 텍스트를 '열기'로 변경합니다.
-      $('.acodian2 ul').stop().slideUp().parents('li').removeClass('active').find('button').attr('title', '열기').find('.hide').text('열기');
-    }
-  });
-
-  // 공통 아코디언(`.acodian2 > li > button`) 클릭 이벤트
-  $('.acodian2 > li > button').click(function () {
-    var parents = $(this).closest('li'); // 클릭된 버튼의 부모 `li` 요소
-    if (parents.hasClass('active')) {
-      // 현재 항목이 활성화된 상태일 경우 비활성화
-      parents.removeClass('active');
-      $(this).attr('title', '열기').find('.hide').text('열기');
-    } else {
-      // 현재 항목이 비활성화된 상태일 경우 활성화
-      parents.addClass('active');
-      $(this).attr('title', '닫기').find('.hide').text('닫기');
-    }
-    // 현재 항목의 다음 형제(콘텐츠)를 슬라이드 토글하고,
-    // 다른 형제 항목들의 콘텐츠는 슬라이드 업하여 닫습니다.
-    $(this).next().stop().slideToggle(300).closest('li').siblings('li').children('button').next().stop().slideUp(300);
-  });
-
-  //공통 - 탭컨텐츠
-  $('.tab_box > li > button').on('click', function () {
-    $(this).closest('li').addClass('active').closest('li').siblings('li').removeClass('active');
-    tabBoxSizing();
-    $(this).attr('title', '탭 선택됨').closest('li').siblings().find('button').attr('title', '탭');
-  });
-
-
-  // 초기 슬라이더 설정
-  initNewsSlider();
-
-  // 창 크기 변경 시 다시 초기화
-  $(window).on('resize', function() {
-    initNewsSlider();
-  });
-
-  // 초기 뉴스 슬라이더 설정 및 창 크기 변경 시 재초기화
-  initNewsSlider();
-  $(window).on('resize', function() {
-    initNewsSlider();
-  });
-
-  $('.modal_open_close').on('click', function () {//팝업 닫기 버튼 닫기
-    $(this).hide();
-    $('.btn_quick .pop').css('visibility', 'hidden');
-  });
-
-  // 뉴스 탭 메뉴 기능
-  console.log('뉴스 탭 메뉴 이벤트 바인딩 시작');
-  
-  $('.news_tab_menu li').on('click', function(){
-    console.log('뉴스 탭 li 클릭됨', $(this));
-    // 만약 `li` 내에 `a` 태그가 있다면 (링크 기능이 있다면) 함수 실행을 중단합니다.
-    if( $(this).find('a').length ) {
-      console.log('a 태그가 있어서 리턴');
-      return;
-    }
-    var idx = $(this).index(); // 클릭된 탭의 인덱스 가져오기
-    console.log('탭 인덱스:', idx);
-    $(this).addClass('active').siblings().removeClass('active'); // 클릭된 탭 활성화, 형제 탭 비활성화
-    $('.news_tab_content .tab_panel').eq(idx).addClass('active').siblings().removeClass('active'); // 해당 콘텐츠 활성화
-    initNewsSlider(); // 뉴스 슬라이더 초기화 함수 호출
-  });
-  
-  // 뉴스 탭 메뉴 버튼 직접 클릭 이벤트
-  $('.news_tab_menu li button').on('click', function(){
-    console.log('뉴스 탭 button 클릭됨', $(this));
-    var $li = $(this).closest('li');
-    var idx = $li.index(); // 클릭된 탭의 인덱스 가져오기
-    console.log('버튼 탭 인덱스:', idx);
-    $li.addClass('active').siblings().removeClass('active'); // 클릭된 탭 활성화, 형제 탭 비활성화
-    $('.news_tab_content .tab_panel').eq(idx).addClass('active').siblings().removeClass('active'); // 해당 콘텐츠 활성화
-    initNewsSlider(); // 뉴스 슬라이더 초기화 함수 호출
-  });
-
-  //모바일의 경우 테이블 스타일 변환
-  if (!pcChk(720)) {
-    tableChange();
-  }
-
-
 });
 
 $(window).on('resize', function () {
@@ -1003,6 +624,44 @@ $(window).on('resize', function () {
   }
 });
 
+// 모바일 메인 배너 토글 기능
+function initMobileMainBannerToggle() {
+  var isAnimating = false; // 애니메이션 진행 중 플래그
+  
+  $('.m_main_banner_right_btn').off('click').on('click', function() {
+    var $btn = $(this);
+    var container = $btn.closest('.main_banner_right');
+    
+    // 1080px 이하에서만 동작하고, 애니메이션 중이 아닐 때만
+    if ($(window).width() <= 1080 && !isAnimating) {
+      isAnimating = true;
+      
+      container.toggleClass('toggle-open');
+      
+      // 버튼 텍스트 변경
+      if (container.hasClass('toggle-open')) {
+        $btn.text('한국전기연구원 최신성과 및 영상 닫기');
+      } else {
+        $btn.text('한국전기연구원 최신성과 및 영상 열기');
+      }
+      
+      // 애니메이션 완료 후 플래그 리셋 (CSS transition 시간과 맞춤)
+      setTimeout(function() {
+        isAnimating = false;
+      }, 450); // 0.4s transition + 여유시간
+    }
+  });
+  
+  // 리사이즈 시 데스크톱에서는 토글 상태 리셋
+  $(window).off('resize.mobileToggle').on('resize.mobileToggle', function() {
+    if ($(window).width() > 1080) {
+      $('.main_banner_right').removeClass('toggle-open');
+      $('.m_main_banner_right_btn').text('한국전기연구원 최신성과 및 영상 열기');
+      isAnimating = false; // 플래그도 리셋
+    }
+  });
+}
+
 $(window).on('load', function () {
   //lnb 컨텐츠 높이 통일
   resizeContentHeight();
@@ -1015,6 +674,9 @@ $(window).on('load', function () {
   
   // 헤더 스크롤 이벤트 초기화
   initHeaderScroll();
+  
+  // 모바일 메인 배너 토글 초기화
+  initMobileMainBannerToggle();
 });
 
 function slick_on_pc(slider, settings) {
@@ -1030,6 +692,7 @@ function slick_on_pc(slider, settings) {
     }
   });
 };
+
 
 // 도메인 슬라이더 초기화 (slick.js 사용)
 function initDomainSlider() {
@@ -1053,11 +716,11 @@ function initDomainSlider() {
       $('.domain-content.slider-for').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        centerMode: true,
-        centerPadding: '20px',
+        centerMode: false,
+       // centerPadding: '20px',
         dots: true,
         arrows: false,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 4000,
         pauseOnHover: true,
         infinite: true,
@@ -1081,12 +744,12 @@ function initDomainSlider() {
       
       $('.domain-controls .pause').on('click', function() {
         var slider = $('.domain-content.slider-for');
-        if ($(this).hasClass('paused')) {
+        if ($(this).hasClass('play')) {
           slider.slick('slickPlay');
-          $(this).removeClass('paused');
+          $(this).removeClass('play');
         } else {
           slider.slick('slickPause');
-          $(this).addClass('paused');
+          $(this).addClass('play');
         }
       });
       
@@ -1103,15 +766,18 @@ function initDomainSlider() {
       slidesToScroll: 1,
       arrows: false,
       fade: true,
+      infinite: true, // 무한 롤링 활성화
       asNavFor: '.domain-nav.slider-nav',
       autoplay: true,
       autoplaySpeed: 4000,
-      pauseOnHover: true
+      pauseOnHover: true,
+      speed: 500, // 전환 속도 설정
+      cssEase: 'cubic-bezier(0.4, 0, 0.2, 1)' // 부드러운 전환 효과
     });
     
     // 네비게이션 슬라이더 (세로 방향)
     $('.domain-nav.slider-nav').slick({
-      slidesToShow: 9,
+      slidesToShow: 7,
       slidesToScroll: 1,
       asNavFor: '.domain-content.slider-for',
       vertical: true,
@@ -1121,12 +787,11 @@ function initDomainSlider() {
       focusOnSelect: true,
       infinite: true,
       arrows: false,
-      initialSlide: 4,
+      initialSlide: 5, // 첫 번째 슬라이드부터 시작
       speed: 500,
       cssEase: 'cubic-bezier(0.4, 0, 0.2, 1)',
       waitForAnimate: false, // 애니메이션 대기 비활성화
       useTransform: true, // CSS transform 사용
-      adaptiveHeight: true, // 높이 자동 조정
       responsive: [
         {
           breakpoint: 1080,
@@ -1135,7 +800,8 @@ function initDomainSlider() {
             verticalSwiping: false,
             slidesToShow: 1,
             centerMode: true,
-            centerPadding: '20px'
+            centerPadding: '20px',
+            initialSlide: 0 // 모바일에서도 첫 번째 슬라이드부터 시작
           }
         }
       ]
@@ -1146,21 +812,6 @@ function initDomainSlider() {
       $('.domain-nav.slider-nav').slick('refresh');
       $('.domain-content.slider-for').slick('refresh');
     }, 100);
-    
-    // 콘텐츠 슬라이더 설정도 무한 롤링되도록 수정
-    $('.domain-content.slider-for').slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false,
-      fade: true,
-      infinite: true, // 무한 롤링 활성화
-      asNavFor: '.domain-nav.slider-nav',
-      autoplay: true,
-      autoplaySpeed: 4000,
-      pauseOnHover: true,
-      speed: 500, // 전환 속도 설정
-      cssEase: 'cubic-bezier(0.4, 0, 0.2, 1)' // 부드러운 전환 효과
-    });
     
     // PC 슬라이더 이벤트 처리
     $('.domain-nav.slider-nav').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
@@ -1186,12 +837,12 @@ function initDomainSlider() {
     
     $('.domain-controls .pause').on('click', function() {
       var slider = $('.domain-content.slider-for');
-      if ($(this).hasClass('paused')) {
+      if ($(this).hasClass('play')) {
         slider.slick('slickPlay');
-        $(this).removeClass('paused');
+        $(this).removeClass('play');
       } else {
         slider.slick('slickPause');
-        $(this).addClass('paused');
+        $(this).addClass('play');
       }
     });
     
@@ -1232,7 +883,7 @@ $(document).ready(function() {
       // 스크롤 이벤트 핸들러 (fullpage.js가 비활성화된 환경에서만 동작)
     $(window).on('scroll', function() {
       // fullpage.js가 활성화된 환경(PC)에서는 실행하지 않음
-      if ($(window).width() > 720) {
+      if ($(window).width() > 1080) {
         return;
       }
       
@@ -1247,7 +898,7 @@ $(document).ready(function() {
       const windowHeight = $(window).height();
       
       // contents 영역에서 indicator 표시, 푸터 직전까지만
-      if (scrollTop >= contentsTop && scrollTop + windowHeight <= footerTop + 100) {
+      if (scrollTop >= contentsTop && scrollTop + windowHeight <= footerTop + 200) {
       $indicator.css('opacity', '1');
       
       // 현재 보이는 섹션에 따라 active 클래스 변경
@@ -1271,30 +922,6 @@ $(document).ready(function() {
         }
       });
       
-    //   // news 섹션 활성화 시 marginTop 추가/제거 (1080px 이하에서만)
-    //   if ($(window).width() <= 1080) {
-    //     const $newsSection = $('[data-mainnavi="news"]');
-        
-    //     if (currentActiveSection === 'news') {
-    //       // news 섹션이 활성화되면 marginTop 추가
-    //       if (!$newsSection.hasClass('news-margin-active')) {
-    //         $newsSection.addClass('news-margin-active').css('padding-top', '100px');
-    //       }
-    //     } else {
-    //       // 다른 섹션이 활성화되면 marginTop 제거
-    //       if ($newsSection.hasClass('news-margin-active')) {
-    //         $newsSection.removeClass('news-margin-active').css('margin-top', '');
-    //       }
-    //     }
-    //   } else {
-    //     // 1080px 초과일 때는 항상 marginTop 제거
-    //     const $newsSection = $('[data-mainnavi="news"]');
-    //     if ($newsSection.hasClass('news-margin-active')) {
-    //       $newsSection.removeClass('news-margin-active').css('margin-top', '');
-    //     }
-    //   }
-    // } else {
-    //   $indicator.css('opacity', '0');
     }
   });
   
@@ -1470,14 +1097,18 @@ function initSupportSlider() {
         breakpoint: 1080,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '30px'
         }
         },
         {
         breakpoint: 720,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '30px'
         }
         }
       ]
@@ -1638,11 +1269,11 @@ var dropBtn = $('.list_dropdown2 dt a');
 dropBtn.on('click', function () {
   if ($(this).closest('dt').hasClass('active')) {
     // 활성화된 콘텐츠를 클릭하면 닫기
-    $(this).closest('dt').removeClass('active').children('a').attr('title', '내용 닫힘');
+    $(this).closest('dt').removeClass('active').children('a').attr('title', '내용 닫힌');
     $('.list_dropdown2 dd').slideUp();
   } else {
     // 다른 콘텐츠를 클릭하면 기존 콘텐츠 닫고 현재 콘텐츠 열기
-    $('.list_dropdown2 dt').removeClass('active').children('a').attr('title', '내용 닫힘');
+    $('.list_dropdown2 dt').removeClass('active').children('a').attr('title', '내용 닫힌');
     $('.list_dropdown2 dd').slideUp();
     $(this).closest('dt').addClass('active').next().slideDown();
     $(this).closest('dt').children('a').attr('title', '내용 열림');
@@ -1945,3 +1576,4 @@ $(window).on('resize', function() {
       managePageLayout();  // 페이지 레이아웃 새로 고침
   }, 250); // Debounce 적용
 });
+

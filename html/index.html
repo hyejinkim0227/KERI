@@ -34,12 +34,12 @@
   <!-- 반응형 AOS/fullPage.js 관리 -->
   <script src="../common/js/common-responsive.js"></script>
   <!-- //공통 js -->
-  <style>
+  <!-- <style>
     html, body { margin:0; padding:0; height:100%; overflow:hidden; }
 
     /* 뷰포트 100% 크기 + overflow:hidden */
     #wrapper {
-      width: 100vw;
+    width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: flex-start; /* 가로 중앙 */
@@ -56,18 +56,18 @@
     transition: transform 0.3s ease;
   }
   /* 화면 크기가 1080px 이하일 때, scale을 사용하여 비율 줄이기 */
-@media screen and (max-width: 1080px) {
-  #scale-container {
-    transform: scale(0.8);  /* 80%로 축소 */
+  @media screen and (max-width: 1080px) {
+    #scale-container {
+      transform: scale(0.8);  /* 80%로 축소 */
+    }
   }
-}
 
     /* fullPage.js용 섹션 예시 */
     .section {
       width: 100%;
       height: 100%;
     }
-  </style>
+  </style> -->
 </head>
 
 <body>
@@ -114,46 +114,6 @@
                       </li>
                       <li>
                         <a href="#">조직안내</a>
-                        <!-- <ol>
-                          <li><a href="#">전략정책본부</a></li>
-                          <li><a href="#">미래전략실</a></li>
-                          <li><a href="#">신사업기획실</a></li>
-                          <li><a href="#">국방기술전략실</a></li>
-                          <li><a href="#">대외협력실</a></li>
-                          <li><a href="#">감사부</a></li>
-                          <li><a href="#">안전경영총괄실</a></li>
-                          <li><a href="#">기획조정본부</a></li>
-                          <li><a href="#">경영기획실</a></li>
-                          <li><a href="#">예산실</a></li>
-                          <li><a href="#">사업운영실</a></li>
-                          <li><a href="#">정보전산실</a></li>
-                          <li><a href="#">경영지원본부</a></li>
-                          <li><a href="#">총부복지실</a></li>
-                          <li><a href="#">인력개발실</a></li>
-                          <li><a href="#">재무실</a></li>
-                          <li><a href="#">구매자산실</a></li>
-                          <li><a href="#">시설관리실</a></li>
-                          <li><a href="#">운영관리실(안산)</a></li>
-                          <li><a href="#">운영관리실(광주)</a></li>
-                          <li><a href="#">기술사업화본부</a></li>
-                          <li><a href="#">기술사업화기획실</a></li>
-                          <li><a href="#">지식재산경영실</a></li>
-                          <li><a href="#">기업지원실</a></li>
-                          <li><a href="#">기술창업실</a></li>
-                          <li><a href="#">대전력평가본부</a></li>
-                          <li><a href="#">고전압시험실</a></li>
-                          <li><a href="#">대전력시험실</a></li>
-                          <li><a href="#">대전력설비운영실</a></li>
-                          <li><a href="#">전기에너지평가본부</a></li>
-                          <li><a href="#">지능형에너지시험실</a></li>
-                          <li><a href="#">전기특성시험실</a></li>
-                          <li><a href="#">단락시험실</a></li>
-                          <li><a href="#">배터리시스템시험실</a></li>
-                          <li><a href="#">적합성운영본부</a></li>
-                          <li><a href="#">시험운영기획실</a></li>
-                          <li><a href="#">품질경영실</a></li>
-                          <li><a href="#">제품인증실</a></li>
-                        </ol> -->
                       </li>
                       <li>
                         <a href="#">역사기록관</a>
@@ -461,7 +421,7 @@
               </ul>
             </div>
             <div class="util">
-              <a href="https://www.keri.re.kr/html/en/"  target="_blank" class="lang">Eng</a>
+              <a href="https://www.keri.re.kr/html/en/"  target="_blank" class="lang">ENG</a>
               <button type="button" class="popup_zone">POPUP ZONE</button>
               <button type="button" class="search_open"><span class="sr-only">검색창 열기</span></button>
               <div class="search_box">
@@ -481,8 +441,16 @@
               <div class="sitemap">
                 <div class="container">
                   <div class="sitemap_top">
-                    <img src="../common/images/common/logo.png" alt="로고">
-                    <button type="button" class="btn_sitemap_close"><span class="sr-only">사이트맵 닫기</span></button>
+                    <div>
+                      <img src="../common/images/common/logo.png" alt="로고">
+                      <button type="button" class="btn_sitemap_close"><span class="sr-only">사이트맵 닫기</span></button>
+                    </div>
+                   
+                    <ol>
+                      <li><a href="#">ENG</a></li>
+                      <li><a href="#">POPUP</a></li>
+                      <li><a href="#">SEARCH</a></li>
+                    </ol>
                   </div>
                 </div>
               </div>
@@ -524,7 +492,7 @@
           <div id="fullpage" >
               <!-- 메인배너 -->
               <section class="section section1  main_banner fp-auto-height fp-section fp-table active" data-mainnavi="search" data-anchor="page1" id="search">
-                <div class="fp-tableCell  ">
+                <div class="fp-tableCell ">
                   <div class="main_banner_left" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
                     <h3>전기를 넘어, 에너지 혁신의 중심으로 <b>KERI, 전기기술의 미래를 이끌다</b></h3>
                     <div class="search">
@@ -590,32 +558,35 @@
                   </div>
                   <div class="main_banner_right" data-aos="fade-left" data-aos-delay="300" data-aos-duration="1000" data-aos-easing="ease">
                     <button type="button" class="m_main_banner_right_btn">한국전기연구원 최신성과 및 영상 열기</button>
-                    <div class="main_banner_right_con">
-                      <h3>최신성과</h3>
-                      <ul>
-                        <li><a href="#"><span>1</span>불타지 않는 전고체전지의 원리</a></li>
-                        <li><a href="#"><span>2</span>비싼 '은 잉크', 갑싼 구리로 대체하는 법</a></li>
-                        <li><a href="#"><span>3</span>극한 환경에서도 전기는 흘러야 한다</a></li>
-                        <li><a href="#"><span>4</span>수소를 액체로 만들어 보관하는 기술</a></li>
-                        <li><a href="#"><span>5</span>빛으로 미세유리관 접촉판별, 생명공학</a></li>
-                      </ul>
-                      <a href="#">최신성과 더보기</a>
+                    <div>
+                      <div class="main_banner_right_con">
+                        <h3>최신성과</h3>
+                        <ul>
+                          <li><a href="#"><span>1</span>불타지 않는 전고체전지의 원리</a></li>
+                          <li><a href="#"><span>2</span>비싼 '은 잉크', 갑싼 구리로 대체하는 법</a></li>
+                          <li><a href="#"><span>3</span>극한 환경에서도 전기는 흘러야 한다</a></li>
+                          <li><a href="#"><span>4</span>수소를 액체로 만들어 보관하는 기술</a></li>
+                          <li><a href="#"><span>5</span>빛으로 미세유리관 접촉판별, 생명공학</a></li>
+                        </ul>
+                        <a href="#">최신성과 더보기</a>
+                      </div>
+                      <div class="video-container">
+                          <iframe
+                              src="https://www.youtube.com/embed/lheN8ChGU04?autoplay=1&mute=1" 
+                              title="YouTube video player"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                              allowfullscreen>
+                          </iframe>
+                      </div>
                     </div>
-                    <div class="video-container">
-                        <iframe
-                            src="https://www.youtube.com/embed/lheN8ChGU04?autoplay=1&mute=1" 
-                            title="YouTube video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
+                  
                   </div>
                 </div>          
               </section>
               <!-- //메인베너 -->
               <!-- 분야 -->
               <section class="section section2 domain fp-auto-height fp-section fp-table"  data-mainnavi="domain" data-anchor="page2" id="domain">
-                <div class="container fp-tableCell">
+                <div class="container fp-tableCell ">
                     <!-- 좌측 네비게이션 -->
                     <div class="domain-nav slider-nav"> 
                         <div class="nav-item" data-index="0">
@@ -1173,10 +1144,10 @@
                         <div class="support_search" >
                           <h3>기술 검색 <span>한국전기연구원이 보유한 다양한 기술을 검색할 수 있습니다.</span></h3>
                           <ul>
-                            <li><a href="#"><span><img src="../common/images/main/support_icon_01.png" alt="지식재산권아이콘"></span><b>지식재산권</b></a></li>
-                            <li><a href="#"><span><img src="../common/images/main/support_icon_02.png" alt="기술소개자료아이콘"></span><b>기술소개자료</b></a></li>
-                            <li><a href="#"><span><img src="../common/images/main/support_icon_03.png" alt="기술소개영상아이콘"></span><b>기술소개영상</b></a></li>
-                            <li><a href="#"><span><img src="../common/images/main/support_icon_04.png" alt="연구자연구팀아이콘"></span><b>연구자연구팀</b></a></li>
+                            <li><a href="#"><span><img src="../common/images/main/support_icon_01.png" alt="지식재산권아이콘"></span><b>지식<em>재산권</em></b></a></li>
+                            <li><a href="#"><span><img src="../common/images/main/support_icon_02.png" alt="기술소개자료아이콘"></span><b>기술소개<em>자료</em></b></a></li>
+                            <li><a href="#"><span><img src="../common/images/main/support_icon_03.png" alt="기술소개영상아이콘"></span><b>기술소개<em>영상</em></b></a></li>
+                            <li><a href="#"><span><img src="../common/images/main/support_icon_04.png" alt="연구자연구팀아이콘"></span><b>연구자<em>연구팀</em></b></a></li>
                           </ul>
                         </div>
                     </div>
@@ -1191,7 +1162,7 @@
                                   <img src="../common/images/main/certification_icon_01.png" alt="시험인증서비스">
                                 </span>
                                 <div>
-                                  <b>시험인증서비스</b>
+                                  <b>시험인증<em>서비스</em></b>
                                   <em>KOLAS 공인 시험기관<span class="block">시험성적서/시험인증서 발행</span></em>
                                 </div>
                               </a>
@@ -1202,10 +1173,9 @@
                                   <img src="../common/images/main/certification_icon_02.png" alt="제품인증서비스">
                                 </span>
                                 <div>
-                                  <b>제품인증서비스</b>
+                                  <b>제품인증<em>서비스</em></b>
                                   <em>KOLAS / ACCREDIA 제품인증기관<span class="block">제품인증서/인증마크 발행</span></em>
                                 </div>
-                                
                               </a>
                             </li>
                             <li>
@@ -1214,7 +1184,7 @@
                                   <img src="../common/images/main/certification_icon_03.png" alt="검사서비스">
                                 </span>
                                 <div>
-                                  <b>검사서비스</b>
+                                  <b>검사<em>서비스</em></b>
                                   <em>ACCREDIA 검사기관<span class="block">검사인증서발행</span></em>
                                 </div>
                               </a>
@@ -1363,99 +1333,8 @@
                         </li>
                       </ol>
                     </nav>
-                    <!-- 관련사이트 모달 -->
-                    <div class="modal_overlay" id="modal-related-sites">
-                      <div class="modal_container">
-                        <div class="modal_header">
-                          <h3>관련사이트</h3>
-                          <button type="button" class="btn_modal_close"><span class="sr-only">닫기</span></button>
-                        </div>
-                          <div class="modal_content">
-                            <h4>관련 정부부처</h4>
-                            <ul class="modal_list">
-                              <li><a href="http://www.gov.kr/" target="_blank" title="새창">대한민국 정부24</a></li>
-                              <li><a href="http://www.assembly.go.kr/" target="_blank" title="새창">대한민국 국회</a></li>
-                              <li><a href="http://www.president.go.kr/" target="_blank" title="새창">대한민국 청와대</a></li>
-                              <li><a href="http://www.opm.go.kr/" target="_blank" title="새창">국무조정실·국무총리비서실</a></li>
-                              <li><a href="https://www.moef.go.kr/" target="_blank" title="새창">기획재정부</a></li>
-                              <li><a href="http://www.moe.go.kr/" target="_blank" title="새창">교육부</a></li>
-                              <li><a href="http://www.msit.go.kr/" target="_blank" title="새창">과학기술정보통신부</a></li>
-                              <li><a href="http://www.mofa.go.kr/" target="_blank" title="새창">외교부</a></li>
-                              <li><a href="http://www.unikorea.go.kr/" target="_blank" title="새창">통일부</a></li>
-                              <li><a href="http://www.moj.go.kr/" target="_blank" title="새창">법무부</a></li>
-                              <li><a href="http://www.mnd.go.kr/" target="_blank" title="새창">국방부</a></li>
-                              <li><a href="http://www.mois.go.kr/" target="_blank" title="새창">행정안전부</a></li>
-                              <li><a href="http://www.mcst.go.kr/" target="_blank" title="새창">문화체육관광부</a></li>
-                              <li><a href="http://www.mafra.go.kr/" target="_blank" title="새창">농림축산식품부</a></li>
-                              <li><a href="https://www.motie.go.kr/" target="_blank" title="새창">산업통상자원부</a></li>
-                              <li><a href="http://www.mohw.go.kr/" target="_blank" title="새창">보건복지부</a></li>
-                              <li><a href="http://www.me.go.kr/" target="_blank" title="새창">환경부</a></li>
-                              <li><a href="http://www.moel.go.kr/" target="_blank" title="새창">고용노동부</a></li>
-                              <li><a href="http://www.mogef.go.kr/" target="_blank" title="새창">여성가족부</a></li>
-                              <li><a href="http://www.molit.go.kr/" target="_blank" title="새창">국토교통부</a></li>
-                              <li><a href="http://www.mof.go.kr/" target="_blank" title="새창">해양수산부</a></li>
-                              <li><a href="http://www.mss.go.kr/" target="_blank" title="새창">중소벤처기업부</a></li>
-                              <li><a href="http://www.nts.go.kr/" target="_blank" title="새창">국세청</a></li>
-                              <li><a href="http://www.customs.go.kr/" target="_blank" title="새창">관세청</a></li>
-                              <li><a href="http://www.pps.go.kr/" target="_blank" title="새창">조달청</a></li>
-                              <li><a href="http://www.kostat.go.kr/" target="_blank" title="새창">통계청</a></li>
-                              <li><a href="http://www.spo.go.kr/" target="_blank" title="새창">검찰청</a></li>
-                              <li><a href="http://www.mma.go.kr/" target="_blank" title="새창">병무청</a></li>
-                              <li><a href="http://www.dapa.go.kr/" target="_blank" title="새창">방위사업청</a></li>
-                              <li><a href="http://www.police.go.kr/" target="_blank" title="새창">경찰청</a></li>
-                              <li><a href="http://www.nfa.go.kr/" target="_blank" title="새창">소방청</a></li>
-                              <li><a href="http://www.cha.go.kr/" target="_blank" title="새창">국가유산청</a></li>
-                              <li><a href="http://www.rda.go.kr/" target="_blank" title="새창">농촌진흥청</a></li>
-                              <li><a href="http://www.forest.go.kr/" target="_blank" title="새창">산림청</a></li>
-                              <li><a href="http://www.kipo.go.kr/" target="_blank" title="새창">특허청</a></li>
-                              <li><a href="http://www.kma.go.kr/" target="_blank" title="새창">기상청</a></li>
-                              <li><a href="http://www.naacc.go.kr/" target="_blank" title="새창">행정중심복합도시건설청</a></li>
-                              <li><a href="http://www.saemangeum.go.kr/" target="_blank" title="새창">새만금개발청</a></li>
-                              <li><a href="http://www.kcg.go.kr/" target="_blank" title="새창">해양경찰청</a></li>
-                              <li><a href="http://www.mpva.go.kr/" target="_blank" title="새창">국가보훈부</a></li>
-                              <li><a href="http://www.mpm.go.kr/" target="_blank" title="새창">인사혁신처</a></li>
-                              <li><a href="http://www.moleg.go.kr/" target="_blank" title="새창">법제처</a></li>
-                              <li><a href="http://www.mfds.go.kr/" target="_blank" title="새창">식품의약품안전처</a></li>
-                              <li><a href="http://www.bai.go.kr/" target="_blank" title="새창">감사원</a></li>
-                              <li><a href="http://www.nis.go.kr/" target="_blank" title="새창">국가정보원</a></li>
-                              <li><a href="http://www.kcc.go.kr/" target="_blank" title="새창">방송통신위원회</a></li>
-                              <li><a href="http://www.humanrights.go.kr/" target="_blank" title="새창">국가인권위원회</a></li>
-                            </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- //관련사이트 모달 -->
-                    <!-- 관련기관 모달 -->
-                    <div class="modal_overlay" id="modal-related-agencies">
-                      <div class="modal_container">
-                        <div class="modal_header">
-                          <h3>관련기관</h3>
-                          <button type="button" class="btn_modal_close"><span class="sr-only">닫기</span></button>
-                        </div>
-                          <div class="modal_content">
-                            <h4>관련 기관</h4>
-                          <ul class="modal_list">
-                            <li><a href="https://www.gov.kr/portal/main?Mcode=9999#" title="클릭시 새창으로 정부24 페이지로 이동합니다." target="_blank">정부24</a></li>
-                            <li><a href="https://www.msit.go.kr/index.do" title="클릭시 새창으로 과학기술정보통신부 페이지로 이동합니다." target="_blank">과학기술정보통신부</a></li>
-                            <li><a href="https://www.motie.go.kr/" title="클릭시 새창으로 산업통상자원부 페이지로 이동합니다." target="_blank">산업통상자원부</a></li>
-                            <li><a href="https://www.nst.re.kr /" title="클릭시 새창으로 NST 페이지로 이동합니다." target="_blank">NST</a></li>
-                            <li><a href="https://www.sos1379.go.kr/" title="클릭시 새창으로 공공기관 1379 페이지로 이동합니다." target="_blank">1379</a></li>
-                            <li><a href="https://www.ust.ac.kr/" title="클릭시 새창으로 ust 페이지로 이동합니다." target="_blank">UST</a></li>
-                            <li><a href="http://policy.nl.go.kr/" title="클릭시 새창으로 POINT 페이지로 이동합니다." target="_blank">POINT</a></li>
-                            <li><a href="http://www.acrc.go.kr/" title="클릭시 새창으로 국민권익위원회 페이지로 이동합니다." target="_blank">국민권익위원회</a></li>
-                            <li><a href="https://job.alio.go.kr/main.do" title="클릭시 새창으로 공공기관 채용정보시스템 페이지로 이동합니다." target="_blank">공공기관 채용정보시스템</a></li>
-                            <li><a href="https://www.data.go.kr/" title="클릭시 새창으로 공공데이터 페이지로 이동합니다." target="_blank">공공데이터포털</a></li>
-                            <li><a href="http://www.creativekorea.or.kr" title="클릭시 새창으로 창조경제타운 페이지로 이동합니다." target="_blank">창조경제타운</a></li>
-                            <li><a href="http://www.smartregulation.or.kr/" title="클릭시 새창으로 민관합동규제개선추진단 페이지로 이동합니다." target="_blank">민관합동규제개선추진단</a></li>
-                            <li><a href="http://www.changwon.go.kr/" title="클릭시 새창으로 창원시 페이지로 이동합니다." target="_blank">창원시</a></li>
-                            <li><a href="http://www.kepco.co.kr/" title="클릭시 새창으로 한국전력공사 페이지로 이동합니다." target="_blank">한국전력공사</a></li>
-                            <li><a href="https://www.eshare.go.kr/UserPortal/Upm/Main/index.do" title="클릭시 새창으로 공유누리 페이지로 이동합니다." target="_blank">공유누리</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- //관련기관 모달 -->
-                    <div class="footer_con ">
+
+                    <div class="footer_con">
                       <div class="footer_info container">
                         <div class="footer_left">
                           <img src="../common/images/common/logo.png" alt="한국전기연구원">
@@ -1538,8 +1417,99 @@
               </section>
           </div>
           <!-- //fullpage -->
-          
-            <!-- TOP 버튼 -->
+          <!-- 관련사이트 모달 -->
+          <div class="modal_overlay" id="modal-related-sites">
+            <div class="modal_container">
+              <div class="modal_header">
+                <h3>관련사이트</h3>
+                <button type="button" class="btn_modal_close"><span class="sr-only">닫기</span></button>
+              </div>
+                <div class="modal_content">
+                  <h4>관련 정부부처</h4>
+                  <ul class="modal_list">
+                    <li><a href="http://www.gov.kr/" target="_blank" title="새창">대한민국 정부24</a></li>
+                    <li><a href="http://www.assembly.go.kr/" target="_blank" title="새창">대한민국 국회</a></li>
+                    <li><a href="http://www.president.go.kr/" target="_blank" title="새창">대한민국 청와대</a></li>
+                    <li><a href="http://www.opm.go.kr/" target="_blank" title="새창">국무조정실·국무총리비서실</a></li>
+                    <li><a href="https://www.moef.go.kr/" target="_blank" title="새창">기획재정부</a></li>
+                    <li><a href="http://www.moe.go.kr/" target="_blank" title="새창">교육부</a></li>
+                    <li><a href="http://www.msit.go.kr/" target="_blank" title="새창">과학기술정보통신부</a></li>
+                    <li><a href="http://www.mofa.go.kr/" target="_blank" title="새창">외교부</a></li>
+                    <li><a href="http://www.unikorea.go.kr/" target="_blank" title="새창">통일부</a></li>
+                    <li><a href="http://www.moj.go.kr/" target="_blank" title="새창">법무부</a></li>
+                    <li><a href="http://www.mnd.go.kr/" target="_blank" title="새창">국방부</a></li>
+                    <li><a href="http://www.mois.go.kr/" target="_blank" title="새창">행정안전부</a></li>
+                    <li><a href="http://www.mcst.go.kr/" target="_blank" title="새창">문화체육관광부</a></li>
+                    <li><a href="http://www.mafra.go.kr/" target="_blank" title="새창">농림축산식품부</a></li>
+                    <li><a href="https://www.motie.go.kr/" target="_blank" title="새창">산업통상자원부</a></li>
+                    <li><a href="http://www.mohw.go.kr/" target="_blank" title="새창">보건복지부</a></li>
+                    <li><a href="http://www.me.go.kr/" target="_blank" title="새창">환경부</a></li>
+                    <li><a href="http://www.moel.go.kr/" target="_blank" title="새창">고용노동부</a></li>
+                    <li><a href="http://www.mogef.go.kr/" target="_blank" title="새창">여성가족부</a></li>
+                    <li><a href="http://www.molit.go.kr/" target="_blank" title="새창">국토교통부</a></li>
+                    <li><a href="http://www.mof.go.kr/" target="_blank" title="새창">해양수산부</a></li>
+                    <li><a href="http://www.mss.go.kr/" target="_blank" title="새창">중소벤처기업부</a></li>
+                    <li><a href="http://www.nts.go.kr/" target="_blank" title="새창">국세청</a></li>
+                    <li><a href="http://www.customs.go.kr/" target="_blank" title="새창">관세청</a></li>
+                    <li><a href="http://www.pps.go.kr/" target="_blank" title="새창">조달청</a></li>
+                    <li><a href="http://www.kostat.go.kr/" target="_blank" title="새창">통계청</a></li>
+                    <li><a href="http://www.spo.go.kr/" target="_blank" title="새창">검찰청</a></li>
+                    <li><a href="http://www.mma.go.kr/" target="_blank" title="새창">병무청</a></li>
+                    <li><a href="http://www.dapa.go.kr/" target="_blank" title="새창">방위사업청</a></li>
+                    <li><a href="http://www.police.go.kr/" target="_blank" title="새창">경찰청</a></li>
+                    <li><a href="http://www.nfa.go.kr/" target="_blank" title="새창">소방청</a></li>
+                    <li><a href="http://www.cha.go.kr/" target="_blank" title="새창">국가유산청</a></li>
+                    <li><a href="http://www.rda.go.kr/" target="_blank" title="새창">농촌진흥청</a></li>
+                    <li><a href="http://www.forest.go.kr/" target="_blank" title="새창">산림청</a></li>
+                    <li><a href="http://www.kipo.go.kr/" target="_blank" title="새창">특허청</a></li>
+                    <li><a href="http://www.kma.go.kr/" target="_blank" title="새창">기상청</a></li>
+                    <li><a href="http://www.naacc.go.kr/" target="_blank" title="새창">행정중심복합도시건설청</a></li>
+                    <li><a href="http://www.saemangeum.go.kr/" target="_blank" title="새창">새만금개발청</a></li>
+                    <li><a href="http://www.kcg.go.kr/" target="_blank" title="새창">해양경찰청</a></li>
+                    <li><a href="http://www.mpva.go.kr/" target="_blank" title="새창">국가보훈부</a></li>
+                    <li><a href="http://www.mpm.go.kr/" target="_blank" title="새창">인사혁신처</a></li>
+                    <li><a href="http://www.moleg.go.kr/" target="_blank" title="새창">법제처</a></li>
+                    <li><a href="http://www.mfds.go.kr/" target="_blank" title="새창">식품의약품안전처</a></li>
+                    <li><a href="http://www.bai.go.kr/" target="_blank" title="새창">감사원</a></li>
+                    <li><a href="http://www.nis.go.kr/" target="_blank" title="새창">국가정보원</a></li>
+                    <li><a href="http://www.kcc.go.kr/" target="_blank" title="새창">방송통신위원회</a></li>
+                    <li><a href="http://www.humanrights.go.kr/" target="_blank" title="새창">국가인권위원회</a></li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+          <!-- //관련사이트 모달 -->
+          <!-- 관련기관 모달 -->
+          <div class="modal_overlay" id="modal-related-agencies">
+            <div class="modal_container">
+              <div class="modal_header">
+                <h3>관련기관</h3>
+                <button type="button" class="btn_modal_close"><span class="sr-only">닫기</span></button>
+              </div>
+                <div class="modal_content">
+                  <h4>관련 기관</h4>
+                <ul class="modal_list">
+                  <li><a href="https://www.gov.kr/portal/main?Mcode=9999#" title="클릭시 새창으로 정부24 페이지로 이동합니다." target="_blank">정부24</a></li>
+                  <li><a href="https://www.msit.go.kr/index.do" title="클릭시 새창으로 과학기술정보통신부 페이지로 이동합니다." target="_blank">과학기술정보통신부</a></li>
+                  <li><a href="https://www.motie.go.kr/" title="클릭시 새창으로 산업통상자원부 페이지로 이동합니다." target="_blank">산업통상자원부</a></li>
+                  <li><a href="https://www.nst.re.kr /" title="클릭시 새창으로 NST 페이지로 이동합니다." target="_blank">NST</a></li>
+                  <li><a href="https://www.sos1379.go.kr/" title="클릭시 새창으로 공공기관 1379 페이지로 이동합니다." target="_blank">1379</a></li>
+                  <li><a href="https://www.ust.ac.kr/" title="클릭시 새창으로 ust 페이지로 이동합니다." target="_blank">UST</a></li>
+                  <li><a href="http://policy.nl.go.kr/" title="클릭시 새창으로 POINT 페이지로 이동합니다." target="_blank">POINT</a></li>
+                  <li><a href="http://www.acrc.go.kr/" title="클릭시 새창으로 국민권익위원회 페이지로 이동합니다." target="_blank">국민권익위원회</a></li>
+                  <li><a href="https://job.alio.go.kr/main.do" title="클릭시 새창으로 공공기관 채용정보시스템 페이지로 이동합니다." target="_blank">공공기관 채용정보시스템</a></li>
+                  <li><a href="https://www.data.go.kr/" title="클릭시 새창으로 공공데이터 페이지로 이동합니다." target="_blank">공공데이터포털</a></li>
+                  <li><a href="http://www.creativekorea.or.kr" title="클릭시 새창으로 창조경제타운 페이지로 이동합니다." target="_blank">창조경제타운</a></li>
+                  <li><a href="http://www.smartregulation.or.kr/" title="클릭시 새창으로 민관합동규제개선추진단 페이지로 이동합니다." target="_blank">민관합동규제개선추진단</a></li>
+                  <li><a href="http://www.changwon.go.kr/" title="클릭시 새창으로 창원시 페이지로 이동합니다." target="_blank">창원시</a></li>
+                  <li><a href="http://www.kepco.co.kr/" title="클릭시 새창으로 한국전력공사 페이지로 이동합니다." target="_blank">한국전력공사</a></li>
+                  <li><a href="https://www.eshare.go.kr/UserPortal/Upm/Main/index.do" title="클릭시 새창으로 공유누리 페이지로 이동합니다." target="_blank">공유누리</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- //관련기관 모달 -->
+          <!-- TOP 버튼 -->
           <button type="button" id="topBtn" class="top_btn">
             <span>TOP</span>
           </button>
@@ -1550,21 +1520,7 @@
   
   </div>
 <!-- pullpage.js, AOS, Slick 등 스크립트는 아래에 로드 -->
-<script>
-  function applyScale() {
-    const designW = 1700, designH = 956;
-    // 화면 너비에 맞춘 스케일 비율
-    const scale = window.innerWidth / designW;
-    const container = document.getElementById('scale-container');
-    container.style.transform = `scale(${scale})`;
 
-    // wrapper 높이도 비례해서 맞춰줘야 fullpage가 올바르게 동작
-    document.getElementById('wrapper').style.height = `${designH * scale}px`;
-  }
-
-  window.addEventListener('resize', applyScale);
-  applyScale();  // 최초 로드 시 한 번 실행
-</script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 /**
  * 반응형 AOS 및 fullPage.js 관리
- * 900px 기준으로 활성화/비활성화
+ * 1080px 기준으로 활성화/비활성화
  */
 
 // 상태 추적 변수
@@ -32,7 +32,7 @@ function initAOS() {
       once: true,
       mirror: false,
       disable: function() {
-        return window.innerWidth <= 900;
+        return window.innerWidth <= 1080;
       }
     });
     isAOSActive = true;
@@ -222,13 +222,13 @@ function initResponsiveFeatures() {
   // PC 모드 임시 비활성화 (디버깅용)
   // initPcMode();
   
-  if (windowWidth > 900) {
-    // 900px 초과: AOS와 fullPage.js 활성화
+  if (windowWidth > 1080) {
+    // 1080px 초과: AOS와 fullPage.js 활성화
     initAOS();
     initFullpage();
     $('#indicator').css('opacity', '1');
   } else {
-    // 900px 이하: AOS와 fullPage.js 비활성화
+    // 1080px 이하: AOS와 fullPage.js 비활성화
     destroyAOS();
     destroyFullpage();
     $('#indicator').css('opacity', '0');

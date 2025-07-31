@@ -116,6 +116,9 @@ function openSitemap(isEnglish = false) {
   const sourceSelector = isEnglish ? '.gnb > .dep1' : '#gnb .dep1';
   const targetSelector = isEnglish ? '.sitemap > .container' : '.sitemap .container';
   
+  // 기존에 복제된 메뉴가 있으면 먼저 제거
+  $(targetSelector).find('.dep1').remove();
+  
   $(sourceSelector).clone().appendTo(targetSelector);
   
   if (isEnglish) {
