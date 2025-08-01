@@ -1108,7 +1108,7 @@ function initSupportSlider() {
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: true,
-          centerPadding: '30px'
+          centerPadding: '20px'
         }
         }
       ]
@@ -1178,6 +1178,14 @@ function initInterviewSlider() {
         touchMove: true,
         centerMode: false,
         responsive: [
+          {
+            breakpoint: 1400,
+            settings: {
+              slidesToShow: 2,
+              centerMode: false,
+             // centerPadding: '50px'
+            }
+          },
           {
             breakpoint: 1080,
             settings: {
@@ -1495,6 +1503,14 @@ function managePageLayout() {
                       } else {
                           $topBtn.addClass('show');
                       }
+
+                      // 인디케이터 표시/숨김 처리
+                      if (anchorLink === 'page6') { // 푸터 섹션(anchor: page6)일 경우
+                        $('#indicator').fadeOut();
+                      } else {
+                        $('#indicator').fadeIn();
+                      }
+                      
                       const section = $('#fullpage .section').eq(index - 1)[0];
                       if (section) {
                           section.querySelectorAll('[data-aos]').forEach(el => {

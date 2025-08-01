@@ -299,6 +299,7 @@ section{
     position: fixed;  // absolute에서 fixed로 다시 변경
     left: 30px;
     top: 50%;
+    width: 60px;
     transform: translateY(-50%);
     z-index: 99;
     display: flex;
@@ -370,6 +371,7 @@ section{
   
     // 반응형 - 태블릿 (1080px 이하)
     @media screen and (max-width: 1080px) {
+      display: none;
       left: 30px;
   
       li {
@@ -406,7 +408,7 @@ section{
     
     .fp-tableCell{
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
     }  
 
     &::after{
@@ -441,6 +443,7 @@ section{
       flex-direction: column;
      justify-content: center;
       align-items: self-start;
+      padding-left: 210px;
 
 
     
@@ -631,40 +634,47 @@ section{
       }
       
     }
-    .main_banner_right {
-      height: calc(100% + 106px);
-      position: absolute;
-      right: 0;
-      top: -90px;
+    .main_banner_right { 
+      height: 100%;
       width: 380px;
       max-width: 35vw; // 화면 크기에 따라 조정
       z-index: 2;
+      position: relative;
 
       .m_main_banner_right_btn{
         display: none;
       }
       .main_banner_right_con {
-        padding-bottom: 34px;
+        padding-bottom: 30px;
         display:flex;
         flex-direction: column;
         justify-content: flex-end;
-        background: rgba(0, 0, 0, 0.45);
-        border-radius: 20px;
-        height: 70%;
-        //padding: 0 40px 30px;
-        //height: calc(100% - 250px);
+        height: calc(100vh - 250px);
+        
+        &:after{
+          content: '';
+          display: block;
+          position: absolute;
+          border-radius: 0 0 0 60px;
+          height: calc(70vh + 90px);
+          top: -95px;
+          left: 0;
+          width: 100%;
+          z-index: -1;
+          background: rgba(0, 0, 0, 0.45);
+        }
     
         border-radius: 0 0 0 60px;
         overflow: hidden; // 텍스트가 컨테이너를 벗어나지 않도록
         h3 {
           padding: 0 40px;
+          margin-top: 40px;
           color: #fff;
-          margin-top: 50px;
-          margin-top: 100px;
           margin-bottom: 40px;
         }
 
-        ul { padding: 0 40px;
+        ul { 
+          padding: 0 40px;
           li {
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
@@ -673,8 +683,9 @@ section{
               align-items: center;
               color: rgba(255, 255, 255, 0.9);
               padding: 21px 0;
+              overflow: hidden; 
 
-              span {
+              span:first-of-type {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -687,6 +698,12 @@ section{
                 margin-right: 15px;
                 flex-shrink: 0;
                 color: #fff;
+              }
+             
+              span:last-of-type {
+               white-space: nowrap;
+               overflow: hidden;
+               text-overflow: ellipsis;
               }
             }
 
@@ -709,7 +726,7 @@ section{
           margin: 0 40px;
           display: block;
           text-align: center;
-          margin-top: 26px;
+          margin-top: 20px;
           color: #fff;
           text-decoration: none;
           border-radius: 15px;
@@ -722,32 +739,27 @@ section{
           
         }
       }
-     // .video-container {
-      //   width: 378px;
-      //   height: 30%;
-      //   max-height: 250px;
-      //   border-radius: 60px 0 0 0;
-      //   overflow: hidden;
-      //   opacity: 0.8;
-      // }
       .video-container {
         position: relative;
-        width: 100%;
-        padding-bottom: 56.25%; /* 16:9 비율 */
-        height: 30%;
-        overflow: hidden;
-        max-width: 100%;
+        width: 378px;
+        height: 250px;
         border-radius: 60px 0 0 0;
-        min-height: 250px;
-        ;
-        
+        overflow: hidden;
+        opacity: 0.8;
         iframe {
           position: absolute;
-          top: 0;
-          left: 0;
-           width: 380px;
-           height: 250px;
+          top: 50%;
+          left: 50%;
+          width: calc(250px * 16 / 9);
+          height: 100%;
+          transform: translate(-50%, -50%);
+          border: 0;
         }
+      }
+    }
+    @media screen and (max-width: 1420px){
+      .main_banner_left{
+        padding-left: 100px;
       }
     }
 
@@ -756,7 +768,6 @@ section{
           margin-left: 100px;
           //width: calc(100% - 150px);
           display: flex;
-          justify-content: unset;
         }
       
       .main_banner_right{
@@ -778,7 +789,7 @@ section{
                   padding-left: 20px;
                 }
                 &:after{
-                  right: 175px;
+                  right: 200px;
                 }
               }
             }
@@ -788,14 +799,54 @@ section{
     }
     @media screen and (max-width: 1300px){
       
+      .main_banner_left{
+        padding-left: 0;
+        .search{
+          form{
+            .search_input{
+
+              input{
+                max-width: 400px;
+              }
+            }
+          }
+        }
+      }
       .main_banner_right{
         width: 320px;
         .main_banner_right_con{
           h3{
-            padding: 0 10px;
+            padding-left: 20px;
           }
           ul{
-            padding: 0 10px;
+            padding: 0 20px;
+            li{
+              a{
+                span:last-of-type{
+                  width: 210px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 1150px){
+      .main_banner_right{
+        width: 300px;
+        .main_banner_right_con{
+          h3{
+            padding-left: 20px;
+          }
+          ul{
+            padding: 0 20px;
+            li{
+              a{
+                span:last-of-type{
+                  width: 150px;
+                }
+              }
+            }
           }
         }
       }
@@ -810,6 +861,7 @@ section{
       .fp-tableCell {
         flex-direction: column;
         padding: 0 !important;
+        margin-left: 0 !important;
       }
       .main_banner_wrap {
         padding: 0 30px;
@@ -1426,9 +1478,10 @@ section{
       flex: 1;
       position: relative;
       height: 100%;
-      width: 100%;
+      width: calc(100% - 504px);
       max-width: 1300px;
-      padding: 60px 140px 50px 140px; // 우측 패딩을 300px에서 140px로 변경
+      margin-right: 30px;
+      padding: 30px 20px 50px 140px; 
       
       .slick-list {
         height: 100%;
@@ -1540,6 +1593,7 @@ section{
       transform: translateX(-50%);
       display: flex;
       align-items: center;
+      justify-content: space-around;
       gap: 10px;
       z-index: 10;
       transition: all 0.3s ease; // 부드러운 전환 효과
@@ -1576,9 +1630,9 @@ section{
 
     // 짝수번째 슬라이드일 때 컨트롤 버튼 위치 변경
     &.even-slide .domain-controls {
-      right: 40px; // domain-content의 padding-right(140px) + 여백(20px)
+      right: calc(50vw - 700px); 
       left: unset;
-      top: 42%;
+      top: calc(50vh - 100px);
       bottom: auto;
       transform: unset;
     }
@@ -1594,7 +1648,43 @@ section{
         transform: translateX(0);
       }
     }
+    @media (max-width: 1580px) {
+        &.even-slide{
+          .domain-controls{
+            right: calc(50vw - 580px); 
+          }
+      }
+      
+    }
+    @media (max-width: 1400px) {
+      &.even-slide{
+        .domain-controls{
+          right: unset;
+          left: 430px; 
+        }
+        .domain-content{
+          .content-slide{
+            .visual{
+              right: 0;
+            }
+          }
+        }
+    }
+      .domain-content{
+        padding-left: 30px;
+        .content-slide{
+          .visual{
+            right: 0;
+          }
+        }
+      }
 
+      &.even-slide{
+        .domain-controls{
+          right: calc(50vw - 380px); 
+        }
+    }
+  }
     // 반응형 - 모바일 (1080px 이하)
     @media (max-width: 1080px) {
       padding: 44px 0 40px;
@@ -1703,7 +1793,7 @@ section{
 
       .domain-controls {
         bottom: 46%;
-        left: calc(50vw + 100px);
+        left: calc(50vw + 50px);
         right: auto;
         transform: none;
         justify-content: center;
@@ -1721,9 +1811,9 @@ section{
         }
       }
 
-      // 짝수 슬라이드 위치 조정 - 화면 정가운데에서 +200px
+
       &.even-slide .domain-controls {
-        left: calc(50% + 200px);
+        left: calc(50% + 50px);
         top: auto;
         right: auto;
         bottom: 46%;
@@ -1785,7 +1875,7 @@ section{
       }
       @media screen and (max-width: 1590px) {
        padding-left: 50px;
-       width: calc(100% - 260px);
+     //  width: calc(100% - 260px);
       }
       // 반응형 처리
       @media screen and (max-width: 1280px) {
@@ -2858,11 +2948,13 @@ section{
           }
 
           .support_list {
-
+            .slick-track{
+              margin-left: -40px;
+            }
             .slick-slide {
               padding-right: 0px;
               border: unset !important;
-              margin-left: -40px;
+             // margin-left: -40px;
             }
 
             .support_item {
@@ -3159,8 +3251,6 @@ section{
           
           .slick-slide {
             margin: 0 20px;
-          
-           
           }
         }
       
@@ -3303,16 +3393,22 @@ section{
         height: 210px;
         background: #f6f6f6 ;
         position: relative;
+        padding-right: 20px;
 
 
         .video_wrap {
+          position: relative;
           width: 320px;
           height: 210px;
           border-radius: 30px;
           overflow: hidden;
           iframe{
-            width: 100%;
-            height: 290px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: calc(210px * 16 / 9);
+            height: 100%;
+            transform: translate(-50%, -50%);
           }
         }
         .video_text {
@@ -3329,10 +3425,11 @@ section{
           }
           span {
             font-size: $fs-19;
-           font-family: $ff-suit;
-           font-weight: 600;
+            font-family: $ff-suit;
+            font-weight: 600;
             line-height: 1.54;
             letter-spacing: -0.49px;
+            word-break: keep-all;
           }
         }
       }
@@ -3414,7 +3511,6 @@ section{
     @media screen and (max-width: 1540px){
       &_top {
         .publications_wrap{
-          width: 280px; // 고정 너비 유지
           flex-shrink: 0; // 크기 고정
           .inner{
             width: 280px;
@@ -3431,10 +3527,10 @@ section{
       }
       &_top {
         .publications_wrap{
-          width: 280px; // 고정 너비 유지
+
           flex-shrink: 0; // 크기 고정
           .inner{
-            width: 280px;
+
             &:after{
               right: -39px;
             }
@@ -3743,6 +3839,15 @@ section{
               height: 25px;
               margin-left: 10px;
             }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 900px){
+      .interview {
+        &.slick-initialized {
+          .slick-track {
+            margin-left: -60px;
           }
         }
       }

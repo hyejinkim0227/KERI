@@ -559,7 +559,13 @@
       }
     }
   }
-
+@include maxWidth(1400px){
+  .logo{
+    >a{
+      width: 250px;
+    }
+  }
+}
   // 스크롤 시 헤더 스타일 (PC에서만 적용)
   @include minWidth($tb1080 + 1) {
     &.scrolled {
@@ -597,16 +603,10 @@
       }
     }
   }
-  @include maxWidth(1420px){
+  @include maxWidth(1410px){
     #gnb{
       width: 550px;
-      ul{
-        >li{
-          >a{
-            padding: 0 10px;
-          }
-        }
-      }
+      margin-right: auto;
     }
     .util{
       width: 320px;
@@ -619,18 +619,44 @@
       }
     }
   }
-  @include maxWidth(1300px){
+  @include maxWidth(1340px){
+    #gnb{
+      width: 400px;
+      margin-right: auto;
+      >ul{
+        >li{
+         > a{
+            font-size: $fs-16;
+          }
+        }
+      }
+    }
     .util{
       width: 280px;
+      .popup_zone{
+        em{
+          display: none;
+        }
+      }
     }
   }
-  @media screen and (max-width: 1280px) {
-    #gnb { width: 550px;
 
+  @include maxWidth(1220px){
+    #gnb{
+      >ul{
+        >li{
+          >a{
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+    .util{
+      width: 250px;
+      gap: 0;
     }
   }
-
-  @include maxWidth($tb1080) {
+  @include maxWidth(1080px) {
     .head{
       background: #fff;
       margin: 0;
@@ -816,7 +842,7 @@
         &:after {
           position: absolute;
           right: 0;
-          top: 100px;
+          top: 95px;
           width: 68%;
           height: calc(100% + 20px);
           background-color: #fff;
