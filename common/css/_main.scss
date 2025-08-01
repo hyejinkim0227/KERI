@@ -177,6 +177,7 @@ section{
   overflow: visible;
   padding-top: 90px !important;
   table-layout: 100% !important;
+  transition: height 0.3s ease; // 높이 변화 시 부드러운 전환
 
   &.footer{
     margin-left: 0 !important;
@@ -196,11 +197,13 @@ section{
   @media screen and (max-width: 1080px) {
     margin: 0 auto;
     width: 100% !important;
-    height: 100%; // 모바일에서 자동 높이
+    height: auto; // 모바일에서 자동 높이
+    min-height: 100vh; // 최소 높이 보장
     overflow-y: auto; // 세로 스크롤 허용
     padding-top: 50px !important;
     table-layout: unset !important;
     display: block !important;
+    transition: none; // 모바일에서는 전환 효과 제거
     
     .fp-tableCell {
       display: block;
@@ -480,7 +483,7 @@ section{
               content: '';
               display: block;
               position: absolute;
-              background: url(../images/main/search_icon_01.png) no-repeat center/24px 23px, linear-gradient(135deg, $color1, #1f60c2);
+              background: url(../images/main/search_icon_01.png) no-repeat center/24px 23px, linear-gradient(135deg, $color1, $bg-color2);
               width: 56.5px;
               height: 56.5px;
               box-shadow: 8.9px 4.5px 10px 0 rgba(19, 58, 131, 0.2);
@@ -644,10 +647,9 @@ section{
         display: none;
       }
       .main_banner_right_con {
-        padding-bottom: 30px;
         display:flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: center;
         height: calc(100vh - 250px);
         
         &:after{
@@ -655,7 +657,7 @@ section{
           display: block;
           position: absolute;
           border-radius: 0 0 0 60px;
-          height: calc(70vh + 90px);
+          height: calc(80vh + 25px);
           top: -95px;
           left: 0;
           width: 100%;
@@ -762,15 +764,14 @@ section{
       }
     }
 
-    @media screen and (max-width: 1380px){
+    @media screen and (max-width: 1340px){
         .fp-tableCell{
           margin-left: 100px;
-          //width: calc(100% - 150px);
           display: flex;
         }
       
       .main_banner_right{
-       // width: 320px;
+        width: 258px;
 
       }
       .main_banner_left{
@@ -818,7 +819,7 @@ section{
             padding-left: 20px;
           }
           ul{
-            padding: 0 20px;
+            padding: 0 10px;
             li{
               a{
                 span:last-of-type{
@@ -842,7 +843,7 @@ section{
             li{
               a{
                 span:last-of-type{
-                  width: 150px;
+                  width: 180px;
                 }
               }
             }
@@ -1365,6 +1366,7 @@ section{
       align-items: stretch;
       overflow: visible; // visual 이미지가 보이도록
       min-width: 320px; // 최소 너비 보장
+      transition: height 0.3s ease; // 높이 변화 시 부드러운 전환
     }
 
     // 좌측 네비게이션 (slick.js)
@@ -1378,12 +1380,14 @@ section{
         overflow: hidden;
         padding: 81px 0 !important;
         width: 320px;
+        transition: all 0.3s ease; // 부드러운 전환 효과
       }
       
       .slick-track {
         height: 100%;
         display: flex !important;
         flex-direction: column;
+        transition: transform 0.3s ease; // 슬라이더 이동 시 부드러운 전환
         .slick-slide{
           min-height: unset !important;
         }
@@ -1394,13 +1398,13 @@ section{
       .nav-item.slick-slide {
         padding: 40px 20px;
         cursor: pointer;
-       // transition: all 0.3s ease;
+        transition: all 0.3s ease; // 전환 효과 복원
         opacity: 0.5;
         height: 80px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-       // transform: scale(0.9);
+        transform: scale(0.9); // 크기 변화 효과 복원
         margin: 0;
 
         // 가로 중앙 정렬
@@ -1414,12 +1418,12 @@ section{
           margin: 0 ;
           color: rgba(255, 255, 255, 0.8) ;
           font-size: $fs-16 ;
-         // transition: all 0.3s ease ;
+          transition: all 0.3s ease ; // 전환 효과 복원
         }
         
         img {
           display: none ;
-          //transition: all 0.3s ease ;
+          transition: all 0.3s ease ; // 전환 효과 복원
         }
 
           // slick-center (활성화된 아이템)
@@ -1433,8 +1437,8 @@ section{
             z-index: 10 ;
             background: $color1 url(../images/main/domain_arrow.png) no-repeat right bottom ;
             justify-content: space-between ;
-           // transform: scale(1) ;
-          //  transition: all 0.3s ease ;
+            transform: scale(1) ; // 크기 변화 효과 복원
+            transition: all 0.3s ease ; // 전환 효과 복원
             border: none ;
 
           h3 {
@@ -1456,7 +1460,7 @@ section{
 
         // 중앙 아이템 위아래의 아이템들 스타일 조정
         &.slick-active {
-          //transform: scale(0.95) ;
+          transform: scale(0.95) ; // 크기 변화 효과 복원
           
           &:not(.slick-center) {
             h3 {
@@ -1484,11 +1488,13 @@ section{
       
       .slick-list {
         height: 100%;
+        transition: height 0.3s ease; // 높이 변화 시 부드러운 전환
       }
       
       .slick-track {
         height: 100%;
         display: flex !important;
+        transition: transform 0.3s ease; // 슬라이더 이동 시 부드러운 전환
       }
       
       .content-slide {
@@ -1510,6 +1516,7 @@ section{
           font-family: $ff-pretendardgov;
           padding: 56px 60px;
           overflow: hidden;
+          transition: all 0.3s ease; // 부드러운 전환 효과
 
           h3 {
             font-size: $fs-28;
@@ -1548,11 +1555,13 @@ section{
           bottom: 0px;
           margin: 0;
           z-index: 1; // content-slide-inner 뒤로 배치
+          transition: all 0.3s ease; // 부드러운 전환 효과
           
           img{
             display: block;
             border-radius: 30px;
             max-width: 500px;
+            transition: all 0.3s ease; // 이미지 전환 효과
           }
          
         }
@@ -1567,12 +1576,14 @@ section{
             position: absolute;
             right: 120px; // 패딩만큼 오른쪽 여백
             bottom: 0px; // 패딩만큼 하단 여백
+            transition: all 0.3s ease; // 위치 변화 시 부드러운 전환
           }
           
           .visual {
             top: 0;
             bottom: unset;
             right: auto;//
+            transition: all 0.3s ease; // 위치 변화 시 부드러운 전환
           }
         }
       }
@@ -1610,6 +1621,7 @@ section{
         width: 32px;
         height: 32px;
         cursor: pointer;
+        transition: all 0.3s ease; // 버튼 호버 효과
         &.prev {
           background: url(../images/main/domain_prev.png) no-repeat center center;
         }
@@ -1634,6 +1646,7 @@ section{
       top: calc(50vh - 100px);
       bottom: auto;
       transform: unset;
+      transition: all 0.3s ease; // 위치 변화 시 부드러운 전환
     }
 
     // 애니메이션
@@ -1658,16 +1671,24 @@ section{
     @media (max-width: 1400px) {
       &.even-slide{
         .domain-controls{
-          right: unset;
-          left: 430px; 
+          right: calc(50vw - 500px); 
+          top: calc(50vh - 50px);
         }
         .domain-content{
           .content-slide{
-            .visual{
+            .content-slide-inner{
+              height: 350px;
+              padding: 46px 50px;
               right: 0;
+            }
+            .visual{
+            left: 0;
             }
           }
         }
+    }
+    .domain-controls{
+      right: calc(100% - 600px);
     }
       .domain-content{
         padding-left: 30px;
@@ -1678,12 +1699,13 @@ section{
         }
       }
 
-      &.even-slide{
-        .domain-controls{
-          right: calc(50vw - 380px); 
-        }
+    //   &.even-slide{
+    //     .domain-controls{
+    //       right: calc(50vw - 380px); 
+    //     }
+    // }
     }
-  }
+
     // 반응형 - 모바일 (1080px 이하)
     @media (max-width: 1080px) {
       padding: 44px 0 40px;
@@ -1693,11 +1715,12 @@ section{
       
       .container {
         flex-direction: column;
-        height: auto;
+        height: auto !important; // 모바일에서는 자동 높이
         gap: 0;
         padding: 0 20px;
         max-width: 100%;
         display: block;
+        transition: none; // 모바일에서는 전환 효과 제거
       }
 
       // 네비게이션 숨김
@@ -1711,6 +1734,11 @@ section{
         width: 100%;
         max-width: 400px;
         margin: 0 auto;
+        height: auto; // 모바일에서는 자동 높이
+        
+        .slick-list {
+          height: auto; // 모바일에서는 자동 높이
+        }
         
         .content-slide {
           opacity: 0.7;
@@ -1720,10 +1748,11 @@ section{
           flex-direction: column-reverse;
           align-items: center;
           gap: 28px;
+          height: auto !important; // 모바일에서는 자동 높이
           
           &.slick-center {
             opacity: 1;
-            //transform: scale(1);
+            transform: scale(1); // 모바일에서도 크기 변화 효과 복원
           }
           
           // 레이아웃 리셋
@@ -2065,10 +2094,10 @@ section{
                 font-weight: 300;
 
                 &.blue { 
-                  background: #1f60c2;
+                  background: $bg-color2;
                 }
                 &.orange { 
-                  background: #e9a027;
+                  background: $bg-color1;
                 }
               }
 
@@ -2444,119 +2473,9 @@ section{
               display: none;
             }
           }
-        }
-
-       
+        }  
       }
     }
-
-    // 반응형 - 모바일 (720px 이하)
-    // @media screen and (max-width: 720px) {
-    //   padding: 60px 0;
-
-    //   .news_tab {
-    //     .container {
-    //       padding: 0 15px;
-    //     }
-
-    //     .news_tab_menu {
-         
-
-    //       li {
-
-    //         button, a {
-    //           font-size: $fs-14;
-    //           padding: 0 10px;
-    //         }
-
-    //         &:last-child {
-    //           button, a {
-    //             border-radius: 0 20px 20px 0;
-    //           }
-    //         }
-    //       }
-    //     }
-
-    //     .news_tab_content {
-    //       .news_controls {
-    //         margin-top: 25px;
-    //         gap: 8px;
-
-    //         a {
-    //           width: 45px;
-    //           height: 45px;
-              
-    //           &.more {
-    //             background-size: 14px;
-    //           }
-
-    //           &.news_prev,
-    //           &.news_next {
-    //             background-size: 14px;
-    //           }
-    //         }
-    //       }
-
-    //       .tab_panel {
-    //         .news_slider {
-    //           gap: 12px;
-
-    //           li a {
-    //             padding: 20px;
-    //             gap: 15px;
-
-    //             > div {
-    //               width: 100px;
-
-    //               .label {
-    //                 font-size: $fs-12;
-    //                 height: 22px;
-    //                 line-height: 22px;
-    //                 padding: 0 8px;
-    //               }
-
-    //               .date {
-    //                 font-size: $fs-13;
-    //               }
-    //             }
-
-    //             > strong {
-    //               font-size: $fs-15;
-    //               line-height: 1.3;
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }
-    //   }
-
-    //   .news_bottom {
-    //     margin-top: 40px;
-    //     padding: 30px 15px;
-
-    //     .container {
-    //       grid-template-columns: 1fr;
-    //       gap: 15px;
-    //     }
-
-    //     a {
-    //       height: 70px;
-    //       padding: 15px 20px;
-    //       font-size: $fs-15;
-
-    //       span {
-    //         padding-left: 35px;
-    //         background-size: 25px;
-    //       }
-
-    //       &::after {
-    //         width: 20px;
-    //         height: 20px;
-    //         background-size: 20px;
-    //       }
-    //     }
-    //   }
-    // }
   }
 
 
@@ -2771,7 +2690,7 @@ section{
         display: flex; 
         justify-content: space-between; 
         align-items: center;
-        height: 235px; 
+        height: 252px; 
         margin-bottom: 27px;
         background: #abd5ff;
         border-radius: 20px;
@@ -2848,7 +2767,7 @@ section{
             font-family: $ff-sbaggro;
             font-weight: 500;
             font-size: $fs-17;
-            background: #1f60c2 url(../images/main/service_icon_arrow.png) no-repeat center right 20px/17px 8px;
+            background: $bg-color2 url(../images/main/service_icon_arrow.png) no-repeat center right 20px/17px 8px;
           
             &:last-child{
               background-color: #ff8839;
@@ -3214,6 +3133,7 @@ section{
     }
     &_top {
       display: flex;
+      justify-content: center;
    
       margin: 40px 0;
       gap: 38px;
@@ -3228,6 +3148,7 @@ section{
       }
 
       .interview {
+
         // 슬라이더가 초기화되지 않았을 때 기본 레이아웃
         &:not(.slick-initialized) {
           display: flex;
@@ -3245,11 +3166,16 @@ section{
           .slick-track {
             display: flex;
             align-items: center;
-            margin-left: 2px;
+            margin-left: -14px;
           }
           
           .slick-slide {
+           
             margin: 0 20px;
+            border-radius: 30px;
+            a{
+              box-shadow: 8.9px 4.5px 21px 0 rgba(0, 0, 0, 0.06);
+            }
           }
         }
       
@@ -3259,8 +3185,6 @@ section{
             height: 345px;
             width: 290px; background-color: #fff;
             border-radius: 30px;
-            box-shadow: 8.9px 4.5px 21px 0 rgba(0, 0, 0, 0.05);
-           
             overflow: hidden;
             
             b {
@@ -3274,14 +3198,14 @@ section{
               border-radius: 6px;
               font-family: $ff-sbaggro;
             }
-            
             span {
               display: block;
               font-size: $fs-18;
               font-weight: 700;
               line-height: 1.4;
               letter-spacing: -0.45px;
-              margin: 0 24px 24px;
+              margin: 0 24px 24px;    
+              height: 34px;
             }
             
             img {
@@ -3512,7 +3436,7 @@ section{
         .publications_wrap{
           flex-shrink: 0; // 크기 고정
           .inner{
-            width: 280px;
+            //width: 280px;
             &:after{
               right: -39px;
             }
@@ -3520,7 +3444,7 @@ section{
         }
       }
     }
-    @media screen and (max-width: 1400px){
+    @media screen and (max-width: 1390px){
       .container{
         padding: 0 50px 0 20px;
       }
@@ -3528,10 +3452,13 @@ section{
         .publications_wrap{
 
           flex-shrink: 0; // 크기 고정
+          h3{
+            margin-left: -25px;
+          }
           .inner{
-
+            margin-left: -25px;
             &:after{
-              right: -39px;
+              right: -45px;
             }
           }
         }
@@ -3545,6 +3472,7 @@ section{
         }
         .history_box{
           max-width: 270;
+          padding: 40px 20px;
         }
       }
     }
@@ -3639,8 +3567,12 @@ section{
                 height: 100%;
               }
             }
+            .slick-list{
+              padding: 30px 0 30px 40px;
+            
+            }
             .slick-slide{
-              width: calc(100% - 310px);
+              width: calc(100% - 320px);
             }
             // 슬라이더가 초기화되지 않았을 때 모바일 기본 레이아웃
             &:not(.slick-initialized) {
@@ -3672,8 +3604,6 @@ section{
             // 슬라이더가 초기화되었을 때
             &.slick-initialized {
               .slick-slide {
-                padding: 0 8px;
-                
                 > div {
                   max-width: 250px;
                   margin: 0 auto;
@@ -3701,7 +3631,9 @@ section{
         .publications_wrap {
           order: 2;
           width: 100%;
-
+          h3{
+            margin-left: 0;
+          }
           
           .inner {
             width: 100%;
@@ -3713,6 +3645,7 @@ section{
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
+            margin-left: 0;
 
             &:after{
              top: 20px;
@@ -3771,6 +3704,9 @@ section{
             width: 100%;
             height: 200px;
             border-radius: 20px;
+            iframe{
+              border-radius: 20px;
+            }
           }
 
           .video_text {
@@ -3879,32 +3815,38 @@ section{
 
 .fullpage-scroll section {
   height: 100vh;
+  transition: height 0.3s ease; // 높이 변화 시 부드러운 전환
   
   // 모바일에서는 자동 높이 사용
   @media screen and (max-width: 1080px) {
     height: auto;
     min-height: 100vh;
+    transition: none; // 모바일에서는 전환 효과 제거
   }
 }
 
 .fullpage-scroll .main_banner {
   height: 100vh;
   min-height: auto;
+  transition: height 0.3s ease; // 높이 변화 시 부드러운 전환
   
   // 모바일에서는 자동 높이 사용
   @media screen and (max-width: 1080px) {
     height: auto;
     min-height: 100vh;
+    transition: none; // 모바일에서는 전환 효과 제거
   }
 }
 
 .fullpage-scroll .domain {
   height: 100vh;
+  transition: height 0.3s ease; // 높이 변화 시 부드러운 전환
   
   // 모바일에서는 자동 높이 사용
   @media screen and (max-width: 1080px) {
     height: auto;
     min-height: 100vh;
+    transition: none; // 모바일에서는 전환 효과 제거
   }
 }
 
@@ -3912,11 +3854,21 @@ section{
 .fullpage-scroll .certification,
 .fullpage-scroll .promo {
   height: 100vh;
+  transition: height 0.3s ease; // 높이 변화 시 부드러운 전환
   
   // 모바일에서는 자동 높이 사용
   @media screen and (max-width: 1080px) {
     height: auto;
     min-height: 100vh;
+    transition: none; // 모바일에서는 전환 효과 제거
+  }
+}
+
+// 레이아웃 전환 시 깜빡임 방지
+.layout-transitioning {
+  .section {
+    opacity: 0.95;
+    transition: opacity 0.1s ease;
   }
 }
 

@@ -2599,6 +2599,7 @@ section {
   overflow: visible;
   padding-top: 90px !important;
   table-layout: 100% !important;
+  transition: height 0.3s ease;
 }
 section.footer {
   margin-left: 0 !important;
@@ -2616,11 +2617,13 @@ section .fp-tableCell {
   section {
     margin: 0 auto;
     width: 100% !important;
-    height: 100%;
+    height: auto;
+    min-height: 100vh;
     overflow-y: auto;
     padding-top: 50px !important;
     table-layout: unset !important;
     display: block !important;
+    transition: none;
   }
   section .fp-tableCell {
     display: block;
@@ -3011,10 +3014,9 @@ section .fp-tableCell {
   display: none;
 }
 .main .main_banner .main_banner_right .main_banner_right_con {
-  padding-bottom: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   height: calc(100vh - 250px);
   border-radius: 0 0 0 60px;
   overflow: hidden;
@@ -3024,7 +3026,7 @@ section .fp-tableCell {
   display: block;
   position: absolute;
   border-radius: 0 0 0 60px;
-  height: calc(70vh + 90px);
+  height: calc(80vh + 25px);
   top: -95px;
   left: 0;
   width: 100%;
@@ -3113,10 +3115,13 @@ section .fp-tableCell {
     padding-left: 100px;
   }
 }
-@media screen and (max-width: 1380px) {
+@media screen and (max-width: 1340px) {
   .main .main_banner .fp-tableCell {
     margin-left: 100px;
     display: flex;
+  }
+  .main .main_banner .main_banner_right {
+    width: 258px;
   }
   .main .main_banner .main_banner_left {
     max-width: 650px;
@@ -3151,7 +3156,7 @@ section .fp-tableCell {
     padding-left: 20px;
   }
   .main .main_banner .main_banner_right .main_banner_right_con ul {
-    padding: 0 20px;
+    padding: 0 10px;
   }
   .main .main_banner .main_banner_right .main_banner_right_con ul li a span:last-of-type {
     width: 210px;
@@ -3168,7 +3173,7 @@ section .fp-tableCell {
     padding: 0 20px;
   }
   .main .main_banner .main_banner_right .main_banner_right_con ul li a span:last-of-type {
-    width: 150px;
+    width: 180px;
   }
 }
 @media screen and (max-width: 1080px) {
@@ -3651,6 +3656,7 @@ section .fp-tableCell {
   align-items: stretch;
   overflow: visible;
   min-width: 320px;
+  transition: height 0.3s ease;
 }
 .main .domain .domain-nav {
   flex: 0 0 320px;
@@ -3662,11 +3668,13 @@ section .fp-tableCell {
   overflow: hidden;
   padding: 81px 0 !important;
   width: 320px;
+  transition: all 0.3s ease;
 }
 .main .domain .domain-nav .slick-track {
   height: 100%;
   display: flex !important;
   flex-direction: column;
+  transition: transform 0.3s ease;
 }
 .main .domain .domain-nav .slick-track .slick-slide {
   min-height: unset !important;
@@ -3675,11 +3683,13 @@ section .fp-tableCell {
 .main .domain .domain-nav .nav-item.slick-slide {
   padding: 40px 20px;
   cursor: pointer;
+  transition: all 0.3s ease;
   opacity: 0.5;
   height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transform: scale(0.9);
   margin: 0;
   background: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.16);
@@ -3692,10 +3702,12 @@ section .fp-tableCell {
   margin: 0;
   color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
+  transition: all 0.3s ease;
 }
 .main .domain .domain-nav .slick-slide.nav-item img,
 .main .domain .domain-nav .nav-item.slick-slide img {
   display: none;
+  transition: all 0.3s ease;
 }
 .main .domain .domain-nav .slick-slide.nav-item.slick-center,
 .main .domain .domain-nav .nav-item.slick-slide.slick-center {
@@ -3708,6 +3720,8 @@ section .fp-tableCell {
   z-index: 10;
   background: #17469d url(../images/main/domain_arrow.png) no-repeat right bottom;
   justify-content: space-between;
+  transform: scale(1);
+  transition: all 0.3s ease;
   border: none;
 }
 .main .domain .domain-nav .slick-slide.nav-item.slick-center h3,
@@ -3727,6 +3741,10 @@ section .fp-tableCell {
   -o-object-fit: contain;
      object-fit: contain;
 }
+.main .domain .domain-nav .slick-slide.nav-item.slick-active,
+.main .domain .domain-nav .nav-item.slick-slide.slick-active {
+  transform: scale(0.95);
+}
 .main .domain .domain-nav .slick-slide.nav-item.slick-active:not(.slick-center) h3,
 .main .domain .domain-nav .nav-item.slick-slide.slick-active:not(.slick-center) h3 {
   font-size: 1rem;
@@ -3745,10 +3763,12 @@ section .fp-tableCell {
 }
 .main .domain .domain-content .slick-list {
   height: 100%;
+  transition: height 0.3s ease;
 }
 .main .domain .domain-content .slick-track {
   height: 100%;
   display: flex !important;
+  transition: transform 0.3s ease;
 }
 .main .domain .domain-content .content-slide {
   flex: 1;
@@ -3768,6 +3788,7 @@ section .fp-tableCell {
   font-family: "PretendardGOV", "Pretendard";
   padding: 56px 60px;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 .main .domain .domain-content .content-slide .content-slide-inner h3 {
   font-size: 1.75rem;
@@ -3801,21 +3822,25 @@ section .fp-tableCell {
   bottom: 0px;
   margin: 0;
   z-index: 1;
+  transition: all 0.3s ease;
 }
 .main .domain .domain-content .content-slide .visual img {
   display: block;
   border-radius: 30px;
   max-width: 500px;
+  transition: all 0.3s ease;
 }
 .main .domain .domain-content .content-slide[data-index="1"] .content-slide-inner, .main .domain .domain-content .content-slide[data-index="3"] .content-slide-inner, .main .domain .domain-content .content-slide[data-index="5"] .content-slide-inner, .main .domain .domain-content .content-slide[data-index="7"] .content-slide-inner, .main .domain .domain-content .content-slide[data-index="9"] .content-slide-inner {
   position: absolute;
   right: 120px;
   bottom: 0px;
+  transition: all 0.3s ease;
 }
 .main .domain .domain-content .content-slide[data-index="1"] .visual, .main .domain .domain-content .content-slide[data-index="3"] .visual, .main .domain .domain-content .content-slide[data-index="5"] .visual, .main .domain .domain-content .content-slide[data-index="7"] .visual, .main .domain .domain-content .content-slide[data-index="9"] .visual {
   top: 0;
   bottom: unset;
   right: auto;
+  transition: all 0.3s ease;
 }
 .main .domain .domain-content .slick-dots {
   display: none !important;
@@ -3844,6 +3869,7 @@ section .fp-tableCell {
   width: 32px;
   height: 32px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 .main .domain .domain-controls button.prev {
   background: url(../images/main/domain_prev.png) no-repeat center center;
@@ -3863,6 +3889,7 @@ section .fp-tableCell {
   top: calc(50vh - 100px);
   bottom: auto;
   transform: unset;
+  transition: all 0.3s ease;
 }
 @keyframes fadeInSlide {
   0% {
@@ -3881,20 +3908,25 @@ section .fp-tableCell {
 }
 @media (max-width: 1400px) {
   .main .domain.even-slide .domain-controls {
-    right: unset;
-    left: 430px;
+    right: calc(50vw - 500px);
+    top: calc(50vh - 50px);
+  }
+  .main .domain.even-slide .domain-content .content-slide .content-slide-inner {
+    height: 350px;
+    padding: 46px 50px;
+    right: 0;
   }
   .main .domain.even-slide .domain-content .content-slide .visual {
-    right: 0;
+    left: 0;
+  }
+  .main .domain .domain-controls {
+    right: calc(100% - 600px);
   }
   .main .domain .domain-content {
     padding-left: 30px;
   }
   .main .domain .domain-content .content-slide .visual {
     right: 0;
-  }
-  .main .domain.even-slide .domain-controls {
-    right: calc(50vw - 380px);
   }
 }
 @media (max-width: 1080px) {
@@ -3905,11 +3937,12 @@ section .fp-tableCell {
   }
   .main .domain .container {
     flex-direction: column;
-    height: auto;
+    height: auto !important;
     gap: 0;
     padding: 0 20px;
     max-width: 100%;
     display: block;
+    transition: none;
   }
   .main .domain .domain-nav {
     display: none;
@@ -3919,6 +3952,10 @@ section .fp-tableCell {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
+    height: auto;
+  }
+  .main .domain .domain-content .slick-list {
+    height: auto;
   }
   .main .domain .domain-content .content-slide {
     opacity: 0.7;
@@ -3928,9 +3965,11 @@ section .fp-tableCell {
     flex-direction: column-reverse;
     align-items: center;
     gap: 28px;
+    height: auto !important;
   }
   .main .domain .domain-content .content-slide.slick-center {
     opacity: 1;
+    transform: scale(1);
   }
   .main .domain .domain-content .content-slide[data-index] .content-slide-inner {
     position: unset;
@@ -4696,7 +4735,7 @@ section .fp-tableCell {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 235px;
+  height: 252px;
   margin-bottom: 27px;
   background: #abd5ff;
   border-radius: 20px;
@@ -5036,6 +5075,7 @@ section .fp-tableCell {
 }
 .main .promo_top {
   display: flex;
+  justify-content: center;
   margin: 40px 0;
   gap: 38px;
 }
@@ -5059,10 +5099,14 @@ section .fp-tableCell {
 .main .promo_top .interview.slick-initialized .slick-track {
   display: flex;
   align-items: center;
-  margin-left: 2px;
+  margin-left: -14px;
 }
 .main .promo_top .interview.slick-initialized .slick-slide {
   margin: 0 20px;
+  border-radius: 30px;
+}
+.main .promo_top .interview.slick-initialized .slick-slide a {
+  box-shadow: 8.9px 4.5px 21px 0 rgba(0, 0, 0, 0.06);
 }
 .main .promo_top .interview > div a {
   display: block;
@@ -5070,7 +5114,6 @@ section .fp-tableCell {
   width: 290px;
   background-color: #fff;
   border-radius: 30px;
-  box-shadow: 8.9px 4.5px 21px 0 rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 .main .promo_top .interview > div a b {
@@ -5091,6 +5134,7 @@ section .fp-tableCell {
   line-height: 1.4;
   letter-spacing: -0.45px;
   margin: 0 24px 24px;
+  height: 34px;
 }
 .main .promo_top .interview > div a img {
   display: block;
@@ -5301,22 +5345,25 @@ section .fp-tableCell {
   .main .promo_top .publications_wrap {
     flex-shrink: 0;
   }
-  .main .promo_top .publications_wrap .inner {
-    width: 280px;
-  }
   .main .promo_top .publications_wrap .inner:after {
     right: -39px;
   }
 }
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1390px) {
   .main .promo .container {
     padding: 0 50px 0 20px;
   }
   .main .promo_top .publications_wrap {
     flex-shrink: 0;
   }
+  .main .promo_top .publications_wrap h3 {
+    margin-left: -25px;
+  }
+  .main .promo_top .publications_wrap .inner {
+    margin-left: -25px;
+  }
   .main .promo_top .publications_wrap .inner:after {
-    right: -39px;
+    right: -45px;
   }
   .main .promo_bottom .video_box {
     gap: 10px;
@@ -5326,6 +5373,7 @@ section .fp-tableCell {
   }
   .main .promo_bottom .history_box {
     max-width: 270;
+    padding: 40px 20px;
   }
 }
 @media screen and (max-width: 1080px) {
@@ -5402,8 +5450,11 @@ section .fp-tableCell {
     width: 100%;
     height: 100%;
   }
+  .main .promo_top .interview_wrap .interview .slick-list {
+    padding: 30px 0 30px 40px;
+  }
   .main .promo_top .interview_wrap .interview .slick-slide {
-    width: calc(100% - 310px);
+    width: calc(100% - 320px);
   }
   .main .promo_top .interview_wrap .interview:not(.slick-initialized) {
     display: block;
@@ -5425,9 +5476,6 @@ section .fp-tableCell {
     font-size: 1rem;
     margin: 0 15px 15px;
   }
-  .main .promo_top .interview_wrap .interview.slick-initialized .slick-slide {
-    padding: 0 8px;
-  }
   .main .promo_top .interview_wrap .interview.slick-initialized .slick-slide > div {
     max-width: 250px;
     margin: 0 auto;
@@ -5448,6 +5496,9 @@ section .fp-tableCell {
     order: 2;
     width: 100%;
   }
+  .main .promo_top .publications_wrap h3 {
+    margin-left: 0;
+  }
   .main .promo_top .publications_wrap .inner {
     width: 100%;
     height: 310px;
@@ -5458,6 +5509,7 @@ section .fp-tableCell {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    margin-left: 0;
   }
   .main .promo_top .publications_wrap .inner:after {
     top: 20px;
@@ -5504,6 +5556,9 @@ section .fp-tableCell {
   .main .promo_bottom .video_box .video_wrap {
     width: 100%;
     height: 200px;
+    border-radius: 20px;
+  }
+  .main .promo_bottom .video_box .video_wrap iframe {
     border-radius: 20px;
   }
   .main .promo_bottom .video_box .video_text {
@@ -5583,32 +5638,38 @@ section .fp-tableCell {
 
 .fullpage-scroll section {
   height: 100vh;
+  transition: height 0.3s ease;
 }
 @media screen and (max-width: 1080px) {
   .fullpage-scroll section {
     height: auto;
     min-height: 100vh;
+    transition: none;
   }
 }
 
 .fullpage-scroll .main_banner {
   height: 100vh;
   min-height: auto;
+  transition: height 0.3s ease;
 }
 @media screen and (max-width: 1080px) {
   .fullpage-scroll .main_banner {
     height: auto;
     min-height: 100vh;
+    transition: none;
   }
 }
 
 .fullpage-scroll .domain {
   height: 100vh;
+  transition: height 0.3s ease;
 }
 @media screen and (max-width: 1080px) {
   .fullpage-scroll .domain {
     height: auto;
     min-height: 100vh;
+    transition: none;
   }
 }
 
@@ -5616,6 +5677,7 @@ section .fp-tableCell {
 .fullpage-scroll .certification,
 .fullpage-scroll .promo {
   height: 100vh;
+  transition: height 0.3s ease;
 }
 @media screen and (max-width: 1080px) {
   .fullpage-scroll .news,
@@ -5623,7 +5685,13 @@ section .fp-tableCell {
   .fullpage-scroll .promo {
     height: auto;
     min-height: 100vh;
+    transition: none;
   }
+}
+
+.layout-transitioning .section {
+  opacity: 0.95;
+  transition: opacity 0.1s ease;
 }
 
 .fw_b {
