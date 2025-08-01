@@ -2593,7 +2593,6 @@ body.modal-open {
 }
 
 section {
-  border: 1px solid red;
   margin-left: 116px;
   width: calc(100% - 80px) !important;
   height: 100vh;
