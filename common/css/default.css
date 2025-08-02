@@ -3074,7 +3074,7 @@ section .fp-tableCell {
 .main .main_banner .main_banner_right .main_banner_right_con ul li:first-child a {
   padding-top: 0;
 }
-.main .main_banner .main_banner_right .main_banner_right_con ul li:nth-child(4) a span, .main .main_banner .main_banner_right .main_banner_right_con ul li:nth-child(5) a span {
+.main .main_banner .main_banner_right .main_banner_right_con ul li:nth-child(4) a span:first-child, .main .main_banner .main_banner_right .main_banner_right_con ul li:nth-child(5) a span:first-child {
   background: #fff;
   color: #000;
 }
