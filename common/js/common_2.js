@@ -834,9 +834,6 @@ function initDomainSlider() {
     
     $('.domain-controls').show();
     $('.domain').removeClass('even-slide');
-
-    // 로딩 및 셋팅 완료후 보이게 처리
-    $('.domain .container').removeClass('ready');
   }
   
   // 실제 초기화 실행
@@ -1362,3 +1359,33 @@ function onYouTubeIframeAPIReady() {
 
 // YouTube API가 함수를 찾을 수 있도록 전역으로 노출
 window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
+/**
+ * 뉴스 탭 메뉴 기능 
+ * news_tab_menu의 버튼 클릭 시 해당하는 tab_panel을 활성화하고 뉴스 슬라이더를 재초기화합니다.
+ */
+$(document).ready(function() {
+  // 뉴스 탭 메뉴 버튼 클릭 이벤트
+  $('.news_tab_menu li button').on('click', function() {
+    // 클릭된 버튼의 인덱스를 구합니다 (입찰공고 a태그 제외하고 button만 카운트)
+    var clickedIndex = $(this).closest('li').index();
+    
+    // 모든 탭 메뉴에서 active 클래스 제거
+    $('.news_tab_menu li').removeClass('active');
+    
+    // 클릭된 탭 메뉴에 active 클래스 추가
+    $(this).closest('li').addClass('active');
+    
+    // 모든 탭 패널에서 active 클래스 제거
+    $('.news_tab_content .tab_panel').removeClass('active');
+    
+    // 해당 인덱스의 탭 패널에 active 클래스 추가
+    $('.news_tab_content .tab_panel').eq(clickedIndex).addClass('active');
+    
+    // 뉴스 슬라이더 재초기화 (새로 활성화된 탭 패널의 슬라이더를 위해)
+    setTimeout(function() {
+      initNewsSlider();
+    }, 100);
+    
+  });
+});

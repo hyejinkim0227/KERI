@@ -2607,7 +2607,7 @@ body.modal-open {
 
 section {
   margin-left: 116px;
-  width: calc(100% - 80px) !important;
+  width: calc(100% - 116px) !important;
   overflow: visible;
   padding-top: 90px !important;
   table-layout: 100% !important;
@@ -4640,7 +4640,7 @@ section .fp-tableCell {
 }
 .main .certification .support .support_banner {
   background: #fff;
-  margin-bottom: 34px;
+  margin-bottom: 25px;
   padding: 30px 0;
   border: solid 1px #d6d6d6;
   border-radius: 30px;
@@ -4652,7 +4652,7 @@ section .fp-tableCell {
   align-items: center;
   justify-content: space-between;
   padding: 0 26px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .main .certification .support .support_banner > div .control {
   display: flex;
@@ -4697,7 +4697,7 @@ section .fp-tableCell {
   border-radius: 17px;
 }
 .main .certification .support .support_banner .support_list .support_item b {
-  margin: 26px 0 14px;
+  margin: 26px 0 10px;
   color: #1a2a5c;
   font-size: 1.0625rem;
   font-family: "SBAggro", "Pretendard";
@@ -5120,9 +5120,12 @@ section .fp-tableCell {
     width: auto;
     height: 35px;
   }
+  .main .certification .support .support_banner .support_list .support_item {
+    flex: 0 0 20%;
+  }
   .main .certification .support .support_banner .support_list .support_item:nth-child(even) {
     border-left: 0;
-    padding-left: 0;
+    padding-left: 15px;
     margin-right: 0;
   }
 }
@@ -5240,7 +5243,7 @@ section .fp-tableCell {
   height: 347px;
   position: relative;
   z-index: 1;
-  background: #032565 url(../images/main/brochure_txt.png) no-repeat center bottom/383px auto;
+  background: #032565 url(../images/main/brochure_txt.png) no-repeat center bottom/95% auto;
   border-radius: 40px;
   padding: 75px 23px 23px;
   box-shadow: 8.9px 4.5px 21px 0 rgba(0, 0, 0, 0.1);
@@ -5489,7 +5492,7 @@ section .fp-tableCell {
   }
   .main .promo_top {
     flex-direction: column;
-    margin: 25px 0 40px;
+    margin: 25px 0 30px;
     gap: 30px;
   }
   .main .promo_top .interview_wrap {
@@ -5618,10 +5621,11 @@ section .fp-tableCell {
     margin-left: 0;
   }
   .main .promo_top .publications_wrap .inner:after {
-    top: 20px;
-    right: 52px;
-    width: 168px;
-    height: 234px;
+    top: 10%;
+    right: -10px;
+    background-size: 178px 247px;
+    width: 178px;
+    height: 247px;
   }
   .main .promo_top .publications_wrap .inner strong {
     font-size: 1.25rem;
@@ -5657,6 +5661,7 @@ section .fp-tableCell {
     flex-direction: column;
     gap: 20px;
     background: none;
+    padding: 0;
     background-color: #f6f6f6;
   }
   .main .promo_bottom .video_box .video_wrap {
@@ -5731,13 +5736,12 @@ section .fp-tableCell {
     margin-left: -60px;
   }
 }
-@media screen and (max-width: 720px) {
-  .main .promo_top .publications_wrap .inner:after {
-    top: 10%;
-    right: -10px;
-    background-size: 178px 247px;
-    width: 178px;
-    height: 247px;
+@media screen and (max-width: 420px) {
+  .main .promo .publications_wrap .inner:after {
+    top: 15%;
+    background-size: 149px 218px;
+    width: 149px;
+    height: 218px;
   }
 }
 
