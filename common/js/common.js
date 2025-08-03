@@ -1031,6 +1031,10 @@ function initSupportSlider() {
         prevEl: '.support_banner .support_btn_prev',
       },
       breakpoints: {
+        // 1080 이하 1개씩 보여주기
+        1079: {
+          slidesPerView: 1,
+        },
         // 1080 이상 2개씩 보여주기
         1080: {
           slidesPerView: 2,

@@ -885,20 +885,23 @@
           border: 0;
           > li {
             margin-bottom: 0;
-            padding: 0 20px;
+            //padding: 0 20px;
             width: 32%;
             border: 0;
             background-color: #dceefc;
+
             > a {
               position: relative;
               z-index: 1;
               display: block;
               width: 111%;
               border-top: 0;
-              font-size: 17px;
-              padding: 15px 0;
+              font-size: $fs-17;
+              padding: 15px 20px;
               color: #3f4143;
+              word-break: keep-all;
               &::after{display: none;}
+
             }
             &.active {
               > a {
@@ -910,8 +913,8 @@
               .dep2_wrap {
                 z-index: 2;
                 display: block; border-top: none; margin-top: 30px;
-                > ul{display: block;
-                  > li{ width: 94%;
+                > ul{display: block; padding: 0 20px;
+                  > li{ width: 94%;  
                     > a{ font-size: $fs-15; color: #222; padding: 15px 0; background: url(../images/common/m_menu_arrow_down.png) no-repeat right 20px center/ 9px auto;
                       &:before{display: none;}
                     }
@@ -1065,6 +1068,17 @@
                     background-color: #1e49b9;
                   }
                 }
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 420px) {
+        .container{
+          .dep1{
+            >li{
+              >a{
+                padding: 15px 10px;
               }
             }
           }
@@ -2121,7 +2135,7 @@ body.modal-open {
 
   h3 {
     margin: 0;
-    font-size: $fs-32;
+    font-size: $fs-32 !important;
 
     font-family: $ff-sbaggro;
     font-weight: 600;
